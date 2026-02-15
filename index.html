@@ -4,85 +4,124 @@
   <title>Tile Lab Calculator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-      background: linear-gradient(180deg,#e9f1ff,#dfe9f3);
-      text-align: center;
-      color: #1d1d1f;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  background: linear-gradient(135deg,#cfd9ff,#e2ebff,#f5f7fa);
+  overflow-x: hidden;
+  color: #111;
+}
 
-    h2 {
-      margin-top: 30px;
-      font-weight: 600;
-    }
+/* Animated light background */
+body::before {
+  content:"";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 30%,rgba(255,255,255,0.6),transparent 40%),
+              radial-gradient(circle at 70% 70%,rgba(255,255,255,0.5),transparent 40%);
+  animation: moveLight 12s infinite alternate ease-in-out;
+  z-index:-1;
+}
 
-    .card {
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border-radius: 28px;
-      padding: 25px;
-      margin: 25px auto;
-      max-width: 420px;
-      box-shadow:
-        0 10px 30px rgba(0,0,0,0.08);
-    }
+@keyframes moveLight {
+  0% { transform: translate(-10%, -10%); }
+  100% { transform: translate(10%, 10%); }
+}
 
-    input {
-      width: 90%;
-      padding: 14px;
-      margin: 8px;
-      border-radius: 18px;
-      border: 1px solid rgba(0,0,0,0.1);
-      font-size: 16px;
-      outline: none;
-    }
+h2 {
+  text-align:center;
+  margin-top:40px;
+  font-weight:600;
+  letter-spacing:1px;
+}
 
-    button {
-      padding: 12px 22px;
-      margin: 10px;
-      border-radius: 22px;
-      border: none;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+/* Glass Card */
+.card {
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 30px;
+  padding: 30px;
+  margin: 30px auto;
+  max-width: 420px;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.08),
+    inset 0 0 0 1px rgba(255,255,255,0.6);
+  position: relative;
+  transition: 0.3s ease;
+}
 
-    .primary {
-      background: #007aff;
-      color: white;
-    }
+.card:hover {
+  transform: translateY(-8px);
+}
 
-    .primary:hover { opacity: 0.85; }
+/* Inputs */
+input {
+  width: 90%;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 20px;
+  border: none;
+  font-size: 16px;
+  background: rgba(255,255,255,0.6);
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.05);
+  outline: none;
+}
 
-    .secondary {
-      background: #e5e5ea;
-    }
+/* Buttons */
+button {
+  padding: 14px 25px;
+  border-radius: 25px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 10px;
+  font-size: 15px;
+  transition: 0.3s ease;
+}
 
-    .danger {
-      background: #ff3b30;
-      color: white;
-    }
+/* Primary glass gradient */
+.primary {
+  background: linear-gradient(135deg,#4facfe,#00f2fe);
+  color:white;
+  box-shadow: 0 10px 25px rgba(0,150,255,0.4);
+}
 
-    .result {
-      font-size: 22px;
-      font-weight: 600;
-      margin-top: 15px;
-      color: #007aff;
-    }
+.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0,150,255,0.6);
+}
 
-    .hidden { display: none; }
-  </style>
+.secondary {
+  background: rgba(255,255,255,0.6);
+}
+
+.danger {
+  background: linear-gradient(135deg,#ff6a6a,#ff3b3b);
+  color:white;
+  box-shadow: 0 10px 25px rgba(255,50,50,0.4);
+}
+
+.result {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 15px;
+  background: linear-gradient(90deg,#4facfe,#00f2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hidden { display:none; }
+
+</style>
 </head>
 
 <body>
 
 <h2>Tile Lab Calculator</h2>
 
-<!-- LOGIN -->
 <div id="loginDiv">
   <div class="card">
     <input type="email" id="email" placeholder="Email">
@@ -92,7 +131,6 @@
   </div>
 </div>
 
-<!-- DASHBOARD -->
 <div id="dashboard" class="hidden">
   <div class="card">
     <button class="primary" onclick="showCalc('wa')">Water Absorption</button>
@@ -104,7 +142,7 @@
   </div>
 </div>
 
-<!-- WATER ABSORPTION -->
+<!-- Calculators same structure -->
 <div id="wa" class="hidden">
   <div class="card">
     <h3>Water Absorption (%)</h3>
@@ -116,7 +154,6 @@
   </div>
 </div>
 
-<!-- BULK DENSITY -->
 <div id="bd" class="hidden">
   <div class="card">
     <h3>Bulk Density (g/cm³)</h3>
@@ -129,7 +166,6 @@
   </div>
 </div>
 
-<!-- MOR -->
 <div id="mor" class="hidden">
   <div class="card">
     <h3>MOR</h3>
@@ -143,7 +179,6 @@
   </div>
 </div>
 
-<!-- BREAKING STRENGTH -->
 <div id="bs" class="hidden">
   <div class="card">
     <h3>Breaking Strength</h3>
@@ -157,76 +192,73 @@
 </div>
 
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBUUqKaKs9-vDaAoWE2UorKD90SoQe-iMA",
-    authDomain: "tiles-a850f.firebaseapp.com",
-    projectId: "tiles-a850f",
-    storageBucket: "tiles-a850f.firebasestorage.app",
-    messagingSenderId: "1070603762129",
-    appId: "1:1070603762129:web:7cd3889cbad403320d8f0"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyBUUqKaKs9-vDaAoWE2UorKD90SoQe-iMA",
+  authDomain: "tiles-a850f.firebaseapp.com",
+  projectId: "tiles-a850f",
+  storageBucket: "tiles-a850f.firebasestorage.app",
+  messagingSenderId: "1070603762129",
+  appId: "1:1070603762129:web:7cd3889cbad403320d8f0"
+};
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-  window.login = () => signInWithEmailAndPassword(auth,email.value,password.value).catch(e=>alert(e.message));
-  window.signup = () => createUserWithEmailAndPassword(auth,email.value,password.value).catch(e=>alert(e.message));
-  window.logout = () => signOut(auth);
+window.login = () => signInWithEmailAndPassword(auth,email.value,password.value).catch(e=>alert(e.message));
+window.signup = () => createUserWithEmailAndPassword(auth,email.value,password.value).catch(e=>alert(e.message));
+window.logout = () => signOut(auth);
 
-  onAuthStateChanged(auth,user=>{
-    if(user){ loginDiv.classList.add("hidden"); dashboard.classList.remove("hidden"); }
-    else{ loginDiv.classList.remove("hidden"); dashboard.classList.add("hidden"); }
-  });
+onAuthStateChanged(auth,user=>{
+  if(user){ loginDiv.classList.add("hidden"); dashboard.classList.remove("hidden"); }
+  else{ loginDiv.classList.remove("hidden"); dashboard.classList.add("hidden"); }
+});
 
-  function clearAll() {
-    document.querySelectorAll("input").forEach(i=>i.value="");
-    document.querySelectorAll(".result").forEach(r=>r.innerHTML="");
-  }
+function clearAll(){
+  document.querySelectorAll("input").forEach(i=>i.value="");
+  document.querySelectorAll(".result").forEach(r=>r.innerHTML="");
+}
 
-  window.showCalc = id => {
-    dashboard.classList.add("hidden");
-    document.getElementById(id).classList.remove("hidden");
-  };
+window.showCalc=id=>{
+  dashboard.classList.add("hidden");
+  document.getElementById(id).classList.remove("hidden");
+};
 
-  window.back = () => {
-    clearAll();
-    document.querySelectorAll("#wa,#bd,#mor,#bs").forEach(el=>el.classList.add("hidden"));
-    dashboard.classList.remove("hidden");
-  };
+window.back=()=>{
+  clearAll();
+  document.querySelectorAll("#wa,#bd,#mor,#bs").forEach(el=>el.classList.add("hidden"));
+  dashboard.classList.remove("hidden");
+};
 
-  window.calcWA = () => {
-    let w1=parseFloat(wa_w1.value), w2=parseFloat(wa_w2.value);
-    wa_result.innerHTML=((w2-w1)/w1*100).toFixed(2)+" %";
-  };
+window.calcWA=()=>{
+  let w1=parseFloat(wa_w1.value),w2=parseFloat(wa_w2.value);
+  wa_result.innerHTML=((w2-w1)/w1*100).toFixed(2)+" %";
+};
 
-  window.calcBD = () => {
-    let w1=parseFloat(bd_w1.value), w2=parseFloat(bd_w2.value), w3=parseFloat(bd_w3.value);
-    bd_result.innerHTML=(w1/(w3-w2)).toFixed(3)+" g/cm³";
-  };
+window.calcBD=()=>{
+  let w1=parseFloat(bd_w1.value),w2=parseFloat(bd_w2.value),w3=parseFloat(bd_w3.value);
+  bd_result.innerHTML=(w1/(w3-w2)).toFixed(3)+" g/cm³";
+};
 
-  window.calcMOR = () => {
-    let f=parseFloat(mor_f.value)*9.80665;
-    let l=parseFloat(mor_l.value);
-    let b=parseFloat(mor_b.value);
-    let d=parseFloat(mor_d.value);
+window.calcMOR=()=>{
+  let f=parseFloat(mor_f.value)*9.80665;
+  let l=parseFloat(mor_l.value);
+  let b=parseFloat(mor_b.value);
+  let d=parseFloat(mor_d.value);
+  let morN=(3*f*l)/(2*b*d*d);
+  let morKg=morN*10.1972;
+  mor_result.innerHTML=morN.toFixed(2)+" N/mm²<br>"+morKg.toFixed(2)+" kg/cm²";
+};
 
-    let morN=((3*f*l)/(2*b*d*d));
-    let morKg=morN*10.1972;
-
-    mor_result.innerHTML=
-      morN.toFixed(2)+" N/mm² <br>"+morKg.toFixed(2)+" kg/cm²";
-  };
-
-  window.calcBS = () => {
-    let f=parseFloat(bs_f.value)*9.80665;
-    let l=parseFloat(bs_l.value);
-    let b=parseFloat(bs_b.value);
-    let bs=(f*l)/b;
-    bs_result.innerHTML=bs.toFixed(2)+" N";
-  };
+window.calcBS=()=>{
+  let f=parseFloat(bs_f.value)*9.80665;
+  let l=parseFloat(bs_l.value);
+  let b=parseFloat(bs_b.value);
+  let bs=(f*l)/b;
+  bs_result.innerHTML=bs.toFixed(2)+" N";
+};
 </script>
 
 </body>
