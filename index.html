@@ -3,243 +3,230 @@
 <head>
 <meta charset="UTF-8">
 <title>Tile Lab Calculator</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
 margin:0;
-font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-background:linear-gradient(180deg,#dbe4ea,#eef3f7);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+background:linear-gradient(135deg,#dbeafe,#e0f2fe,#f1f5f9);
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
+}
+
+h1{
+font-weight:600;
+letter-spacing:1px;
 }
 
 .glass{
+background:rgba(255,255,255,0.35);
 backdrop-filter:blur(25px);
-background:rgba(255,255,255,0.5);
-border-radius:28px;
-padding:35px;
-width:390px;
+-webkit-backdrop-filter:blur(25px);
+border-radius:30px;
+padding:40px;
+width:420px;
 box-shadow:
-0 20px 45px rgba(0,0,0,0.15),
-inset 0 0 0 1px rgba(255,255,255,0.7);
-transition:0.3s;
-}
-
-h1{text-align:center;margin-bottom:25px;}
-
-input{
-width:100%;
-padding:14px;
-border:none;
-border-radius:18px;
-background:rgba(255,255,255,0.7);
-margin-bottom:15px;
-font-size:15px;
-outline:none;
+0 20px 40px rgba(0,0,0,0.15),
+inset 0 1px 1px rgba(255,255,255,0.6);
+text-align:center;
+transition:all 0.3s ease;
 }
 
 button{
-padding:12px 20px;
+padding:14px 28px;
 border:none;
-border-radius:20px;
+border-radius:50px;
+font-weight:600;
 cursor:pointer;
-font-size:14px;
-margin-top:8px;
+margin:10px;
 transition:0.3s;
 }
 
 .primary{
-background:linear-gradient(135deg,#3a8dde,#00c6ff);
+background:linear-gradient(135deg,#3b82f6,#06b6d4);
 color:white;
+box-shadow:0 10px 20px rgba(59,130,246,0.4);
 }
 
-.secondary{
+.primary:hover{
+transform:translateY(-3px);
+box-shadow:0 15px 25px rgba(59,130,246,0.6);
+}
+
+.logout{
+background:linear-gradient(135deg,#ef4444,#f97316);
+color:white;
+box-shadow:0 10px 20px rgba(239,68,68,0.4);
+}
+
+input{
+width:85%;
+padding:14px;
+border-radius:20px;
+border:none;
+margin:10px 0;
 background:rgba(255,255,255,0.6);
+font-size:16px;
+text-align:center;
 }
 
-.danger{
-background:linear-gradient(135deg,#ff5f6d,#ff9966);
-color:white;
+.result-box{
+margin-top:20px;
+padding:18px;
+border-radius:20px;
+background:rgba(255,255,255,0.6);
+font-size:20px;
+font-weight:600;
 }
 
 .hidden{display:none;}
-
-.result{
-margin-top:20px;
-font-weight:600;
-text-align:center;
-font-size:18px;
-}
 </style>
 </head>
 
 <body>
 
-<div class="glass">
-
-<h1>Tile Lab</h1>
-
-<!-- LOGIN -->
-<div id="loginView">
-<input id="email" placeholder="Email">
+<div class="glass" id="loginCard">
+<h1>Tile Lab Calculator</h1>
+<input type="text" id="username" placeholder="Username">
 <input type="password" id="password" placeholder="Password">
 <button class="primary" onclick="login()">Login</button>
 </div>
 
-<!-- DASHBOARD -->
-<div id="dashboardView" class="hidden">
-<button class="primary" onclick="openWA()">Water Absorption</button>
-<button class="primary" onclick="openBD()">Bulk Density</button>
-<button class="primary" onclick="openMOR()">MOR</button>
-<button class="primary" onclick="openBS()">Breaking Strength</button>
-<button class="danger" onclick="logout()">Logout</button>
+<div class="glass hidden" id="menuCard">
+<h1>Tile Lab Calculator</h1>
+<button class="primary" onclick="openTest('wa')">Water Absorption</button>
+<button class="primary" onclick="openTest('bd')">Bulk Density</button>
+<button class="primary" onclick="openTest('mor')">MOR</button>
+<button class="primary" onclick="openTest('bs')">Breaking Strength</button>
+<br>
+<button class="logout" onclick="logout()">Logout</button>
 </div>
 
-<!-- TEST AREA -->
-<div id="testView" class="hidden">
-<h3 id="testTitle"></h3>
-<div id="inputs"></div>
+<div class="glass hidden" id="testCard">
+<h1 id="testTitle"></h1>
+<div id="testInputs"></div>
+<div id="result" class="result-box hidden"></div>
 <button class="primary" onclick="calculate()">Calculate</button>
-<div class="result" id="result"></div>
-<button class="secondary" onclick="goDashboard()">Back</button>
+<button onclick="back()">Back</button>
 </div>
 
-</div>
+<script>
 
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-
-const firebaseConfig = {
-apiKey: "AIzaSyBUUqKaKs9-vDaAoWE2UorKD90SoQe-iMA",
-authDomain: "tiles-a850f.firebaseapp.com",
-projectId: "tiles-a850f"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const validUser="admin";
+const validPass="1234";
 
 let currentTest="";
 
-window.login = async function(){
-try{
-await signInWithEmailAndPassword(auth,email.value,password.value);
-}catch(e){alert("Login Failed");}
+function login(){
+let u=document.getElementById("username").value;
+let p=document.getElementById("password").value;
+if(u===validUser && p===validPass){
+loginCard.classList.add("hidden");
+menuCard.classList.remove("hidden");
+}
+else{
+alert("Invalid Login");
+}
 }
 
-window.logout = function(){ signOut(auth); }
-
-onAuthStateChanged(auth,user=>{
-reset();
-if(user){
-dashboardView.classList.remove("hidden");
-}else{
-loginView.classList.remove("hidden");
-}
-});
-
-function reset(){
-loginView.classList.add("hidden");
-dashboardView.classList.add("hidden");
-testView.classList.add("hidden");
-result.innerText="";
+function logout(){
+menuCard.classList.add("hidden");
+loginCard.classList.remove("hidden");
 }
 
-window.goDashboard=function(){
-reset();
-dashboardView.classList.remove("hidden");
-}
+function openTest(test){
+currentTest=test;
+menuCard.classList.add("hidden");
+testCard.classList.remove("hidden");
+result.classList.add("hidden");
+result.innerHTML="";
+testInputs.innerHTML="";
 
-window.openWA=function(){
-reset();
-testView.classList.remove("hidden");
-testTitle.innerText="Water Absorption (%)";
-inputs.innerHTML=`
-<input id="v1" placeholder="Dry Weight (g)">
-<input id="v2" placeholder="Wet Weight (g)">
+if(test==="wa"){
+testTitle.innerHTML="Water Absorption (%)";
+testInputs.innerHTML=`
+<input id="w1" placeholder="Dry Weight (g)">
+<input id="w2" placeholder="Wet Weight (g)">
 `;
-currentTest="WA";
 }
 
-window.openBD=function(){
-reset();
-testView.classList.remove("hidden");
-testTitle.innerText="Bulk Density (g/cc)";
-inputs.innerHTML=`
-<input id="v1" placeholder="Dry Weight (g)">
-<input id="v2" placeholder="Wet Weight (g)">
-<input id="v3" placeholder="Suspended Weight (g)">
+if(test==="bd"){
+testTitle.innerHTML="Bulk Density";
+testInputs.innerHTML=`
+<input id="dry" placeholder="Dry Weight (g)">
+<input id="susp" placeholder="Suspended Weight (g)">
+<input id="sat" placeholder="Saturated Weight (g)">
 `;
-currentTest="BD";
 }
 
-window.openMOR=function(){
-reset();
-testView.classList.remove("hidden");
-testTitle.innerText="MOR";
-inputs.innerHTML=`
-<input id="v1" placeholder="Peak Load (kgf)">
-<input id="v2" placeholder="Span (mm)">
-<input id="v3" placeholder="Width (mm)">
-<input id="v4" placeholder="Thickness (mm)">
+if(test==="mor"){
+testTitle.innerHTML="Modulus of Rupture";
+testInputs.innerHTML=`
+<input id="f" placeholder="Peak Load (kgf)">
+<input id="l" placeholder="Span Length (mm)">
+<input id="b" placeholder="Width (mm)">
+<input id="d" placeholder="Thickness (mm)">
 `;
-currentTest="MOR";
 }
 
-window.openBS=function(){
-reset();
-testView.classList.remove("hidden");
-testTitle.innerText="Breaking Strength (N)";
-inputs.innerHTML=`
-<input id="v1" placeholder="Peak Load (kgf)">
-<input id="v2" placeholder="Length (mm)">
-<input id="v3" placeholder="Width (mm)">
+if(test==="bs"){
+testTitle.innerHTML="Breaking Strength";
+testInputs.innerHTML=`
+<input id="f" placeholder="Peak Load (kgf)">
+<input id="l" placeholder="Span Length (mm)">
+<input id="b" placeholder="Width (mm)">
 `;
-currentTest="BS";
+}
 }
 
-window.calculate=function(){
+function calculate(){
 
-if(currentTest==="WA"){
-let dry=parseFloat(v1.value);
-let wet=parseFloat(v2.value);
-let res=((wet-dry)/dry*100).toFixed(2);
-result.innerText="Result = "+res+" %";
+if(currentTest==="wa"){
+let w1=parseFloat(w1.value);
+let w2=parseFloat(w2.value);
+let res=((w2-w1)/w1)*100;
+showResult("Result = "+res.toFixed(2)+" %");
 }
 
-if(currentTest==="BD"){
-let dry=parseFloat(v1.value);
-let wet=parseFloat(v2.value);
-let sus=parseFloat(v3.value);
-let res=(dry/(wet-sus)).toFixed(3);
-result.innerText="Result = "+res+" g/cc";
+if(currentTest==="bd"){
+let d=parseFloat(dry.value);
+let s=parseFloat(susp.value);
+let satv=parseFloat(sat.value);
+let res=d/(satv-s);
+showResult("Result = "+res.toFixed(3));
 }
 
-if(currentTest==="MOR"){
-let P=parseFloat(v1.value)*9.81;
-let L=parseFloat(v2.value);
-let b=parseFloat(v3.value);
-let d=parseFloat(v4.value);
-let res=(3*P*L/(2*b*d*d));
-let nmm=res.toFixed(2);
-let kgcm=(res*10.1972).toFixed(2);
-result.innerText="Result = "+nmm+" N/mm²  |  "+kgcm+" kg/cm²";
+if(currentTest==="mor"){
+let F=parseFloat(f.value)*9.80665;
+let L=parseFloat(l.value);
+let B=parseFloat(b.value);
+let D=parseFloat(d.value);
+let mor=(3*F*L)/(2*B*Math.pow(D,2));
+let kgcm2=mor*10.1972;
+showResult("Result = "+mor.toFixed(2)+" N/mm²<br>"+kgcm2.toFixed(2)+" kg/cm²");
 }
 
-if(currentTest==="BS"){
-let F=parseFloat(v1.value)*9.81;
-let L=parseFloat(v2.value);
-let b=parseFloat(v3.value);
-let res=(F*L/b).toFixed(2);
-result.innerText="Result = "+res+" N";
+if(currentTest==="bs"){
+let F=parseFloat(f.value)*9.80665;
+let L=parseFloat(l.value);
+let B=parseFloat(b.value);
+let bs=(F*L)/B;
+showResult("Result = "+bs.toFixed(2)+" N");
+}
 }
 
+function showResult(text){
+result.innerHTML=text;
+result.classList.remove("hidden");
 }
 
+function back(){
+testCard.classList.add("hidden");
+menuCard.classList.remove("hidden");
+}
 </script>
 
 </body>
