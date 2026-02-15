@@ -154,13 +154,14 @@ testInputs.innerHTML=`
 }
 
 if(test==="bd"){
-testTitle.innerHTML="Bulk Density";
+testTitle.innerHTML="Bulk Density (g/cc)";
 testInputs.innerHTML=`
 <input id="dry" placeholder="Dry Weight (g)">
+<input id="wet" placeholder="Wet Weight (g)">
 <input id="susp" placeholder="Suspended Weight (g)">
-<input id="sat" placeholder="Saturated Weight (g)">
 `;
 }
+
 
 if(test==="mor"){
 testTitle.innerHTML="Modulus of Rupture";
@@ -185,38 +186,55 @@ testInputs.innerHTML=`
 function calculate(){
 
 if(currentTest==="wa"){
-let w1=parseFloat(w1.value);
-let w2=parseFloat(w2.value);
-let res=((w2-w1)/w1)*100;
-showResult("Result = "+res.toFixed(2)+" %");
+let W1=parseFloat(document.getElementById("w1").value);
+let W2=parseFloat(document.getElementById("w2").value);
+
+if(!W1 || !W2){ alert("Enter all values"); return; }
+
+let res=((W2-W1)/W1)*100;
+showResult("Result = " + res.toFixed(2) + " %");
 }
 
 if(currentTest==="bd"){
-let d=parseFloat(dry.value);
-let s=parseFloat(susp.value);
-let satv=parseFloat(sat.value);
-let res=d/(satv-s);
-showResult("Result = "+res.toFixed(3));
+let W1=parseFloat(document.getElementById("dry").value);
+let W2=parseFloat(document.getElementById("wet").value);
+let W3=parseFloat(document.getElementById("susp").value);
+
+if(!W1 || !W2 || !W3){ alert("Enter all values"); return; }
+
+let res=W1/(W2-W3);
+showResult("Result = " + res.toFixed(3) + " g/cc");
 }
 
 if(currentTest==="mor"){
-let F=parseFloat(f.value)*9.80665;
-let L=parseFloat(l.value);
-let B=parseFloat(b.value);
-let D=parseFloat(d.value);
+let F=parseFloat(document.getElementById("f").value)*9.80665;
+let L=parseFloat(document.getElementById("l").value);
+let B=parseFloat(document.getElementById("b").value);
+let D=parseFloat(document.getElementById("d").value);
+
+if(!F || !L || !B || !D){ alert("Enter all values"); return; }
+
 let mor=(3*F*L)/(2*B*Math.pow(D,2));
 let kgcm2=mor*10.1972;
-showResult("Result = "+mor.toFixed(2)+" N/mm²<br>"+kgcm2.toFixed(2)+" kg/cm²");
+
+showResult(
+"Result = " + mor.toFixed(2) + " N/mm²<br>" +
+kgcm2.toFixed(2) + " kg/cm²"
+);
 }
 
 if(currentTest==="bs"){
-let F=parseFloat(f.value)*9.80665;
-let L=parseFloat(l.value);
-let B=parseFloat(b.value);
+let F=parseFloat(document.getElementById("f").value)*9.80665;
+let L=parseFloat(document.getElementById("l").value);
+let B=parseFloat(document.getElementById("b").value);
+
+if(!F || !L || !B){ alert("Enter all values"); return; }
+
 let bs=(F*L)/B;
-showResult("Result = "+bs.toFixed(2)+" N");
+showResult("Result = " + bs.toFixed(2) + " N");
 }
 }
+
 
 function showResult(text){
 result.innerHTML=text;
