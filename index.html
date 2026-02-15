@@ -2,289 +2,248 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Tile Lab System</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tile Lab Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 body{
 margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto;
-background:linear-gradient(140deg,#e8edf7,#f5f7fb,#eef1f7);
-height:100vh;
+font-family:-apple-system, BlinkMacSystemFont, sans-serif;
+background:linear-gradient(180deg,#cfd9df,#e2ebf0);
 display:flex;
 justify-content:center;
 align-items:center;
-overflow:hidden;
+height:100vh;
 }
 
-/* floating glass window */
-.window{
-width:520px;
-background:rgba(255,255,255,0.65);
-backdrop-filter:blur(30px);
-border-radius:28px;
-padding:35px;
+.glass{
+backdrop-filter: blur(25px);
+background:rgba(255,255,255,0.45);
+border-radius:30px;
+padding:40px;
+width:380px;
 box-shadow:
-0 40px 80px rgba(0,0,0,0.15),
-inset 0 1px 0 rgba(255,255,255,0.8);
-position:relative;
-transition:all 0.4s ease;
+0 15px 40px rgba(0,0,0,0.15),
+inset 0 0 0 1px rgba(255,255,255,0.6);
+transition:0.4s ease;
 }
 
-h2{
-margin-top:0;
+h1{
+text-align:center;
+margin-bottom:30px;
 font-weight:600;
-letter-spacing:0.3px;
 }
 
-input,textarea{
+input, textarea{
 width:100%;
-padding:12px;
-margin:8px 0;
+padding:14px;
 border-radius:18px;
 border:none;
-background:rgba(255,255,255,0.8);
-font-size:14px;
+margin-bottom:15px;
+background:rgba(255,255,255,0.6);
+font-size:16px;
 outline:none;
 }
 
-textarea{height:120px;}
-
 button{
-padding:10px 20px;
+padding:12px 25px;
 border:none;
-border-radius:25px;
-font-weight:600;
+border-radius:20px;
 cursor:pointer;
-margin:6px 4px;
-transition:all 0.2s ease;
+font-size:15px;
+margin-top:5px;
+transition:0.3s;
 }
 
 .primary{
-background:#3b82f6;
+background:linear-gradient(135deg,#3a8dde,#00c6ff);
 color:white;
+box-shadow:0 6px 20px rgba(0,0,0,0.2);
 }
 
-.primary:hover{
-transform:translateY(-2px);
-box-shadow:0 10px 20px rgba(59,130,246,0.4);
+.secondary{
+background:rgba(255,255,255,0.6);
 }
 
 .danger{
-background:#ef4444;
+background:linear-gradient(135deg,#ff5f6d,#ff9966);
 color:white;
 }
 
-.card-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-margin-top:15px;
-}
-
-.dashboard-card{
-background:rgba(255,255,255,0.8);
-padding:20px;
-border-radius:20px;
-cursor:pointer;
-text-align:center;
-font-weight:600;
-transition:0.25s;
-}
-
-.dashboard-card:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 20px rgba(0,0,0,0.1);
-}
-
-.result{
-background:rgba(255,255,255,0.9);
-padding:12px;
-border-radius:18px;
-margin-top:10px;
-font-weight:600;
+.card-btn{
+width:100%;
+margin:10px 0;
 }
 
 .hidden{display:none;}
+
+.result{
+margin-top:20px;
+font-size:18px;
+font-weight:600;
+text-align:center;
+}
+
+.test-item{
+padding:10px;
+margin:8px 0;
+background:rgba(255,255,255,0.6);
+border-radius:15px;
+cursor:pointer;
+}
 </style>
 </head>
-
 <body>
 
-<div class="window">
+<div class="glass">
 
-<!-- LOGIN -->
+<h1>Tile Lab</h1>
+
 <div id="loginView">
-<h2>Tile Lab System</h2>
 <input type="email" id="email" placeholder="Email">
 <input type="password" id="password" placeholder="Password">
 <button class="primary" onclick="login()">Login</button>
 </div>
 
-<!-- DASHBOARD -->
 <div id="dashboardView" class="hidden">
-<h2 id="welcomeText"></h2>
 
-<div class="card-grid">
-<div class="dashboard-card" id="addCard">Add Test</div>
-<div class="dashboard-card" id="viewCard">Available Tests</div>
+<div id="adminCard" class="hidden">
+<button class="primary card-btn" onclick="openAddTest()">Add Test</button>
 </div>
 
-<button class="danger" onclick="logout()">Logout</button>
+<button class="secondary card-btn" onclick="openAvailable()">Available Tests</button>
+
+<button class="danger card-btn" onclick="logout()">Logout</button>
+
 </div>
 
-<!-- ADD TEST -->
-<div id="addView" class="hidden">
-<h2>Add Test</h2>
+<div id="addTestView" class="hidden">
+<h3>Add New Test</h3>
 <input id="testName" placeholder="Test Name">
-<textarea id="testCode" placeholder="Paste JSON Code"></textarea>
-<button class="primary" id="saveBtn">Save Test</button>
-<button onclick="back()">Back</button>
+<textarea id="testCode" placeholder="Paste calculation JS code"></textarea>
+<button class="primary" onclick="addTest()">Add</button>
+<button class="secondary" onclick="back()">Back</button>
 </div>
 
-<!-- TEST LIST -->
-<div id="listView" class="hidden">
-<h2>Available Tests</h2>
+<div id="availableView" class="hidden">
+<h3>Available Tests</h3>
 <div id="testsList"></div>
-<button onclick="back()">Back</button>
+<button class="secondary" onclick="back()">Back</button>
 </div>
 
-<!-- CALCULATOR -->
-<div id="calcView" class="hidden">
-<h2 id="calcTitle"></h2>
-<div id="calcInputs"></div>
-<div id="calcResults"></div>
-<button class="primary" onclick="calculate()">Calculate</button>
-<button onclick="back()">Back</button>
+<div id="testRunView" class="hidden">
+<h3 id="runTitle"></h3>
+<div id="runContent"></div>
+<button class="secondary" onclick="back()">Back</button>
 </div>
 
 </div>
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey:"AIzaSyBUUqKaKs9-vDaAoWE2UorKD90SoQe-iMA",
-authDomain:"tiles-a850f.firebaseapp.com",
-projectId:"tiles-a850f",
-storageBucket:"tiles-a850f.firebasestorage.app",
-messagingSenderId:"1070603762129",
-appId:"1:1070603762129:web:7cd3889cbad403320d8f0"
+apiKey: "AIzaSyBUUqKaKs9-vDaAoWE2UorKD90SoQe-iMA",
+authDomain: "tiles-a850f.firebaseapp.com",
+projectId: "tiles-a850f"
 };
 
-const ADMIN_EMAIL="admin@tilelab.com";
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
+const ADMIN_EMAIL = "admin@tilelab.com";
 
-let currentTest=null;
-
-const loginView=document.getElementById("loginView");
-const dashboardView=document.getElementById("dashboardView");
-const addView=document.getElementById("addView");
-const listView=document.getElementById("listView");
-const calcView=document.getElementById("calcView");
-const saveBtn=document.getElementById("saveBtn");
-
-function show(view){
-loginView.classList.add("hidden");
-dashboardView.classList.add("hidden");
-addView.classList.add("hidden");
-listView.classList.add("hidden");
-calcView.classList.add("hidden");
-view.classList.remove("hidden");
+window.login = async function(){
+const email=document.getElementById("email").value;
+const pass=document.getElementById("password").value;
+await signInWithEmailAndPassword(auth,email,pass);
 }
 
-window.login=()=>signInWithEmailAndPassword(auth,email.value,password.value).catch(e=>alert(e.message));
-window.logout=()=>signOut(auth);
+window.logout = function(){
+signOut(auth);
+}
 
 onAuthStateChanged(auth,user=>{
 if(user){
-show(dashboardView);
-welcomeText.innerHTML="Welcome " + user.email;
-if(user.email!==ADMIN_EMAIL){
-document.getElementById("addCard").style.display="none";
-}
-loadTests();
+document.getElementById("loginView").classList.add("hidden");
+document.getElementById("dashboardView").classList.remove("hidden");
+
+if(user.email.trim().toLowerCase() === ADMIN_EMAIL){
+document.getElementById("adminCard").classList.remove("hidden");
 }else{
-show(loginView);
+document.getElementById("adminCard").classList.add("hidden");
+}
+}else{
+document.getElementById("loginView").classList.remove("hidden");
+document.getElementById("dashboardView").classList.add("hidden");
 }
 });
 
-document.getElementById("addCard").onclick=()=>show(addView);
-document.getElementById("viewCard").onclick=()=>show(listView);
-
-window.back=()=>show(dashboardView);
-
-saveBtn.onclick=async()=>{
-saveBtn.disabled=true;
-try{
-const parsed=JSON.parse(testCode.value);
-await addDoc(collection(db,"tests"),{
-name:testName.value,
-code:parsed
-});
-alert("Saved");
-testName.value="";
-testCode.value="";
-loadTests();
-}catch(e){
-alert("Invalid JSON");
+window.openAddTest=function(){
+hideAll();
+document.getElementById("addTestView").classList.remove("hidden");
 }
-saveBtn.disabled=false;
-};
 
-async function loadTests(){
-testsList.innerHTML="";
-const snapshot=await getDocs(collection(db,"tests"));
-snapshot.forEach(doc=>{
+window.openAvailable=async function(){
+hideAll();
+document.getElementById("availableView").classList.remove("hidden");
+
+const snap = await getDocs(collection(db,"tests"));
+let html="";
+snap.forEach(doc=>{
 const data=doc.data();
-const btn=document.createElement("button");
-btn.className="primary";
-btn.innerHTML=data.name;
-btn.onclick=()=>openCalc(data);
-testsList.appendChild(btn);
+html+=`<div class="test-item" onclick='runTest(${JSON.stringify(data.code)})'>${data.name}</div>`;
 });
+document.getElementById("testsList").innerHTML=html;
 }
 
-function openCalc(test){
-currentTest=test;
-show(calcView);
-calcTitle.innerHTML=test.name;
-calcInputs.innerHTML="";
-calcResults.innerHTML="";
-test.code.inputs.forEach(inp=>{
-const field=document.createElement("input");
-field.placeholder=inp.label;
-field.id=inp.var;
-calcInputs.appendChild(field);
+window.addTest=async function(){
+const name=document.getElementById("testName").value;
+const code=document.getElementById("testCode").value;
+
+await addDoc(collection(db,"tests"),{
+name:name,
+code:code
 });
+
+alert("Test Added");
 }
 
-window.calculate=()=>{
-let values={};
-currentTest.code.inputs.forEach(inp=>{
-values[inp.var]=parseFloat(document.getElementById(inp.var).value);
-});
-let resultObj;
-try{
-resultObj=Function(...Object.keys(values),currentTest.code.calculate)(...Object.values(values));
-}catch(e){
-alert("Calculation Error");
-return;
+window.runTest=function(code){
+hideAll();
+document.getElementById("testRunView").classList.remove("hidden");
+document.getElementById("runTitle").innerText="Run Test";
+
+document.getElementById("runContent").innerHTML=`
+<input id="v1" placeholder="Value 1">
+<input id="v2" placeholder="Value 2">
+<button class="primary" onclick="calculate(\`${code}\`)">Calculate</button>
+<div class="result" id="result"></div>
+`;
 }
-calcResults.innerHTML="";
-currentTest.code.results.forEach(r=>{
-const div=document.createElement("div");
-div.className="result";
-div.innerHTML=r.label+" = "+resultObj[r.key].toFixed(3)+" "+r.unit;
-calcResults.appendChild(div);
-});
-};
+
+window.calculate=function(code){
+const v1=parseFloat(document.getElementById("v1").value);
+const v2=parseFloat(document.getElementById("v2").value);
+let result=eval(code);
+document.getElementById("result").innerText="Result = "+result;
+}
+
+function hideAll(){
+document.getElementById("addTestView").classList.add("hidden");
+document.getElementById("availableView").classList.add("hidden");
+document.getElementById("testRunView").classList.add("hidden");
+document.getElementById("dashboardView").classList.add("hidden");
+document.getElementById("dashboardView").classList.remove("hidden");
+}
+
+window.back=function(){
+hideAll();
+}
 
 </script>
 
