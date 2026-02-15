@@ -6,99 +6,163 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
+/* ================== BACKGROUND ================== */
 body{
 margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-background:linear-gradient(135deg,#dbeafe,#e0f2fe,#f8fafc);
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto;
+background:linear-gradient(135deg,#e6f0ff,#f5f7ff,#eef2ff);
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
+overflow:hidden;
 }
 
-.glass{
-background:rgba(255,255,255,0.45);
+/* Animated soft light */
+body::before{
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.7),transparent 40%),
+           radial-gradient(circle at 70% 70%,rgba(255,255,255,0.6),transparent 40%);
+animation:floatLight 12s ease-in-out infinite alternate;
+z-index:-1;
+}
+
+@keyframes floatLight{
+0%{transform:translate(-10%,-10%);}
+100%{transform:translate(10%,10%);}
+}
+
+/* ================== WINDOW ================== */
+.window{
+width:480px;
+background:rgba(255,255,255,0.55);
 backdrop-filter:blur(30px);
 border-radius:30px;
 padding:40px;
-width:440px;
-box-shadow:0 25px 50px rgba(0,0,0,0.1);
-text-align:center;
+box-shadow:
+0 30px 60px rgba(0,0,0,0.15),
+inset 0 1px 0 rgba(255,255,255,0.8);
+transform:scale(0.95);
+opacity:0;
+transition:all 0.4s cubic-bezier(.2,.8,.2,1);
+position:relative;
 }
 
+.window.active{
+transform:scale(1);
+opacity:1;
+}
+
+/* ================== TEXT ================== */
+h2{
+margin-top:0;
+font-weight:600;
+letter-spacing:0.5px;
+}
+
+/* ================== INPUT ================== */
+input,textarea{
+width:100%;
+padding:14px;
+border-radius:18px;
+border:none;
+margin:8px 0;
+font-size:15px;
+background:rgba(255,255,255,0.7);
+box-shadow:inset 0 2px 6px rgba(0,0,0,0.05);
+outline:none;
+}
+
+/* ================== BUTTON ================== */
 button{
 padding:12px 25px;
 border:none;
-border-radius:40px;
-margin:8px;
+border-radius:30px;
+margin:8px 5px;
 font-weight:600;
 cursor:pointer;
+transition:all 0.25s ease;
 }
 
 .primary{
-background:linear-gradient(135deg,#3b82f6,#06b6d4);
+background:linear-gradient(135deg,#4f8cff,#6ed0ff);
 color:white;
+box-shadow:0 10px 25px rgba(79,140,255,0.4);
+}
+
+.primary:hover{
+transform:translateY(-3px);
+box-shadow:0 15px 35px rgba(79,140,255,0.6);
 }
 
 .danger{
-background:linear-gradient(135deg,#ef4444,#f97316);
+background:linear-gradient(135deg,#ff5f6d,#ff9966);
 color:white;
-}
-
-input, textarea{
-width:85%;
-padding:12px;
-border-radius:20px;
-border:none;
-margin:8px 0;
-text-align:center;
+box-shadow:0 10px 25px rgba(255,100,100,0.4);
 }
 
 .result-box{
 margin-top:20px;
 padding:15px;
 border-radius:20px;
-background:rgba(255,255,255,0.7);
+background:rgba(255,255,255,0.8);
 font-weight:600;
+line-height:1.6;
+animation:fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(10px);}
+to{opacity:1; transform:translateY(0);}
 }
 
 .hidden{display:none;}
+
 </style>
 </head>
 
 <body>
 
-<div class="glass" id="loginCard">
+<div class="window active" id="appWindow">
+
+<!-- LOGIN -->
+<div id="loginView">
 <h2>Tile Lab System</h2>
 <input type="email" id="email" placeholder="Email">
 <input type="password" id="password" placeholder="Password">
 <button class="primary" onclick="login()">Login</button>
 </div>
 
-<div class="glass hidden" id="dashboard">
-<h2 id="welcome"></h2>
+<!-- DASHBOARD -->
+<div id="dashboardView" class="hidden">
+<h2 id="welcomeText"></h2>
+
 <div id="adminPanel" class="hidden">
-<h3>Add New Test</h3>
+<h3>Add Test (JSON Code)</h3>
 <input id="testName" placeholder="Test Name">
-<input id="testInputs" placeholder="Inputs (comma separated e.g. W1,W2)">
-<textarea id="testFormula" placeholder="Formula (e.g. (W2-W1)/W1*100)"></textarea>
-<input id="testUnit" placeholder="Unit (e.g. %)">
+<textarea id="testCode" placeholder='Paste JSON Code Here'></textarea>
 <button class="primary" onclick="addTest()">Add Test</button>
 <hr>
 </div>
 
 <h3>Available Tests</h3>
 <div id="testsList"></div>
-
 <button class="danger" onclick="logout()">Logout</button>
 </div>
 
-<div class="glass hidden" id="calculatorCard">
+<!-- CALCULATOR -->
+<div id="calculatorView" class="hidden">
 <h2 id="calcTitle"></h2>
 <div id="calcInputs"></div>
-<div class="result-box hidden" id="resultBox"></div>
+<div id="resultsContainer"></div>
 <button class="primary" onclick="calculate()">Calculate</button>
 <button onclick="back()">Back</button>
+</div>
+
 </div>
 
 <script type="module">
@@ -116,43 +180,34 @@ messagingSenderId: "1070603762129",
 appId: "1:1070603762129:web:7cd3889cbad403320d8f0"
 };
 
-const ADMIN_EMAIL = "admin@tilelab.com";
+const ADMIN_EMAIL="admin@tilelab.com";
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
 
-let currentTest = null;
+let currentTest=null;
 
-window.login = () => {
-signInWithEmailAndPassword(auth,email.value,password.value)
-.catch(e=>alert(e.message));
-};
-
-window.logout = () => signOut(auth);
+window.login=()=>signInWithEmailAndPassword(auth,email.value,password.value).catch(e=>alert(e.message));
+window.logout=()=>signOut(auth);
 
 onAuthStateChanged(auth,user=>{
 if(user){
-loginCard.classList.add("hidden");
-dashboard.classList.remove("hidden");
-welcome.innerHTML="Welcome " + user.email;
-
-if(user.email === ADMIN_EMAIL){
-adminPanel.classList.remove("hidden");
-}
-
+loginView.classList.add("hidden");
+dashboardView.classList.remove("hidden");
+welcomeText.innerHTML="Welcome " + user.email;
+if(user.email===ADMIN_EMAIL){adminPanel.classList.remove("hidden");}
 loadTests();
-}
-else{
-loginCard.classList.remove("hidden");
-dashboard.classList.add("hidden");
+}else{
+loginView.classList.remove("hidden");
+dashboardView.classList.add("hidden");
 }
 });
 
 async function loadTests(){
 testsList.innerHTML="";
-const querySnapshot = await getDocs(collection(db,"tests"));
-querySnapshot.forEach(doc=>{
+const snapshot=await getDocs(collection(db,"tests"));
+snapshot.forEach(doc=>{
 let data=doc.data();
 let btn=document.createElement("button");
 btn.className="primary";
@@ -162,65 +217,62 @@ testsList.appendChild(btn);
 });
 }
 
-window.addTest = async ()=>{
-let name=testName.value;
-let inputs=testInputs.value.split(",");
-let formula=testFormula.value;
-let unit=testUnit.value;
-
+window.addTest=async()=>{
+try{
+let parsed=JSON.parse(testCode.value);
 await addDoc(collection(db,"tests"),{
-name:name,
-inputs:inputs,
-formula:formula,
-unit:unit
+name:testName.value,
+code:parsed
 });
-
 alert("Test Added");
 loadTests();
+}catch(e){
+alert("Invalid JSON Format");
+}
 };
 
 function openCalculator(test){
 currentTest=test;
-dashboard.classList.add("hidden");
-calculatorCard.classList.remove("hidden");
+dashboardView.classList.add("hidden");
+calculatorView.classList.remove("hidden");
 calcTitle.innerHTML=test.name;
 calcInputs.innerHTML="";
-resultBox.classList.add("hidden");
+resultsContainer.innerHTML="";
 
-test.inputs.forEach(input=>{
+test.code.inputs.forEach(inp=>{
 let field=document.createElement("input");
-field.id=input.trim();
-field.placeholder=input.trim();
+field.id=inp.var;
+field.placeholder=inp.label;
 calcInputs.appendChild(field);
 });
 }
 
-window.calculate = ()=>{
+window.calculate=()=>{
 let values={};
-
-currentTest.inputs.forEach(input=>{
-values[input.trim()]=parseFloat(document.getElementById(input.trim()).value);
+currentTest.code.inputs.forEach(inp=>{
+values[inp.var]=parseFloat(document.getElementById(inp.var).value);
 });
 
-let formula=currentTest.formula;
-let result;
-
+let resultObj;
 try{
-result = Function(...Object.keys(values), "return " + formula)
-(...Object.values(values));
-}
-catch(e){
-alert("Formula Error");
+resultObj=Function(...Object.keys(values), currentTest.code.calculate)(...Object.values(values));
+}catch(e){
+alert("Calculation Error");
 return;
 }
 
-resultBox.innerHTML="Result = " + result.toFixed(3) + " " + currentTest.unit;
-resultBox.classList.remove("hidden");
+resultsContainer.innerHTML="";
+currentTest.code.results.forEach(r=>{
+let div=document.createElement("div");
+div.className="result-box";
+div.innerHTML=r.label + " = " + resultObj[r.key].toFixed(3) + " " + r.unit;
+resultsContainer.appendChild(div);
+});
 };
 
-window.back = ()=>{
-calculatorCard.classList.add("hidden");
-dashboard.classList.remove("hidden");
+window.back=()=>{
+calculatorView.classList.add("hidden");
+dashboardView.classList.remove("hidden");
 };
 
 </script>
