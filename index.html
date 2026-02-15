@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Tile Lab</title>
+<title>Tile Lab Calculator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 body{
 margin:0;
 font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-background:linear-gradient(180deg,#dbe4ea,#e6eef4);
+background:linear-gradient(180deg,#dbe4ea,#eef3f7);
 display:flex;
 justify-content:center;
 align-items:center;
@@ -17,20 +17,20 @@ height:100vh;
 }
 
 .glass{
-backdrop-filter:blur(30px);
-background:rgba(255,255,255,0.45);
-border-radius:30px;
+backdrop-filter:blur(25px);
+background:rgba(255,255,255,0.5);
+border-radius:28px;
 padding:35px;
 width:390px;
 box-shadow:
 0 20px 45px rgba(0,0,0,0.15),
 inset 0 0 0 1px rgba(255,255,255,0.7);
-transition:0.3s ease;
+transition:0.3s;
 }
 
 h1{text-align:center;margin-bottom:25px;}
 
-input,textarea{
+input{
 width:100%;
 padding:14px;
 border:none;
@@ -42,7 +42,7 @@ outline:none;
 }
 
 button{
-padding:12px 22px;
+padding:12px 20px;
 border:none;
 border-radius:20px;
 cursor:pointer;
@@ -65,20 +65,7 @@ background:linear-gradient(135deg,#ff5f6d,#ff9966);
 color:white;
 }
 
-.card-btn{
-width:100%;
-margin:10px 0;
-}
-
 .hidden{display:none;}
-
-.test-item{
-padding:12px;
-background:rgba(255,255,255,0.6);
-border-radius:15px;
-margin-bottom:10px;
-cursor:pointer;
-}
 
 .result{
 margin-top:20px;
@@ -104,34 +91,17 @@ font-size:18px;
 
 <!-- DASHBOARD -->
 <div id="dashboardView" class="hidden">
-<div id="adminCard" class="hidden">
-<button class="primary card-btn" onclick="openAdd()">Add Test</button>
-</div>
-<button class="secondary card-btn" onclick="openAvailable()">Available Tests</button>
-<button class="danger card-btn" onclick="logout()">Logout</button>
-</div>
-
-<!-- ADD TEST -->
-<div id="addView" class="hidden">
-<h3>Add Test</h3>
-<input id="testName" placeholder="Test Name">
-<textarea id="testCode" placeholder="Example: ((v2 - v1) / v1 * 100).toFixed(2) + ' %'"></textarea>
-<button class="primary" onclick="addTest()">Add Test</button>
-<button class="secondary" onclick="goDashboard()">Back</button>
+<button class="primary" onclick="openWA()">Water Absorption</button>
+<button class="primary" onclick="openBD()">Bulk Density</button>
+<button class="primary" onclick="openMOR()">MOR</button>
+<button class="primary" onclick="openBS()">Breaking Strength</button>
+<button class="danger" onclick="logout()">Logout</button>
 </div>
 
-<!-- AVAILABLE -->
-<div id="availableView" class="hidden">
-<h3>Available Tests</h3>
-<div id="testsList"></div>
-<button class="secondary" onclick="goDashboard()">Back</button>
-</div>
-
-<!-- RUN TEST -->
-<div id="runView" class="hidden">
-<h3 id="runTitle"></h3>
-<input id="v1" placeholder="Value 1">
-<input id="v2" placeholder="Value 2">
+<!-- TEST AREA -->
+<div id="testView" class="hidden">
+<h3 id="testTitle"></h3>
+<div id="inputs"></div>
 <button class="primary" onclick="calculate()">Calculate</button>
 <div class="result" id="result"></div>
 <button class="secondary" onclick="goDashboard()">Back</button>
@@ -143,7 +113,6 @@ font-size:18px;
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyBUUqKaKs9-vDaAoWE2UorKD90SoQe-iMA",
@@ -153,103 +122,122 @@ projectId: "tiles-a850f"
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
-const ADMIN_EMAIL = "admin@tilelab.com";
-let currentCode="";
+let currentTest="";
 
 window.login = async function(){
-const email=emailInput.value.trim();
-const pass=password.value;
 try{
-await signInWithEmailAndPassword(auth,email,pass);
+await signInWithEmailAndPassword(auth,email.value,password.value);
 }catch(e){alert("Login Failed");}
 }
 
 window.logout = function(){ signOut(auth); }
 
 onAuthStateChanged(auth,user=>{
-resetViews();
+reset();
 if(user){
 dashboardView.classList.remove("hidden");
-if(user.email.trim().toLowerCase()===ADMIN_EMAIL){
-adminCard.classList.remove("hidden");
-}
 }else{
 loginView.classList.remove("hidden");
 }
 });
 
-function resetViews(){
+function reset(){
 loginView.classList.add("hidden");
 dashboardView.classList.add("hidden");
-addView.classList.add("hidden");
-availableView.classList.add("hidden");
-runView.classList.add("hidden");
-adminCard.classList.add("hidden");
-}
-
-window.openAdd=function(){
-resetViews();
-addView.classList.remove("hidden");
-}
-
-window.openAvailable=async function(){
-resetViews();
-availableView.classList.remove("hidden");
-testsList.innerHTML="Loading...";
-
-const snap=await getDocs(collection(db,"tests"));
-
-if(snap.empty){
-testsList.innerHTML="No tests available";
-return;
-}
-
-let html="";
-snap.forEach(doc=>{
-const data=doc.data();
-html+=`<div class="test-item" onclick="runTest(\`${data.code}\`,'${data.name}')">${data.name}</div>`;
-});
-testsList.innerHTML=html;
-}
-
-window.addTest=async function(){
-const name=testName.value.trim();
-const code=testCode.value.trim();
-
-if(!name||!code){alert("Fill all fields");return;}
-
-await addDoc(collection(db,"tests"),{name:name,code:code});
-alert("Test Added Successfully");
-
-testName.value="";
-testCode.value="";
-}
-
-window.runTest=function(code,name){
-resetViews();
-runView.classList.remove("hidden");
-runTitle.innerText=name;
-currentCode=code;
+testView.classList.add("hidden");
 result.innerText="";
-v1.value="";
-v2.value="";
-}
-
-window.calculate=function(){
-const val1=parseFloat(v1.value);
-const val2=parseFloat(v2.value);
-if(isNaN(val1)||isNaN(val2)){alert("Enter valid numbers");return;}
-const v1=val1;
-const v2=val2;
-let output=eval(currentCode);
-result.innerText="Result = "+output;
 }
 
 window.goDashboard=function(){
-resetViews();
+reset();
 dashboardView.classList.remove("hidden");
+}
+
+window.openWA=function(){
+reset();
+testView.classList.remove("hidden");
+testTitle.innerText="Water Absorption (%)";
+inputs.innerHTML=`
+<input id="v1" placeholder="Dry Weight (g)">
+<input id="v2" placeholder="Wet Weight (g)">
+`;
+currentTest="WA";
+}
+
+window.openBD=function(){
+reset();
+testView.classList.remove("hidden");
+testTitle.innerText="Bulk Density (g/cc)";
+inputs.innerHTML=`
+<input id="v1" placeholder="Dry Weight (g)">
+<input id="v2" placeholder="Wet Weight (g)">
+<input id="v3" placeholder="Suspended Weight (g)">
+`;
+currentTest="BD";
+}
+
+window.openMOR=function(){
+reset();
+testView.classList.remove("hidden");
+testTitle.innerText="MOR";
+inputs.innerHTML=`
+<input id="v1" placeholder="Peak Load (kgf)">
+<input id="v2" placeholder="Span (mm)">
+<input id="v3" placeholder="Width (mm)">
+<input id="v4" placeholder="Thickness (mm)">
+`;
+currentTest="MOR";
+}
+
+window.openBS=function(){
+reset();
+testView.classList.remove("hidden");
+testTitle.innerText="Breaking Strength (N)";
+inputs.innerHTML=`
+<input id="v1" placeholder="Peak Load (kgf)">
+<input id="v2" placeholder="Length (mm)">
+<input id="v3" placeholder="Width (mm)">
+`;
+currentTest="BS";
+}
+
+window.calculate=function(){
+
+if(currentTest==="WA"){
+let dry=parseFloat(v1.value);
+let wet=parseFloat(v2.value);
+let res=((wet-dry)/dry*100).toFixed(2);
+result.innerText="Result = "+res+" %";
+}
+
+if(currentTest==="BD"){
+let dry=parseFloat(v1.value);
+let wet=parseFloat(v2.value);
+let sus=parseFloat(v3.value);
+let res=(dry/(wet-sus)).toFixed(3);
+result.innerText="Result = "+res+" g/cc";
+}
+
+if(currentTest==="MOR"){
+let P=parseFloat(v1.value)*9.81;
+let L=parseFloat(v2.value);
+let b=parseFloat(v3.value);
+let d=parseFloat(v4.value);
+let res=(3*P*L/(2*b*d*d));
+let nmm=res.toFixed(2);
+let kgcm=(res*10.1972).toFixed(2);
+result.innerText="Result = "+nmm+" N/mm²  |  "+kgcm+" kg/cm²";
+}
+
+if(currentTest==="BS"){
+let F=parseFloat(v1.value)*9.81;
+let L=parseFloat(v2.value);
+let b=parseFloat(v3.value);
+let res=(F*L/b).toFixed(2);
+result.innerText="Result = "+res+" N";
+}
+
 }
 
 </script>
