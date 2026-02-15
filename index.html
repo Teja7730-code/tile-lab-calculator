@@ -6,12 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
-/* ================== BACKGROUND ================== */
 body{
 margin:0;
 font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Roboto;
-background:linear-gradient(135deg,#e6f0ff,#f5f7ff,#eef2ff);
+background:linear-gradient(140deg,#e8edf7,#f5f7fb,#eef1f7);
 height:100vh;
 display:flex;
 justify-content:center;
@@ -19,115 +17,101 @@ align-items:center;
 overflow:hidden;
 }
 
-/* Animated soft light */
-body::before{
-content:"";
-position:absolute;
-width:200%;
-height:200%;
-background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.7),transparent 40%),
-           radial-gradient(circle at 70% 70%,rgba(255,255,255,0.6),transparent 40%);
-animation:floatLight 12s ease-in-out infinite alternate;
-z-index:-1;
-}
-
-@keyframes floatLight{
-0%{transform:translate(-10%,-10%);}
-100%{transform:translate(10%,10%);}
-}
-
-/* ================== WINDOW ================== */
+/* floating glass window */
 .window{
-width:480px;
-background:rgba(255,255,255,0.55);
+width:520px;
+background:rgba(255,255,255,0.65);
 backdrop-filter:blur(30px);
-border-radius:30px;
-padding:40px;
+border-radius:28px;
+padding:35px;
 box-shadow:
-0 30px 60px rgba(0,0,0,0.15),
+0 40px 80px rgba(0,0,0,0.15),
 inset 0 1px 0 rgba(255,255,255,0.8);
-transform:scale(0.95);
-opacity:0;
-transition:all 0.4s cubic-bezier(.2,.8,.2,1);
 position:relative;
+transition:all 0.4s ease;
 }
 
-.window.active{
-transform:scale(1);
-opacity:1;
-}
-
-/* ================== TEXT ================== */
 h2{
 margin-top:0;
 font-weight:600;
-letter-spacing:0.5px;
+letter-spacing:0.3px;
 }
 
-/* ================== INPUT ================== */
 input,textarea{
 width:100%;
-padding:14px;
+padding:12px;
+margin:8px 0;
 border-radius:18px;
 border:none;
-margin:8px 0;
-font-size:15px;
-background:rgba(255,255,255,0.7);
-box-shadow:inset 0 2px 6px rgba(0,0,0,0.05);
+background:rgba(255,255,255,0.8);
+font-size:14px;
 outline:none;
 }
 
-/* ================== BUTTON ================== */
+textarea{height:120px;}
+
 button{
-padding:12px 25px;
+padding:10px 20px;
 border:none;
-border-radius:30px;
-margin:8px 5px;
+border-radius:25px;
 font-weight:600;
 cursor:pointer;
-transition:all 0.25s ease;
+margin:6px 4px;
+transition:all 0.2s ease;
 }
 
 .primary{
-background:linear-gradient(135deg,#4f8cff,#6ed0ff);
+background:#3b82f6;
 color:white;
-box-shadow:0 10px 25px rgba(79,140,255,0.4);
 }
 
 .primary:hover{
-transform:translateY(-3px);
-box-shadow:0 15px 35px rgba(79,140,255,0.6);
+transform:translateY(-2px);
+box-shadow:0 10px 20px rgba(59,130,246,0.4);
 }
 
 .danger{
-background:linear-gradient(135deg,#ff5f6d,#ff9966);
+background:#ef4444;
 color:white;
-box-shadow:0 10px 25px rgba(255,100,100,0.4);
 }
 
-.result-box{
-margin-top:20px;
-padding:15px;
-border-radius:20px;
+.card-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:15px;
+}
+
+.dashboard-card{
 background:rgba(255,255,255,0.8);
+padding:20px;
+border-radius:20px;
+cursor:pointer;
+text-align:center;
 font-weight:600;
-line-height:1.6;
-animation:fadeIn 0.4s ease;
+transition:0.25s;
 }
 
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(10px);}
-to{opacity:1; transform:translateY(0);}
+.dashboard-card:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
+
+.result{
+background:rgba(255,255,255,0.9);
+padding:12px;
+border-radius:18px;
+margin-top:10px;
+font-weight:600;
 }
 
 .hidden{display:none;}
-
 </style>
 </head>
 
 <body>
 
-<div class="window active" id="appWindow">
+<div class="window">
 
 <!-- LOGIN -->
 <div id="loginView">
@@ -141,24 +125,35 @@ to{opacity:1; transform:translateY(0);}
 <div id="dashboardView" class="hidden">
 <h2 id="welcomeText"></h2>
 
-<div id="adminPanel" class="hidden">
-<h3>Add Test (JSON Code)</h3>
-<input id="testName" placeholder="Test Name">
-<textarea id="testCode" placeholder='Paste JSON Code Here'></textarea>
-<button class="primary" onclick="addTest()">Add Test</button>
-<hr>
+<div class="card-grid">
+<div class="dashboard-card" id="addCard">Add Test</div>
+<div class="dashboard-card" id="viewCard">Available Tests</div>
 </div>
 
-<h3>Available Tests</h3>
-<div id="testsList"></div>
 <button class="danger" onclick="logout()">Logout</button>
 </div>
 
+<!-- ADD TEST -->
+<div id="addView" class="hidden">
+<h2>Add Test</h2>
+<input id="testName" placeholder="Test Name">
+<textarea id="testCode" placeholder="Paste JSON Code"></textarea>
+<button class="primary" id="saveBtn">Save Test</button>
+<button onclick="back()">Back</button>
+</div>
+
+<!-- TEST LIST -->
+<div id="listView" class="hidden">
+<h2>Available Tests</h2>
+<div id="testsList"></div>
+<button onclick="back()">Back</button>
+</div>
+
 <!-- CALCULATOR -->
-<div id="calculatorView" class="hidden">
+<div id="calcView" class="hidden">
 <h2 id="calcTitle"></h2>
 <div id="calcInputs"></div>
-<div id="resultsContainer"></div>
+<div id="calcResults"></div>
 <button class="primary" onclick="calculate()">Calculate</button>
 <button onclick="back()">Back</button>
 </div>
@@ -172,12 +167,12 @@ import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AIzaSyBUUqKaKs9-vDaAoWE2UorKD90SoQe-iMA",
-authDomain: "tiles-a850f.firebaseapp.com",
-projectId: "tiles-a850f",
-storageBucket: "tiles-a850f.firebasestorage.app",
-messagingSenderId: "1070603762129",
-appId: "1:1070603762129:web:7cd3889cbad403320d8f0"
+apiKey:"AIzaSyBUUqKaKs9-vDaAoWE2UorKD90SoQe-iMA",
+authDomain:"tiles-a850f.firebaseapp.com",
+projectId:"tiles-a850f",
+storageBucket:"tiles-a850f.firebasestorage.app",
+messagingSenderId:"1070603762129",
+appId:"1:1070603762129:web:7cd3889cbad403320d8f0"
 };
 
 const ADMIN_EMAIL="admin@tilelab.com";
@@ -188,61 +183,84 @@ const db=getFirestore(app);
 
 let currentTest=null;
 
+const loginView=document.getElementById("loginView");
+const dashboardView=document.getElementById("dashboardView");
+const addView=document.getElementById("addView");
+const listView=document.getElementById("listView");
+const calcView=document.getElementById("calcView");
+const saveBtn=document.getElementById("saveBtn");
+
+function show(view){
+loginView.classList.add("hidden");
+dashboardView.classList.add("hidden");
+addView.classList.add("hidden");
+listView.classList.add("hidden");
+calcView.classList.add("hidden");
+view.classList.remove("hidden");
+}
+
 window.login=()=>signInWithEmailAndPassword(auth,email.value,password.value).catch(e=>alert(e.message));
 window.logout=()=>signOut(auth);
 
 onAuthStateChanged(auth,user=>{
 if(user){
-loginView.classList.add("hidden");
-dashboardView.classList.remove("hidden");
+show(dashboardView);
 welcomeText.innerHTML="Welcome " + user.email;
-if(user.email===ADMIN_EMAIL){adminPanel.classList.remove("hidden");}
+if(user.email!==ADMIN_EMAIL){
+document.getElementById("addCard").style.display="none";
+}
 loadTests();
 }else{
-loginView.classList.remove("hidden");
-dashboardView.classList.add("hidden");
+show(loginView);
 }
 });
+
+document.getElementById("addCard").onclick=()=>show(addView);
+document.getElementById("viewCard").onclick=()=>show(listView);
+
+window.back=()=>show(dashboardView);
+
+saveBtn.onclick=async()=>{
+saveBtn.disabled=true;
+try{
+const parsed=JSON.parse(testCode.value);
+await addDoc(collection(db,"tests"),{
+name:testName.value,
+code:parsed
+});
+alert("Saved");
+testName.value="";
+testCode.value="";
+loadTests();
+}catch(e){
+alert("Invalid JSON");
+}
+saveBtn.disabled=false;
+};
 
 async function loadTests(){
 testsList.innerHTML="";
 const snapshot=await getDocs(collection(db,"tests"));
 snapshot.forEach(doc=>{
-let data=doc.data();
-let btn=document.createElement("button");
+const data=doc.data();
+const btn=document.createElement("button");
 btn.className="primary";
 btn.innerHTML=data.name;
-btn.onclick=()=>openCalculator(data);
+btn.onclick=()=>openCalc(data);
 testsList.appendChild(btn);
 });
 }
 
-window.addTest=async()=>{
-try{
-let parsed=JSON.parse(testCode.value);
-await addDoc(collection(db,"tests"),{
-name:testName.value,
-code:parsed
-});
-alert("Test Added");
-loadTests();
-}catch(e){
-alert("Invalid JSON Format");
-}
-};
-
-function openCalculator(test){
+function openCalc(test){
 currentTest=test;
-dashboardView.classList.add("hidden");
-calculatorView.classList.remove("hidden");
+show(calcView);
 calcTitle.innerHTML=test.name;
 calcInputs.innerHTML="";
-resultsContainer.innerHTML="";
-
+calcResults.innerHTML="";
 test.code.inputs.forEach(inp=>{
-let field=document.createElement("input");
-field.id=inp.var;
+const field=document.createElement("input");
 field.placeholder=inp.label;
+field.id=inp.var;
 calcInputs.appendChild(field);
 });
 }
@@ -252,29 +270,23 @@ let values={};
 currentTest.code.inputs.forEach(inp=>{
 values[inp.var]=parseFloat(document.getElementById(inp.var).value);
 });
-
 let resultObj;
 try{
-resultObj=Function(...Object.keys(values), currentTest.code.calculate)(...Object.values(values));
+resultObj=Function(...Object.keys(values),currentTest.code.calculate)(...Object.values(values));
 }catch(e){
 alert("Calculation Error");
 return;
 }
-
-resultsContainer.innerHTML="";
+calcResults.innerHTML="";
 currentTest.code.results.forEach(r=>{
-let div=document.createElement("div");
-div.className="result-box";
-div.innerHTML=r.label + " = " + resultObj[r.key].toFixed(3) + " " + r.unit;
-resultsContainer.appendChild(div);
+const div=document.createElement("div");
+div.className="result";
+div.innerHTML=r.label+" = "+resultObj[r.key].toFixed(3)+" "+r.unit;
+calcResults.appendChild(div);
 });
 };
 
-window.back=()=>{
-calculatorView.classList.add("hidden");
-dashboardView.classList.remove("hidden");
-};
-
 </script>
+
 </body>
 </html>
