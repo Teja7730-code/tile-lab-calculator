@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tile Lab Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    input {
+      padding: 12px;
+      margin: 10px;
+      width: 80%;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: none;
+      background: #22c55e;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Tile Lab Login</h2>
+
+<div id="loginDiv">
+  <input type="email" id="email" placeholder="Email"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button onclick="login()">Login</button>
+  <button onclick="signup()">Sign Up</button>
+</div>
+
+<div id="appDiv" style="display:none;">
+  <h2>Water Absorption</h2>
+  <div class="card">
+    <input type="number" id="dry" placeholder="Dry Weight (W1)">
+    <input type="number" id="wet" placeholder="Wet Weight (W2)">
+    <button onclick="calculate()">Calculate</button>
+    <h3 id="result"></h3>
+  </div>
+  <br>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "PASTE_YOUR_API_KEY_HERE",
+    authDomain: "tiles-a850f.firebaseapp.com",
+    projectId: "tiles-a850f",
+    storageBucket: "tiles-a850f.firebasestorage.app",
+    messagingSenderId: "1070603762129",
+    appId: "1:1070603762129:web:7cd3889cbad403320d8f0"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.login = function() {
+    signInWithEmailAndPassword(auth, email.value, password.value)
+      .catch(err => alert(err.message));
+  }
+
+  window.signup = function() {
+    createUserWithEmailAndPassword(auth, email.value, password.value)
+      .catch(err => alert(err.message));
+  }
+
+  window.logout = function() {
+    signOut(auth);
+  }
+
+  onAuthStateChanged(auth, user => {
+    if(user){
+      loginDiv.style.display = "none";
+      appDiv.style.display = "block";
+    } else {
+      loginDiv.style.display = "block";
+      appDiv.style.display = "none";
+    }
+  });
+
+  window.calculate = function() {
+    let w1 = parseFloat(dry.value);
+    let w2 = parseFloat(wet.value);
+    let result = ((w2 - w1) / w1) * 100;
+    document.getElementById("result").innerHTML =
+      "Water Absorption = " + result.toFixed(2) + " %";
+  }
+</script>
+
+</body>
+</html>
