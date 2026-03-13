@@ -192,7 +192,7 @@ let W2=parseFloat(document.getElementById("w2").value);
 if(!W1 || !W2){ alert("Enter all values"); return; }
 
 let res=((W2-W1)/W1)*100;
-showResult("Result = " + res.toFixed(2) + " %");
+showResult("Result = " + res.toFixed(3) + " %");
 }
 
 if(currentTest==="bd"){
@@ -203,7 +203,7 @@ let W3=parseFloat(document.getElementById("susp").value);
 if(!W1 || !W2 || !W3){ alert("Enter all values"); return; }
 
 let res=W1/(W2-W3);
-showResult("Result = " + res.toFixed(3) + " g/cc");
+showResult("Result = " + res.toFixed(2) + " g/cc");
 }
 
 if(currentTest==="mor"){
@@ -231,7 +231,7 @@ let B=parseFloat(document.getElementById("b").value);
 if(!F || !L || !B){ alert("Enter all values"); return; }
 
 let bs=(F*L)/B;
-showResult("Result = " + bs.toFixed(2) + " N");
+showResult("Result = " + bs.toFixed(0) + " N");
 }
 }
 
