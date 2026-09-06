@@ -1,0 +1,7321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+
+<meta name="theme-color" content="#f5f8ff">
+
+<title>Ceramic Lab — Formulation Suite</title>
+
+<style>
+
+/* =========================================================
+   CERAMIC LAB — AURORA UI
+   Mobile first / desktop enhanced
+========================================================= */
+
+:root{
+
+    --bg:#f3f7fc;
+    --bg2:#edf4ff;
+
+    --surface:rgba(255,255,255,.78);
+    --surface-solid:#ffffff;
+
+    --text:#122033;
+    --muted:#718096;
+    --soft:#9aaabd;
+
+    --blue:#1677ff;
+    --blue2:#0b5cff;
+
+    --cyan:#06b6d4;
+
+    --green:#16a34a;
+    --orange:#f59e0b;
+    --red:#ef4444;
+
+    --border:rgba(110,140,170,.14);
+
+    --shadow:
+        0 18px 50px rgba(34,67,105,.10);
+
+    --shadow2:
+        0 8px 25px rgba(34,67,105,.08);
+
+    --radius:24px;
+
+    --nav-height:78px;
+
+}
+
+
+*{
+    box-sizing:border-box;
+}
+
+
+html{
+    scroll-behavior:smooth;
+}
+
+
+body{
+
+    margin:0;
+
+    min-height:100vh;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    color:var(--text);
+
+    background:
+
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(69,145,255,.20),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 100% 10%,
+            rgba(0,210,230,.16),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(93,110,255,.12),
+            transparent 35%
+        ),
+
+        linear-gradient(
+            135deg,
+            #f5f9ff,
+            #eef5ff 48%,
+            #f6fbff
+        );
+
+    overflow-x:hidden;
+
+}
+
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+
+button{
+    cursor:pointer;
+}
+
+
+input,
+select,
+textarea{
+    outline:none;
+}
+
+
+.hidden{
+    display:none!important;
+}
+
+
+/* =========================================================
+   ANIMATED BACKGROUND
+========================================================= */
+
+.ambient{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:-1;
+
+}
+
+
+.orb{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(50px);
+
+    opacity:.42;
+
+    animation:
+        floatOrb 12s ease-in-out infinite alternate;
+
+}
+
+
+.orb.one{
+
+    width:280px;
+    height:280px;
+
+    background:#74b7ff;
+
+    top:-90px;
+    left:-80px;
+
+}
+
+
+.orb.two{
+
+    width:240px;
+    height:240px;
+
+    background:#52e1e9;
+
+    top:15%;
+    right:-90px;
+
+    animation-delay:-3s;
+
+}
+
+
+.orb.three{
+
+    width:300px;
+    height:300px;
+
+    background:#8b9dff;
+
+    bottom:-130px;
+    left:35%;
+
+    animation-delay:-6s;
+
+}
+
+
+@keyframes floatOrb{
+
+    from{
+        transform:translate3d(0,0,0) scale(1);
+    }
+
+    to{
+        transform:translate3d(30px,-20px,0) scale(1.12);
+    }
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-screen{
+
+    min-height:100vh;
+
+    display:grid;
+
+    place-items:center;
+
+    padding:24px;
+
+}
+
+
+.login-card{
+
+    width:min(440px,100%);
+
+    padding:38px;
+
+    border-radius:34px;
+
+    background:rgba(255,255,255,.84);
+
+    border:1px solid rgba(255,255,255,.9);
+
+    box-shadow:
+        0 35px 90px rgba(38,75,120,.16);
+
+    animation:
+        loginEnter .7s cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+@keyframes loginEnter{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(35px)
+            scale(.96);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+
+}
+
+
+.login-logo{
+
+    width:78px;
+    height:78px;
+
+    border-radius:25px;
+
+    display:grid;
+    place-items:center;
+
+    color:white;
+
+    font-size:23px;
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176cff,
+            #00bdd5
+        );
+
+    box-shadow:
+        0 20px 45px rgba(22,119,255,.28);
+
+    margin-bottom:22px;
+
+}
+
+
+.login-title{
+
+    margin:0;
+
+    font-size:34px;
+
+    letter-spacing:-1.5px;
+
+}
+
+
+.login-sub{
+
+    color:var(--muted);
+
+    margin-top:7px;
+
+    margin-bottom:28px;
+
+    font-size:13px;
+
+}
+
+
+.login-field{
+
+    margin-bottom:13px;
+
+}
+
+
+.login-input{
+
+    width:100%;
+
+    height:54px;
+
+    border-radius:17px;
+
+    border:1px solid #e0e8f2;
+
+    background:#f8fbff;
+
+    padding:0 16px;
+
+    color:var(--text);
+
+    transition:.2s;
+
+}
+
+
+.login-input:focus{
+
+    border-color:#82b6ff;
+
+    background:white;
+
+    box-shadow:
+        0 0 0 4px rgba(22,119,255,.08);
+
+}
+
+
+.login-error{
+
+    min-height:24px;
+
+    color:#dc2626;
+
+    font-size:12px;
+
+    padding:5px 2px;
+
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app{
+
+    min-height:100vh;
+
+    display:flex;
+
+    gap:18px;
+
+    padding:18px;
+
+}
+
+
+.sidebar{
+
+    width:255px;
+
+    height:calc(100vh - 36px);
+
+    position:sticky;
+
+    top:18px;
+
+    flex:none;
+
+    padding:15px;
+
+    border-radius:29px;
+
+    background:
+        rgba(255,255,255,.78);
+
+    border:1px solid rgba(255,255,255,.9);
+
+    box-shadow:var(--shadow);
+
+    display:flex;
+
+    flex-direction:column;
+
+    z-index:50;
+
+}
+
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    padding:6px 7px 24px;
+
+}
+
+
+.brand-logo{
+
+    width:45px;
+    height:45px;
+
+    border-radius:15px;
+
+    display:grid;
+
+    place-items:center;
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:900;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176cff,
+            #00bdd5
+        );
+
+}
+
+
+.brand-title{
+
+    font-size:14px;
+
+    font-weight:850;
+
+}
+
+
+.brand-sub{
+
+    font-size:10px;
+
+    color:var(--muted);
+
+    margin-top:2px;
+
+}
+
+
+.desktop-nav{
+
+    display:grid;
+
+    gap:5px;
+
+}
+
+
+.nav-button{
+
+    border:0;
+
+    background:transparent;
+
+    border-radius:16px;
+
+    padding:12px;
+
+    text-align:left;
+
+    color:#64788d;
+
+    font-weight:700;
+
+    transition:.2s;
+
+}
+
+
+.nav-button:hover{
+
+    background:#f2f7fd;
+
+    color:var(--blue);
+
+}
+
+
+.nav-button.active{
+
+    background:
+        linear-gradient(
+            135deg,
+            #edf5ff,
+            #eafcff
+        );
+
+    color:#075dcc;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(22,119,255,.06);
+
+}
+
+
+.sidebar-bottom{
+
+    margin-top:auto;
+
+}
+
+
+.main{
+
+    flex:1;
+
+    min-width:0;
+
+    padding-bottom:25px;
+
+}
+
+
+.topbar{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    padding:3px 4px 17px;
+
+}
+
+
+.page-title{
+
+    margin:0;
+
+    font-size:29px;
+
+    letter-spacing:-1.2px;
+
+}
+
+
+.page-subtitle{
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    margin-top:5px;
+
+}
+
+
+.cloud-status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:9px 13px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.72);
+
+    border:1px solid rgba(255,255,255,.9);
+
+    font-size:11px;
+
+    white-space:nowrap;
+
+}
+
+
+.cloud-dot{
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+        0 0 12px rgba(34,197,94,.7);
+
+}
+
+
+.content{
+
+    animation:
+        pageEnter .35s ease;
+
+}
+
+
+@keyframes pageEnter{
+
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(12,minmax(0,1fr));
+
+    gap:15px;
+
+}
+
+
+.card{
+
+    grid-column:span 12;
+
+    background:
+        rgba(255,255,255,.76);
+
+    border:
+        1px solid rgba(255,255,255,.92);
+
+    box-shadow:var(--shadow2);
+
+    border-radius:var(--radius);
+
+    padding:21px;
+
+}
+
+
+.card.half{
+    grid-column:span 6;
+}
+
+
+.card.third{
+    grid-column:span 4;
+}
+
+
+.card-title{
+
+    font-size:17px;
+
+    font-weight:850;
+
+    letter-spacing:-.3px;
+
+}
+
+
+.card-sub{
+
+    margin-top:5px;
+
+    color:var(--muted);
+
+    font-size:12px;
+
+    line-height:1.55;
+
+}
+
+
+.hero{
+
+    padding:28px;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    right:-90px;
+    top:-100px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(56,189,248,.20),
+            transparent 70%
+        );
+
+    pointer-events:none;
+
+}
+
+
+.hero-kicker{
+
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:1.6px;
+
+    color:var(--blue);
+
+}
+
+
+.hero-title{
+
+    margin:7px 0 5px;
+
+    font-size:31px;
+
+    line-height:1.05;
+
+    letter-spacing:-1.5px;
+
+}
+
+
+.hero-description{
+
+    max-width:780px;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.65;
+
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.field{
+
+    min-width:180px;
+
+}
+
+
+.field-label{
+
+    display:block;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    color:#687d92;
+
+    margin-bottom:6px;
+
+}
+
+
+.control{
+
+    width:100%;
+
+    height:46px;
+
+    border-radius:14px;
+
+    border:1px solid #dfe8f2;
+
+    background:#f9fbfe;
+
+    padding:0 13px;
+
+    color:var(--text);
+
+    transition:.2s;
+
+}
+
+
+.control:focus{
+
+    border-color:#7fb5ff;
+
+    background:#fff;
+
+    box-shadow:
+        0 0 0 4px rgba(22,119,255,.07);
+
+}
+
+
+.row{
+
+    display:flex;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:9px;
+
+    margin-top:16px;
+
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+
+    min-height:44px;
+
+    border:0;
+
+    border-radius:14px;
+
+    padding:0 16px;
+
+    font-weight:800;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        opacity .18s ease;
+
+}
+
+
+.btn:hover{
+
+    transform:translateY(-1px);
+
+}
+
+
+.btn:active{
+
+    transform:scale(.98);
+
+}
+
+
+.btn-primary{
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #176cff,
+            #08a9d0
+        );
+
+    box-shadow:
+        0 12px 25px rgba(22,119,255,.20);
+
+}
+
+
+.btn-secondary{
+
+    color:#3e5870;
+
+    background:#f4f7fb;
+
+    border:1px solid #e2eaf2;
+
+}
+
+
+.btn-success{
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #0d9488
+        );
+
+}
+
+
+.btn-danger{
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ef4444,
+            #f97316
+        );
+
+}
+
+
+.btn-small{
+
+    min-height:36px;
+
+    border-radius:11px;
+
+    padding:0 11px;
+
+    font-size:11px;
+
+}
+
+
+/* =========================================================
+   STAT CHIPS
+========================================================= */
+
+.stat-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:10px;
+
+    margin-top:17px;
+
+}
+
+
+.stat{
+
+    padding:14px;
+
+    border-radius:17px;
+
+    background:#f7faff;
+
+    border:1px solid #edf2f7;
+
+}
+
+
+.stat-value{
+
+    font-size:22px;
+
+    font-weight:900;
+
+    letter-spacing:-.8px;
+
+}
+
+
+.stat-label{
+
+    font-size:10px;
+
+    color:var(--muted);
+
+    margin-top:3px;
+
+}
+
+
+/* =========================================================
+   RECIPE CARDS
+========================================================= */
+
+.recipe-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+
+.recipe-item{
+
+    padding:14px;
+
+    border-radius:17px;
+
+    background:#f7faff;
+
+    border:1px solid #edf2f7;
+
+    animation:
+        cardPop .3s ease both;
+
+}
+
+
+.recipe-name{
+
+    font-weight:800;
+
+    font-size:12px;
+
+}
+
+
+.recipe-percent{
+
+    margin-top:8px;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    color:#0d65d8;
+
+}
+
+
+.recipe-kg{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin-top:2px;
+
+}
+
+
+@keyframes cardPop{
+
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
+
+}
+
+
+/* =========================================================
+   CHEMISTRY CARDS
+========================================================= */
+
+.chem-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+
+.chem-card{
+
+    padding:13px;
+
+    border-radius:17px;
+
+    background:#f8fbff;
+
+    border:1px solid #edf2f7;
+
+}
+
+
+.chem-head{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:7px;
+
+}
+
+
+.oxide-name{
+
+    font-size:12px;
+
+    font-weight:850;
+
+}
+
+
+.status{
+
+    font-size:9px;
+
+    font-weight:900;
+
+    padding:4px 7px;
+
+    border-radius:99px;
+
+}
+
+
+.status.match{
+
+    color:#166534;
+
+    background:#dcfce7;
+
+}
+
+
+.status.close{
+
+    color:#92400e;
+
+    background:#fef3c7;
+
+}
+
+
+.status.out{
+
+    color:#991b1b;
+
+    background:#fee2e2;
+
+}
+
+
+.chem-values{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:5px;
+
+    margin-top:10px;
+
+}
+
+
+.chem-value-label{
+
+    font-size:8px;
+
+    color:var(--soft);
+
+}
+
+
+.chem-value{
+
+    font-size:12px;
+
+    font-weight:800;
+
+    margin-top:2px;
+
+}
+
+
+/* =========================================================
+   MATERIAL CARDS
+========================================================= */
+
+.material-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:13px;
+
+    margin-top:15px;
+
+}
+
+
+.material-card{
+
+    background:#fff;
+
+    border:1px solid #e7edf4;
+
+    border-radius:21px;
+
+    padding:16px;
+
+    box-shadow:
+        0 8px 25px rgba(40,70,100,.055);
+
+    transition:.2s;
+
+}
+
+
+.material-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 15px 35px rgba(40,70,100,.09);
+
+}
+
+
+.material-top{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+}
+
+
+.material-name{
+
+    font-weight:900;
+
+    font-size:14px;
+
+}
+
+
+.material-source{
+
+    color:var(--muted);
+
+    font-size:9px;
+
+    margin-top:3px;
+
+}
+
+
+.switch{
+
+    width:42px;
+    height:24px;
+
+    border-radius:99px;
+
+    border:0;
+
+    background:#d8e1eb;
+
+    position:relative;
+
+    flex:none;
+
+}
+
+
+.switch::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:18px;
+    height:18px;
+
+    border-radius:50%;
+
+    background:white;
+
+    top:3px;
+    left:3px;
+
+    box-shadow:0 2px 5px rgba(0,0,0,.12);
+
+    transition:.2s;
+
+}
+
+
+.switch.on{
+
+    background:#1d83ff;
+
+}
+
+
+.switch.on::after{
+
+    transform:translateX(18px);
+
+}
+
+
+.material-fields{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:7px;
+
+    margin-top:14px;
+
+}
+
+
+.mini-label{
+
+    font-size:8px;
+
+    color:var(--soft);
+
+    font-weight:800;
+
+    margin-bottom:3px;
+
+}
+
+
+.mini-input{
+
+    width:100%;
+
+    height:34px;
+
+    border:1px solid #e3eaf2;
+
+    background:#f8fafc;
+
+    border-radius:10px;
+
+    padding:0 8px;
+
+    font-size:11px;
+
+}
+
+
+.composition-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-top:14px;
+
+    padding-top:12px;
+
+    border-top:1px solid #edf1f5;
+
+}
+
+
+.composition-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:6px;
+
+    margin-top:10px;
+
+}
+
+
+.oxide-input{
+
+    width:100%;
+
+    height:31px;
+
+    border:1px solid #e5ebf2;
+
+    background:#fbfdff;
+
+    border-radius:9px;
+
+    padding:0 7px;
+
+    font-size:10px;
+
+}
+
+
+.oxide-label{
+
+    font-size:8px;
+
+    color:#74869a;
+
+    font-weight:800;
+
+    margin-bottom:3px;
+
+}
+
+
+.material-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:13px;
+
+}
+
+
+/* =========================================================
+   TARGET CARDS
+========================================================= */
+
+.target-card{
+
+    padding:18px;
+
+    border-radius:21px;
+
+    background:white;
+
+    border:1px solid #e7edf4;
+
+}
+
+
+.target-name{
+
+    font-size:16px;
+
+    font-weight:900;
+
+}
+
+
+.target-meta{
+
+    color:var(--muted);
+
+    font-size:10px;
+
+    margin-top:4px;
+
+}
+
+
+.target-summary{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:6px;
+
+    margin-top:13px;
+
+}
+
+
+.oxide-chip{
+
+    padding:6px 8px;
+
+    border-radius:9px;
+
+    background:#f1f6fb;
+
+    color:#4c647c;
+
+    font-size:9px;
+
+    font-weight:800;
+
+}
+
+
+/* =========================================================
+   BATCH INPUT
+========================================================= */
+
+.batch-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+
+.batch-item{
+
+    padding:14px;
+
+    background:white;
+
+    border:1px solid #e7edf4;
+
+    border-radius:17px;
+
+}
+
+
+.batch-material{
+
+    font-size:12px;
+
+    font-weight:850;
+
+}
+
+
+.batch-limit{
+
+    font-size:9px;
+
+    color:var(--muted);
+
+    margin-top:3px;
+
+}
+
+
+.batch-input{
+
+    margin-top:9px;
+
+    width:100%;
+
+    height:40px;
+
+    border-radius:11px;
+
+    border:1px solid #dfe7ef;
+
+    background:#f8fbff;
+
+    padding:0 10px;
+
+    font-size:13px;
+
+    font-weight:800;
+
+}
+
+
+/* =========================================================
+   PERIODIC
+========================================================= */
+
+.periodic-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,minmax(0,1fr));
+
+    gap:10px;
+
+    margin-top:15px;
+
+}
+
+
+.periodic-card{
+
+    padding:17px;
+
+    border-radius:18px;
+
+    background:white;
+
+    border:1px solid #e7edf4;
+
+    transition:.2s;
+
+}
+
+
+.periodic-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow2);
+
+}
+
+
+.periodic-symbol{
+
+    font-size:22px;
+
+    font-weight:900;
+
+}
+
+
+.periodic-formula{
+
+    font-size:10px;
+
+    color:var(--muted);
+
+    margin-top:3px;
+
+}
+
+
+.periodic-mw{
+
+    font-size:16px;
+
+    font-weight:900;
+
+    margin-top:11px;
+
+}
+
+
+/* =========================================================
+   EMPTY / INFO
+========================================================= */
+
+.empty{
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+}
+
+
+.info{
+
+    padding:12px 14px;
+
+    border-radius:14px;
+
+    background:#f1f7ff;
+
+    color:#55708b;
+
+    font-size:11px;
+
+    line-height:1.55;
+
+    margin-top:12px;
+
+}
+
+
+.warning{
+
+    background:#fff8e8;
+
+    color:#8a6216;
+
+}
+
+
+.success-box{
+
+    padding:15px;
+
+    border-radius:16px;
+
+    background:#effbf3;
+
+    color:#166534;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+
+.danger-box{
+
+    padding:15px;
+
+    border-radius:16px;
+
+    background:#fff1f2;
+
+    color:#991b1b;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:25px;
+
+    transform:
+        translate(-50%,30px)
+        scale(.96);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:9999;
+
+    background:#132238;
+
+    color:white;
+
+    padding:12px 17px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.18);
+
+    transition:.25s;
+
+    max-width:90vw;
+
+    text-align:center;
+
+}
+
+
+.toast.show{
+
+    opacity:1;
+
+    transform:
+        translate(-50%,0)
+        scale(1);
+
+}
+
+
+/* =========================================================
+   MOBILE HEADER / NAV
+========================================================= */
+
+.mobile-header{
+
+    display:none;
+
+}
+
+
+.mobile-bottom{
+
+    display:none;
+
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media(max-width:1100px){
+
+    .chem-grid{
+        grid-template-columns:
+            repeat(3,minmax(0,1fr));
+    }
+
+    .periodic-grid{
+        grid-template-columns:
+            repeat(4,minmax(0,1fr));
+    }
+
+}
+
+
+@media(max-width:900px){
+
+    .sidebar{
+        width:225px;
+    }
+
+    .card.half,
+    .card.third{
+        grid-column:span 12;
+    }
+
+    .material-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+    body{
+
+        padding-bottom:
+            calc(
+                var(--nav-height) +
+                env(safe-area-inset-bottom)
+            );
+
+    }
+
+
+    .app{
+
+        display:block;
+
+        padding:
+            env(safe-area-inset-top)
+            10px
+            10px
+            10px;
+
+    }
+
+
+    .sidebar{
+
+        display:none;
+
+    }
+
+
+    .mobile-header{
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:space-between;
+
+        padding:8px 3px 14px;
+
+    }
+
+
+    .mobile-brand{
+
+        display:flex;
+
+        align-items:center;
+
+        gap:9px;
+
+    }
+
+
+    .mobile-logo{
+
+        width:39px;
+        height:39px;
+
+        border-radius:13px;
+
+        display:grid;
+
+        place-items:center;
+
+        color:white;
+
+        font-weight:900;
+
+        font-size:11px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #176cff,
+                #00bdd5
+            );
+
+    }
+
+
+    .mobile-brand-title{
+
+        font-weight:900;
+
+        font-size:13px;
+
+    }
+
+
+    .mobile-brand-sub{
+
+        font-size:8px;
+
+        color:var(--muted);
+
+        margin-top:2px;
+
+    }
+
+
+    .mobile-menu{
+
+        width:40px;
+        height:40px;
+
+        border:1px solid #e5ebf2;
+
+        border-radius:13px;
+
+        background:white;
+
+        font-size:18px;
+
+    }
+
+
+    .main{
+
+        padding:0 0 15px;
+
+    }
+
+
+    .topbar{
+
+        padding:
+            3px
+            2px
+            13px;
+
+    }
+
+
+    .page-title{
+
+        font-size:24px;
+
+        letter-spacing:-1px;
+
+    }
+
+
+    .page-subtitle{
+
+        font-size:10px;
+
+        max-width:270px;
+
+    }
+
+
+    .cloud-status{
+
+        display:none;
+
+    }
+
+
+    .grid{
+
+        display:block;
+
+    }
+
+
+    .card{
+
+        padding:16px;
+
+        border-radius:20px;
+
+        margin-bottom:11px;
+
+    }
+
+
+    .hero{
+
+        padding:19px;
+
+    }
+
+
+    .hero-title{
+
+        font-size:25px;
+
+    }
+
+
+    .hero-description{
+
+        font-size:11px;
+
+        line-height:1.6;
+
+    }
+
+
+    .row{
+
+        display:grid;
+
+        grid-template-columns:1fr;
+
+        gap:8px;
+
+    }
+
+
+    .field{
+
+        min-width:0;
+
+    }
+
+
+    .btn{
+
+        width:100%;
+
+        min-height:47px;
+
+    }
+
+
+    .stat-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:8px;
+
+    }
+
+
+    .stat{
+
+        padding:12px;
+
+    }
+
+
+    .stat-value{
+
+        font-size:20px;
+
+    }
+
+
+    .recipe-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+
+    .recipe-item{
+
+        padding:12px;
+
+    }
+
+
+    .recipe-percent{
+
+        font-size:19px;
+
+    }
+
+
+    .chem-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:8px;
+
+    }
+
+
+    .chem-card{
+
+        padding:11px;
+
+    }
+
+
+    .chem-values{
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .material-grid{
+
+        display:grid;
+
+        grid-template-columns:1fr;
+
+        gap:10px;
+
+    }
+
+
+    .material-card{
+
+        padding:14px;
+
+    }
+
+
+    .material-fields{
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+    }
+
+
+    .composition-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+
+    .batch-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:8px;
+
+    }
+
+
+    .batch-item{
+
+        padding:11px;
+
+    }
+
+
+    .batch-material{
+
+        font-size:10px;
+
+    }
+
+
+    .periodic-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:8px;
+
+    }
+
+
+    .periodic-card{
+
+        padding:13px;
+
+    }
+
+
+    .periodic-symbol{
+
+        font-size:20px;
+
+    }
+
+
+    /* MOBILE BOTTOM NAV */
+
+    .mobile-bottom{
+
+        display:grid;
+
+        grid-template-columns:
+            repeat(5,1fr);
+
+        position:fixed;
+
+        left:8px;
+
+        right:8px;
+
+        bottom:
+            calc(
+                7px +
+                env(safe-area-inset-bottom)
+            );
+
+        height:68px;
+
+        padding:5px;
+
+        background:
+            rgba(255,255,255,.94);
+
+        border:
+            1px solid rgba(255,255,255,.98);
+
+        box-shadow:
+            0 15px 45px rgba(31,58,92,.18);
+
+        border-radius:23px;
+
+        z-index:500;
+
+    }
+
+
+    .mobile-nav-btn{
+
+        border:0;
+
+        background:transparent;
+
+        border-radius:18px;
+
+        color:#7a8999;
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        justify-content:center;
+
+        gap:3px;
+
+        font-size:8px;
+
+        font-weight:800;
+
+    }
+
+
+    .mobile-nav-icon{
+
+        font-size:19px;
+
+        line-height:1;
+
+    }
+
+
+    .mobile-nav-btn.active{
+
+        color:#0b65d8;
+
+        background:#edf5ff;
+
+    }
+
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media(max-width:390px){
+
+    .hero-title{
+
+        font-size:23px;
+
+    }
+
+
+    .chem-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .recipe-grid{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+
+    .material-fields{
+
+        grid-template-columns:
+            repeat(3,1fr);
+
+    }
+
+
+    .mobile-bottom{
+
+        left:5px;
+        right:5px;
+
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div class="ambient">
+
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+
+</div>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<section id="loginScreen" class="login-screen">
+
+    <div class="login-card">
+
+        <div class="login-logo">
+            CL
+        </div>
+
+        <h1 class="login-title">
+            Ceramic Lab
+        </h1>
+
+        <div class="login-sub">
+            Professional formulation & chemical analysis suite
+        </div>
+
+
+        <div class="login-field">
+
+            <input
+                id="username"
+                class="login-input"
+                autocomplete="username"
+                placeholder="Username"
+            >
+
+        </div>
+
+
+        <div class="login-field">
+
+            <input
+                id="password"
+                class="login-input"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Password"
+            >
+
+        </div>
+
+
+        <div
+            id="loginError"
+            class="login-error"
+        ></div>
+
+
+        <button
+            id="loginButton"
+            class="btn btn-primary"
+            style="width:100%"
+            onclick="login()"
+        >
+            Sign In
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     APP
+===================================================== -->
+
+<section
+    id="appScreen"
+    class="app hidden"
+>
+
+
+    <!-- DESKTOP SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                CL
+            </div>
+
+            <div>
+
+                <div class="brand-title">
+                    Ceramic Lab
+                </div>
+
+                <div class="brand-sub">
+                    Formulation Suite
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav class="desktop-nav">
+
+            <button
+                class="nav-button active"
+                data-page="replicate"
+            >
+                🧪 &nbsp; Replicate Material
+            </button>
+
+            <button
+                class="nav-button"
+                data-page="materials"
+            >
+                🧱 &nbsp; Raw Materials
+            </button>
+
+            <button
+                class="nav-button"
+                data-page="targets"
+            >
+                🎯 &nbsp; Target Analysis
+            </button>
+
+            <button
+                class="nav-button"
+                data-page="batchChem"
+            >
+                ⚗️ &nbsp; Batch → Chemical
+            </button>
+
+            <button
+                class="nav-button"
+                data-page="periodic"
+            >
+                ⚛️ &nbsp; Chemical Reference
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="nav-button"
+                onclick="logout()"
+            >
+                🚪 &nbsp; Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+        <!-- MOBILE HEADER -->
+
+        <div class="mobile-header">
+
+            <div class="mobile-brand">
+
+                <div class="mobile-logo">
+                    CL
+                </div>
+
+                <div>
+
+                    <div class="mobile-brand-title">
+                        Ceramic Lab
+                    </div>
+
+                    <div class="mobile-brand-sub">
+                        Formulation Suite
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="mobile-menu"
+                onclick="openMore()"
+            >
+                ⋯
+            </button>
+
+        </div>
+
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <div>
+
+                <h2
+                    id="pageTitle"
+                    class="page-title"
+                >
+                    Replicate Material
+                </h2>
+
+                <div
+                    id="pageSubtitle"
+                    class="page-subtitle"
+                >
+                    Target chemistry → optimized raw-material recipe
+                </div>
+
+            </div>
+
+
+            <div class="cloud-status">
+
+                <span class="cloud-dot"></span>
+
+                <span id="cloudStatus">
+                    Cloud ready
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="content"
+            class="content"
+        ></div>
+
+
+    </main>
+
+
+    <!-- MOBILE BOTTOM NAV -->
+
+    <nav class="mobile-bottom">
+
+        <button
+            class="mobile-nav-btn active"
+            data-page="replicate"
+        >
+            <span class="mobile-nav-icon">🧪</span>
+            Recipe
+        </button>
+
+        <button
+            class="mobile-nav-btn"
+            data-page="materials"
+        >
+            <span class="mobile-nav-icon">🧱</span>
+            Materials
+        </button>
+
+        <button
+            class="mobile-nav-btn"
+            data-page="targets"
+        >
+            <span class="mobile-nav-icon">🎯</span>
+            Targets
+        </button>
+
+        <button
+            class="mobile-nav-btn"
+            data-page="batchChem"
+        >
+            <span class="mobile-nav-icon">⚗️</span>
+            Batch
+        </button>
+
+        <button
+            class="mobile-nav-btn"
+            onclick="openMore()"
+        >
+            <span class="mobile-nav-icon">•••</span>
+            More
+        </button>
+
+    </nav>
+
+</section>
+
+
+<div id="toast" class="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   CHEMICAL DATABASE
+========================================================= */
+
+const OXIDES = [
+
+    "SiO2",
+    "Al2O3",
+    "K2O",
+    "Na2O",
+    "CaO",
+    "MgO",
+    "Fe2O3",
+    "TiO2",
+    "B2O3",
+    "ZnO",
+    "BaO",
+    "Li2O",
+    "SrO",
+    "ZrO2",
+    "P2O5",
+    "MnO",
+    "Cr2O3",
+    "CuO",
+    "CoO",
+    "NiO",
+    "SnO2",
+    "V2O5",
+    "LOI"
+
+];
+
+
+const LABEL = {
+
+    SiO2:"SiO₂",
+    Al2O3:"Al₂O₃",
+    K2O:"K₂O",
+    Na2O:"Na₂O",
+    CaO:"CaO",
+    MgO:"MgO",
+    Fe2O3:"Fe₂O₃",
+    TiO2:"TiO₂",
+    B2O3:"B₂O₃",
+    ZnO:"ZnO",
+    BaO:"BaO",
+    Li2O:"Li₂O",
+    SrO:"SrO",
+    ZrO2:"ZrO₂",
+    P2O5:"P₂O₅",
+    MnO:"MnO",
+    Cr2O3:"Cr₂O₃",
+    CuO:"CuO",
+    CoO:"CoO",
+    NiO:"NiO",
+    SnO2:"SnO₂",
+    V2O5:"V₂O₅",
+    LOI:"LOI"
+
+};
+
+
+const MW = {
+
+    SiO2:60.083,
+    Al2O3:101.961,
+    K2O:94.196,
+    Na2O:61.979,
+    CaO:56.077,
+    MgO:40.304,
+    Fe2O3:159.687,
+    TiO2:79.866,
+    B2O3:69.620,
+    ZnO:81.379,
+    BaO:153.326,
+    Li2O:29.881,
+    SrO:103.619,
+    ZrO2:123.222,
+    P2O5:141.944,
+    MnO:70.937,
+    Cr2O3:151.990,
+    CuO:79.545,
+    CoO:74.932,
+    NiO:74.692,
+    SnO2:150.709,
+    V2O5:181.880
+
+};
+
+
+/* =========================================================
+   DEFAULT DATABASE
+========================================================= */
+
+const DEFAULT_DB = {
+
+    version:3,
+
+    rawMaterials:[
+
+        material(
+            "Quartz / Silica",
+            "Generic reference",
+            {
+                SiO2:100
+            }
+        ),
+
+        material(
+            "Kaolin",
+            "Published reference",
+            {
+                SiO2:47.29,
+                Al2O3:40.21,
+                LOI:12.50
+            }
+        ),
+
+        material(
+            "Ball Clay",
+            "Published reference",
+            {
+                SiO2:59,
+                Al2O3:25,
+                K2O:.90,
+                Na2O:.40,
+                CaO:.30,
+                MgO:.30,
+                Fe2O3:1,
+                TiO2:1,
+                LOI:12
+            }
+        ),
+
+        material(
+            "Potash Feldspar",
+            "Published reference",
+            {
+                SiO2:64.76,
+                Al2O3:18.32,
+                K2O:16.92
+            }
+        ),
+
+        material(
+            "Soda Feldspar",
+            "Published reference",
+            {
+                SiO2:68.74,
+                Al2O3:19.44,
+                Na2O:11.82
+            }
+        ),
+
+        material(
+            "Nepheline Syenite",
+            "Published reference",
+            {
+                SiO2:60.70,
+                Al2O3:23.30,
+                K2O:4.60,
+                Na2O:9.80,
+                CaO:.70,
+                MgO:.10,
+                Fe2O3:.10,
+                LOI:.70
+            }
+        ),
+
+        material(
+            "Whiting",
+            "CaCO₃ reference",
+            {
+                CaO:56.08,
+                LOI:43.92
+            }
+        ),
+
+        material(
+            "Dolomite",
+            "Published reference",
+            {
+                CaO:30.49,
+                MgO:21.90,
+                LOI:47.61
+            }
+        ),
+
+        material(
+            "Wollastonite",
+            "Published reference",
+            {
+                SiO2:51.72,
+                CaO:48.28
+            }
+        ),
+
+        material(
+            "Talc",
+            "Published reference",
+            {
+                SiO2:63.38,
+                MgO:31.87,
+                LOI:4.75
+            }
+        ),
+
+        material(
+            "Zircon",
+            "Published reference",
+            {
+                SiO2:32.79,
+                ZrO2:67.21
+            }
+        ),
+
+        material(
+            "Zinc Oxide",
+            "Pure reference",
+            {
+                ZnO:100
+            }
+        ),
+
+        material(
+            "Ferro Frit 3134",
+            "Published frit reference",
+            {
+                SiO2:45.56,
+                Al2O3:2,
+                Na2O:10.14,
+                CaO:19.51,
+                B2O3:22.79
+            }
+        ),
+
+        material(
+            "Ferro Frit 3124",
+            "Published frit reference",
+            {
+                SiO2:54.94,
+                Al2O3:10.01,
+                K2O:.68,
+                Na2O:6.40,
+                CaO:14.28,
+                B2O3:13.74
+            }
+        )
+
+    ],
+
+
+    targets:{
+
+        "Engobe-1":{
+
+            basis:"Reference target",
+
+            notes:"Initial trial target",
+
+            oxides:{
+
+                SiO2:60.30,
+                Al2O3:18.20,
+                K2O:3.80,
+                Na2O:3.20,
+                CaO:6.50,
+                MgO:2.00,
+                Fe2O3:.50,
+                TiO2:.20,
+                B2O3:3.00,
+                ZrO2:1.20,
+                LOI:1.10
+
+            },
+
+            tolerances:{
+
+                SiO2:.10,
+                Al2O3:.10,
+                K2O:.05,
+                Na2O:.05,
+                CaO:.05,
+                MgO:.05,
+                Fe2O3:.03,
+                TiO2:.03,
+                B2O3:.05,
+                ZrO2:.05,
+                LOI:.10
+
+            }
+
+        }
+
+    }
+
+};
+
+
+/* =========================================================
+   MATERIAL CREATOR
+========================================================= */
+
+function material(
+    name,
+    source,
+    oxides
+){
+
+    return {
+
+        id:
+            crypto.randomUUID
+            ? crypto.randomUUID()
+            : Date.now()+"-"+Math.random(),
+
+        name,
+
+        source,
+
+        active:true,
+
+        min:0,
+
+        max:100,
+
+        cost:0,
+
+        oxides:{
+            ...oxides
+        }
+
+    };
+
+}
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let DB =
+    deepCopy(DEFAULT_DB);
+
+let token = "";
+
+let currentPage =
+    "replicate";
+
+let currentTarget =
+    "Engobe-1";
+
+let saveTimer = null;
+
+let saving = false;
+
+let queued = false;
+
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+function deepCopy(value){
+
+    return JSON.parse(
+        JSON.stringify(value)
+    );
+
+}
+
+
+function escapeHTML(value){
+
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+    clearTimeout(
+        showToast.timer
+    );
+
+    showToast.timer =
+        setTimeout(
+            ()=>{
+                toast.classList.remove("show");
+            },
+            2600
+        );
+
+}
+
+
+function setStatus(text){
+
+    document.getElementById(
+        "cloudStatus"
+    ).textContent = text;
+
+}
+
+
+function localBackup(){
+
+    try{
+
+        localStorage.setItem(
+            "ceramicLabBackup",
+            JSON.stringify(DB)
+        );
+
+    }catch(error){
+
+        console.warn(
+            "Local backup failed",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   API
+========================================================= */
+
+async function api(
+    action,
+    payload={}
+){
+
+    const response =
+        await fetch(
+            "/.netlify/functions/api",
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":
+                        "application/json",
+
+                    "Cache-Control":
+                        "no-cache"
+                },
+
+                body:JSON.stringify({
+
+                    action,
+
+                    token,
+
+                    ...payload
+
+                })
+
+            }
+        );
+
+
+    const data =
+        await response
+            .json()
+            .catch(
+                ()=>({
+                    error:
+                        "Invalid server response"
+                })
+            );
+
+
+    if(!response.ok){
+
+        throw new Error(
+            data.error ||
+            "Server error"
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+async function login(){
+
+    const username =
+        document.getElementById(
+            "username"
+        ).value.trim();
+
+
+    const password =
+        document.getElementById(
+            "password"
+        ).value;
+
+
+    const error =
+        document.getElementById(
+            "loginError"
+        );
+
+
+    const button =
+        document.getElementById(
+            "loginButton"
+        );
+
+
+    error.textContent = "";
+
+    button.disabled = true;
+
+    button.textContent =
+        "Connecting…";
+
+
+    try{
+
+        const result =
+            await api(
+                "login",
+                {
+                    username,
+                    password
+                }
+            );
+
+
+        token =
+            result.token;
+
+
+        sessionStorage.setItem(
+            "ceramicLabToken",
+            token
+        );
+
+
+        setStatus(
+            "Loading cloud data…"
+        );
+
+
+        const cloud =
+            await api("get");
+
+
+        if(cloud.data){
+
+            DB =
+                normalizeDatabase(
+                    cloud.data
+                );
+
+        }else{
+
+            DB =
+                deepCopy(
+                    DEFAULT_DB
+                );
+
+            await saveCloud(
+                false
+            );
+
+        }
+
+
+        localBackup();
+
+
+        document
+            .getElementById(
+                "loginScreen"
+            )
+            .classList
+            .add("hidden");
+
+
+        document
+            .getElementById(
+                "appScreen"
+            )
+            .classList
+            .remove("hidden");
+
+
+        setStatus(
+            "Cloud synced"
+        );
+
+
+        render();
+
+        showToast(
+            "Cloud data loaded"
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+        error.textContent =
+            error.message ||
+            "Login failed";
+
+        setStatus(
+            "Cloud unavailable"
+        );
+
+    }finally{
+
+        button.disabled = false;
+
+        button.textContent =
+            "Sign In";
+
+    }
+
+}
+
+
+document
+    .getElementById("password")
+    .addEventListener(
+        "keydown",
+        event=>{
+            if(
+                event.key === "Enter"
+            ){
+                login();
+            }
+        }
+    );
+
+
+/* =========================================================
+   NORMALIZE DATABASE
+========================================================= */
+
+function normalizeDatabase(data){
+
+    const output = {
+
+        version:3,
+
+        rawMaterials:[],
+
+        targets:{}
+
+    };
+
+
+    if(
+        data &&
+        Array.isArray(
+            data.rawMaterials
+        )
+    ){
+
+        output.rawMaterials =
+            data.rawMaterials.map(
+                (m,index)=>({
+
+                    id:
+                        m.id ||
+                        `material-${Date.now()}-${index}`,
+
+                    name:
+                        String(
+                            m.name ||
+                            "Raw Material"
+                        ),
+
+                    source:
+                        String(
+                            m.source ||
+                            "User entered"
+                        ),
+
+                    active:
+                        m.active !== false,
+
+                    min:
+                        Number(m.min)||0,
+
+                    max:
+                        Number.isFinite(
+                            Number(m.max)
+                        )
+                        ? Number(m.max)
+                        : 100,
+
+                    cost:
+                        Number(m.cost)||0,
+
+                    oxides:
+                        m.oxides &&
+                        typeof m.oxides ===
+                            "object"
+                        ? {...m.oxides}
+                        : {}
+
+                })
+            );
+
+    }
+
+
+    if(
+        data &&
+        data.targets &&
+        typeof data.targets ===
+            "object"
+    ){
+
+        Object
+            .keys(data.targets)
+            .forEach(name=>{
+
+                const t =
+                    data.targets[name] ||
+                    {};
+
+
+                output.targets[name] = {
+
+                    basis:
+                        String(
+                            t.basis ||
+                            ""
+                        ),
+
+                    notes:
+                        String(
+                            t.notes ||
+                            ""
+                        ),
+
+                    oxides:
+                        {},
+
+                    tolerances:
+                        {}
+
+                };
+
+
+                OXIDES.forEach(o=>{
+
+                    output.targets[name]
+                        .oxides[o] =
+                        Number(
+                            t.oxides?.[o] ||
+                            t[o] ||
+                            0
+                        );
+
+
+                    output.targets[name]
+                        .tolerances[o] =
+                        Number(
+                            t.tolerances?.[o] ||
+                            0
+                        );
+
+                });
+
+            });
+
+    }
+
+
+    if(
+        !output.rawMaterials.length
+    ){
+
+        output.rawMaterials =
+            deepCopy(
+                DEFAULT_DB.rawMaterials
+            );
+
+    }
+
+
+    if(
+        !Object.keys(
+            output.targets
+        ).length
+    ){
+
+        output.targets =
+            deepCopy(
+                DEFAULT_DB.targets
+            );
+
+    }
+
+
+    return output;
+
+}
+
+
+/* =========================================================
+   CLOUD SAVE
+========================================================= */
+
+async function saveCloud(
+    showMessage=true
+){
+
+    localBackup();
+
+    queued = true;
+
+
+    if(saving){
+
+        return;
+
+    }
+
+
+    saving = true;
+
+
+    try{
+
+        while(queued){
+
+            queued = false;
+
+            setStatus(
+                "Saving…"
+            );
+
+
+            const snapshot =
+                deepCopy(DB);
+
+
+            await api(
+                "save",
+                {
+                    data:snapshot
+                }
+            );
+
+
+            setStatus(
+                "Cloud synced"
+            );
+
+
+            if(showMessage){
+
+                showToast(
+                    "Saved to cloud"
+                );
+
+            }
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Cloud save:",
+            error
+        );
+
+        setStatus(
+            "Save failed"
+        );
+
+
+        if(showMessage){
+
+            showToast(
+                "Cloud save failed"
+            );
+
+        }
+
+    }finally{
+
+        saving = false;
+
+    }
+
+}
+
+
+function scheduleSave(){
+
+    localBackup();
+
+    queued = true;
+
+    clearTimeout(
+        saveTimer
+    );
+
+
+    saveTimer =
+        setTimeout(
+            ()=>{
+                saveCloud(false);
+            },
+            700
+        );
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout(){
+
+    token = "";
+
+    sessionStorage.removeItem(
+        "ceramicLabToken"
+    );
+
+
+    document
+        .getElementById(
+            "appScreen"
+        )
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById(
+            "loginScreen"
+        )
+        .classList
+        .remove("hidden");
+
+
+    document.getElementById(
+        "password"
+    ).value = "";
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+const PAGE_INFO = {
+
+    replicate:[
+        "Replicate Material",
+        "Target chemistry → optimized raw-material recipe"
+    ],
+
+    materials:[
+        "Raw Materials",
+        "Your available materials, analyses and limits"
+    ],
+
+    targets:[
+        "Target Analysis",
+        "Engobe / Glaze target chemical compositions"
+    ],
+
+    batchChem:[
+        "Batch → Chemical",
+        "Raw-material batch → calculated chemical analysis"
+    ],
+
+    periodic:[
+        "Chemical Reference",
+        "Oxide molecular weights and calculation reference"
+    ]
+
+};
+
+
+function navigate(page){
+
+    currentPage =
+        page;
+
+
+    document
+        .querySelectorAll(
+            "[data-page]"
+        )
+        .forEach(button=>{
+
+            if(
+                button.dataset.page ===
+                page
+            ){
+
+                button.classList.add(
+                    "active"
+                );
+
+            }else{
+
+                button.classList.remove(
+                    "active"
+                );
+
+            }
+
+        });
+
+
+    document.getElementById(
+        "pageTitle"
+    ).textContent =
+        PAGE_INFO[page][0];
+
+
+    document.getElementById(
+        "pageSubtitle"
+    ).textContent =
+        PAGE_INFO[page][1];
+
+
+    render();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+document
+    .querySelectorAll(
+        ".desktop-nav .nav-button"
+    )
+    .forEach(button=>{
+
+        button.addEventListener(
+            "click",
+            ()=>{
+                navigate(
+                    button.dataset.page
+                );
+            }
+        );
+
+    });
+
+
+document
+    .querySelectorAll(
+        ".mobile-nav-btn[data-page]"
+    )
+    .forEach(button=>{
+
+        button.addEventListener(
+            "click",
+            ()=>{
+                navigate(
+                    button.dataset.page
+                );
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   MORE
+========================================================= */
+
+function openMore(){
+
+    const action =
+        prompt(
+            "More:\n\n1 = Chemical Reference\n2 = Reload Cloud\n3 = Logout\n\nEnter number:"
+        );
+
+
+    if(action==="1"){
+
+        navigate("periodic");
+
+    }
+
+
+    if(action==="2"){
+
+        reloadCloud();
+
+    }
+
+
+    if(action==="3"){
+
+        logout();
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function render(){
+
+    if(
+        currentPage ===
+        "replicate"
+    ){
+
+        renderReplicate();
+
+    }
+
+    if(
+        currentPage ===
+        "materials"
+    ){
+
+        renderMaterials();
+
+    }
+
+    if(
+        currentPage ===
+        "targets"
+    ){
+
+        renderTargets();
+
+    }
+
+    if(
+        currentPage ===
+        "batchChem"
+    ){
+
+        renderBatchChemical();
+
+    }
+
+    if(
+        currentPage ===
+        "periodic"
+    ){
+
+        renderPeriodic();
+
+    }
+
+}
+
+
+/* =========================================================
+   CHEMISTRY
+========================================================= */
+
+function calculateChemical(
+    batch
+){
+
+    const result = {};
+
+
+    OXIDES.forEach(o=>{
+        result[o] = 0;
+    });
+
+
+    DB.rawMaterials
+        .forEach(
+            (material,index)=>{
+
+                if(
+                    material.active === false
+                ){
+
+                    return;
+
+                }
+
+
+                const percent =
+                    Number(
+                        batch[index]
+                    ) || 0;
+
+
+                if(percent===0){
+                    return;
+                }
+
+
+                OXIDES.forEach(o=>{
+
+                    result[o] +=
+
+                        percent *
+
+                        (
+                            Number(
+                                material
+                                    .oxides?.[o]
+                            ) || 0
+                        ) /
+
+                        100;
+
+                });
+
+            }
+        );
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   FAST SOLVER
+========================================================= */
+
+function solveBatch(
+    target
+){
+
+    const materials =
+        DB.rawMaterials;
+
+
+    const n =
+        materials.length;
+
+
+    if(!n){
+        return [];
+    }
+
+
+    const active =
+        materials.map(
+            m=>
+                m.active !== false
+        );
+
+
+    const matrix =
+        materials.map(
+            m=>
+                OXIDES.map(
+                    o=>
+                        (
+                            Number(
+                                m.oxides?.[o]
+                            ) || 0
+                        ) / 100
+                )
+        );
+
+
+    const targetVector =
+        OXIDES.map(
+            o=>
+                Number(
+                    target.oxides?.[o]
+                ) || 0
+        );
+
+
+    const weight =
+        OXIDES.map(o=>{
+
+            if(
+                o==="SiO2" ||
+                o==="Al2O3"
+            ){
+                return 3;
+            }
+
+
+            if(
+                o==="K2O" ||
+                o==="Na2O" ||
+                o==="CaO" ||
+                o==="MgO"
+            ){
+                return 2;
+            }
+
+
+            if(o==="LOI"){
+                return .35;
+            }
+
+
+            return 1;
+
+        });
+
+
+    const min =
+        materials.map(
+            m=>
+                Math.max(
+                    0,
+                    Number(m.min)||0
+                )
+        );
+
+
+    const max =
+        materials.map(
+            (m,i)=>{
+
+                const value =
+                    Number(m.max);
+
+
+                return Math.max(
+                    min[i],
+                    Number.isFinite(
+                        value
+                    )
+                    ? value
+                    : 100
+                );
+
+            }
+        );
+
+
+    let batch =
+        materials.map(
+            (m,i)=>
+                active[i]
+                ? min[i]
+                : 0
+        );
+
+
+    let total =
+        batch.reduce(
+            (a,b)=>a+b,
+            0
+        );
+
+
+    /*
+        Minimum constraints themselves
+        must be possible.
+    */
+
+    if(total > 100){
+
+        return batch;
+
+    }
+
+
+    /*
+        Fill to 100%.
+
+        Prefer materials with greater
+        capacity.
+    */
+
+    let guard=0;
+
+
+    while(
+        total <
+            99.999999 &&
+        guard <
+            1000
+    ){
+
+        guard++;
+
+
+        let candidates =
+            [];
+
+
+        for(
+            let i=0;
+            i<n;
+            i++
+        ){
+
+            if(
+                active[i] &&
+                batch[i] <
+                max[i]-.000001
+            ){
+
+                candidates.push(i);
+
+            }
+
+        }
+
+
+        if(!candidates.length){
+            break;
+        }
+
+
+        candidates.sort(
+            (a,b)=>
+                (
+                    max[b]-batch[b]
+                ) -
+                (
+                    max[a]-batch[a]
+                )
+        );
+
+
+        const i =
+            candidates[0];
+
+
+        const add =
+            Math.min(
+                max[i]-batch[i],
+                100-total
+            );
+
+
+        batch[i] += add;
+
+        total += add;
+
+    }
+
+
+    /*
+        Current chemistry.
+    */
+
+    let chemistry =
+        OXIDES.map(
+            ()=>0
+        );
+
+
+    for(
+        let i=0;
+        i<n;
+        i++
+    ){
+
+        if(
+            !active[i] ||
+            batch[i]===0
+        ){
+            continue;
+        }
+
+
+        for(
+            let o=0;
+            o<OXIDES.length;
+            o++
+        ){
+
+            chemistry[o] +=
+                batch[i] *
+                matrix[i][o];
+
+        }
+
+    }
+
+
+    /*
+        Coordinate descent.
+
+        We move material from i → j.
+
+        Since chemistry changes linearly,
+        the objective along this direction
+        is quadratic and we can calculate
+        the best transfer analytically.
+
+        This avoids the old browser-freezing
+        brute-force loop.
+    */
+
+    let improved = true;
+
+    let rounds = 0;
+
+
+    while(
+        improved &&
+        rounds < 45
+    ){
+
+        improved=false;
+
+        rounds++;
+
+
+        for(
+            let i=0;
+            i<n;
+            i++
+        ){
+
+            if(
+                !active[i]
+            ){
+                continue;
+            }
+
+
+            const removable =
+                batch[i]-min[i];
+
+
+            if(
+                removable <
+                .00001
+            ){
+                continue;
+            }
+
+
+            for(
+                let j=0;
+                j<n;
+                j++
+            ){
+
+                if(
+                    i===j ||
+                    !active[j]
+                ){
+                    continue;
+                }
+
+
+                const capacity =
+                    max[j]-batch[j];
+
+
+                if(
+                    capacity <
+                    .00001
+                ){
+                    continue;
+                }
+
+
+                let numerator=0;
+
+                let denominator=0;
+
+
+                for(
+                    let o=0;
+                    o<OXIDES.length;
+                    o++
+                ){
+
+                    const direction =
+                        matrix[j][o] -
+                        matrix[i][o];
+
+
+                    const error =
+                        chemistry[o] -
+                        targetVector[o];
+
+
+                    numerator +=
+                        weight[o] *
+                        error *
+                        direction;
+
+
+                    denominator +=
+                        weight[o] *
+                        direction *
+                        direction;
+
+                }
+
+
+                if(
+                    denominator <=
+                    1e-12
+                ){
+                    continue;
+                }
+
+
+                let delta =
+                    -numerator /
+                    denominator;
+
+
+                if(delta <= 0){
+                    continue;
+                }
+
+
+                delta =
+                    Math.min(
+                        delta,
+                        removable,
+                        capacity,
+                        10
+                    );
+
+
+                if(
+                    delta <
+                    .00001
+                ){
+                    continue;
+                }
+
+
+                /*
+                    Apply.
+                */
+
+                batch[i] -= delta;
+
+                batch[j] += delta;
+
+
+                for(
+                    let o=0;
+                    o<OXIDES.length;
+                    o++
+                ){
+
+                    chemistry[o] +=
+                        delta *
+                        (
+                            matrix[j][o] -
+                            matrix[i][o]
+                        );
+
+                }
+
+
+                improved=true;
+
+            }
+
+        }
+
+    }
+
+
+    /*
+        Final total correction.
+    */
+
+    total =
+        batch.reduce(
+            (a,b)=>a+b,
+            0
+        );
+
+
+    let diff =
+        100-total;
+
+
+    if(
+        Math.abs(diff) >
+        .000001
+    ){
+
+        for(
+            let i=0;
+            i<n;
+            i++
+        ){
+
+            if(
+                !active[i]
+            ){
+                continue;
+            }
+
+
+            if(diff>0){
+
+                const room =
+                    max[i]-batch[i];
+
+
+                const add =
+                    Math.min(
+                        diff,
+                        room
+                    );
+
+
+                batch[i]+=add;
+
+                diff-=add;
+
+            }else{
+
+                const room =
+                    batch[i]-min[i];
+
+
+                const remove =
+                    Math.min(
+                        -diff,
+                        room
+                    );
+
+
+                batch[i]-=remove;
+
+                diff+=remove;
+
+            }
+
+
+            if(
+                Math.abs(diff) <
+                .000001
+            ){
+
+                break;
+
+            }
+
+        }
+
+    }
+
+
+    return batch.map(
+        v=>
+            Math.abs(v)<.0000005
+            ? 0
+            : Number(
+                v.toFixed(6)
+            )
+    );
+
+}
+
+
+/* =========================================================
+   TARGET ERROR
+========================================================= */
+
+function chemistryResult(
+    target,
+    batch
+){
+
+    const calculated =
+        calculateChemical(
+            batch
+        );
+
+
+    let weightedError=0;
+
+    let maxError=0;
+
+    let outside=0;
+
+
+    const rows =
+        OXIDES.map(o=>{
+
+            const targetValue =
+                Number(
+                    target.oxides?.[o]
+                ) || 0;
+
+
+            const calculatedValue =
+                Number(
+                    calculated[o]
+                ) || 0;
+
+
+            const difference =
+                calculatedValue -
+                targetValue;
+
+
+            const tolerance =
+                Number(
+                    target
+                        .tolerances
+                        ?.[o]
+                ) ||
+                defaultTolerance(o);
+
+
+            const abs =
+                Math.abs(
+                    difference
+                );
+
+
+            if(
+                targetValue!==0 ||
+                calculatedValue!==0
+            ){
+
+                if(abs>tolerance){
+                    outside++;
+                }
+
+            }
+
+
+            maxError =
+                Math.max(
+                    maxError,
+                    abs
+                );
+
+
+            let weight=1;
+
+
+            if(
+                o==="SiO2" ||
+                o==="Al2O3"
+            ){
+
+                weight=3;
+
+            }else if(
+                o==="K2O" ||
+                o==="Na2O" ||
+                o==="CaO" ||
+                o==="MgO"
+            ){
+
+                weight=2;
+
+            }
+
+
+            weightedError +=
+                weight *
+                difference *
+                difference;
+
+
+            return {
+
+                oxide:o,
+
+                target:targetValue,
+
+                calculated:calculatedValue,
+
+                difference,
+
+                tolerance,
+
+                outside
+
+            };
+
+        });
+
+
+    let status;
+
+
+    if(
+        outside===0
+    ){
+
+        status =
+            "TARGET ACHIEVED";
+
+    }else if(
+        weightedError < 1
+    ){
+
+        status =
+            "CLOSE — TRIAL";
+
+    }else{
+
+        status =
+            "BEST FIT — NEEDS TUNING";
+
+    }
+
+
+    return {
+
+        calculated,
+
+        rows,
+
+        weightedError,
+
+        maxError,
+
+        outside,
+
+        status
+
+    };
+
+}
+
+
+function defaultTolerance(
+    oxide
+){
+
+    if(
+        oxide==="SiO2" ||
+        oxide==="Al2O3" ||
+        oxide==="LOI"
+    ){
+
+        return .10;
+
+    }
+
+
+    if(
+        oxide==="K2O" ||
+        oxide==="Na2O" ||
+        oxide==="CaO" ||
+        oxide==="MgO" ||
+        oxide==="B2O3" ||
+        oxide==="ZrO2"
+    ){
+
+        return .05;
+
+    }
+
+
+    return .03;
+
+}
+
+
+/* =========================================================
+   REPLICATE PAGE
+========================================================= */
+
+function renderReplicate(){
+
+    const names =
+        Object.keys(
+            DB.targets
+        );
+
+
+    if(
+        !names.length
+    ){
+
+        document.getElementById(
+            "content"
+        ).innerHTML = `
+            <div class="card empty">
+                Create a target first.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    if(
+        !DB.targets[currentTarget]
+    ){
+
+        currentTarget =
+            names[0];
+
+    }
+
+
+    const target =
+        DB.targets[
+            currentTarget
+        ];
+
+
+    const activeMaterials =
+        DB.rawMaterials.filter(
+            m=>m.active!==false
+        ).length;
+
+
+    document.getElementById(
+        "content"
+    ).innerHTML = `
+
+        <div class="grid">
+
+
+            <section class="card hero">
+
+                <div class="hero-kicker">
+                    FORMULATION ENGINE
+                </div>
+
+                <div class="hero-title">
+                    Replicate your material
+                </div>
+
+                <div class="hero-description">
+
+                    Select the target chemistry, choose your
+                    batch size and calculate the best possible
+                    raw-material recipe using all active materials
+                    and their minimum / maximum limits.
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="field">
+
+                        <label class="field-label">
+                            Target
+                        </label>
+
+                        <select
+                            id="repTarget"
+                            class="control"
+                        >
+
+                            ${
+                                names.map(
+                                    name=>`
+
+                                    <option
+                                        value="${escapeHTML(name)}"
+                                        ${
+                                            name===
+                                            currentTarget
+                                            ?"selected"
+                                            :""
+                                        }
+                                    >
+                                        ${escapeHTML(name)}
+                                    </option>
+
+                                    `
+                                ).join("")
+                            }
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label class="field-label">
+                            Batch size (kg)
+                        </label>
+
+                        <input
+                            id="repKg"
+                            class="control"
+                            type="number"
+                            min="0"
+                            step=".01"
+                            value="1000"
+                        >
+
+                    </div>
+
+
+                    <button
+                        id="calculateButton"
+                        class="btn btn-primary"
+                        onclick="calculateRecipe()"
+                    >
+                        Calculate Recipe
+                    </button>
+
+                </div>
+
+
+                <div class="stat-grid">
+
+                    <div class="stat">
+
+                        <div class="stat-value">
+                            ${activeMaterials}
+                        </div>
+
+                        <div class="stat-label">
+                            Active materials
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-value">
+                            ${OXIDES.length}
+                        </div>
+
+                        <div class="stat-label">
+                            Oxide channels
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-value">
+                            100%
+                        </div>
+
+                        <div class="stat-label">
+                            Batch constraint
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat">
+
+                        <div class="stat-value">
+                            XRF
+                        </div>
+
+                        <div class="stat-label">
+                            Final validation
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div class="card-title">
+                    Target chemistry
+                </div>
+
+                <div class="card-sub">
+                    ${escapeHTML(
+                        target.basis ||
+                        "Target analysis"
+                    )}
+                </div>
+
+
+                <div class="chem-grid">
+
+                    ${
+                        renderTargetChemCards(
+                            target
+                        )
+                    }
+
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div class="card-title">
+                    Calculated recipe
+                </div>
+
+                <div class="card-sub">
+                    Press Calculate Recipe to generate
+                    the optimized batch.
+                </div>
+
+
+                <div
+                    id="recipeOutput"
+                    class="empty"
+                >
+                    No calculation yet.
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div class="card-title">
+                    Target vs calculated chemistry
+                </div>
+
+                <div
+                    id="comparisonOutput"
+                    class="empty"
+                >
+                    Chemical comparison will appear here.
+                </div>
+
+            </section>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById(
+            "repTarget"
+        )
+        .addEventListener(
+            "change",
+            function(){
+
+                currentTarget =
+                    this.value;
+
+                renderReplicate();
+
+            }
+        );
+
+}
+
+
+function renderTargetChemCards(
+    target
+){
+
+    return OXIDES
+        .filter(
+            o=>
+                Number(
+                    target.oxides?.[o]
+                ) ||
+                0
+        )
+        .map(
+            o=>`
+
+            <div class="chem-card">
+
+                <div class="chem-head">
+
+                    <div class="oxide-name">
+                        ${LABEL[o]}
+                    </div>
+
+                    <span class="status match">
+                        TARGET
+                    </span>
+
+                </div>
+
+                <div class="chem-values">
+
+                    <div>
+
+                        <div class="chem-value-label">
+                            TARGET
+                        </div>
+
+                        <div class="chem-value">
+                            ${
+                                Number(
+                                    target.oxides[o]
+                                ).toFixed(3)
+                            }%
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="chem-value-label">
+                            TOLERANCE
+                        </div>
+
+                        <div class="chem-value">
+                            ±${
+                                Number(
+                                    target
+                                        .tolerances
+                                        ?.[o]
+                                ) ||
+                                defaultTolerance(o)
+                            }%
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="chem-value-label">
+                            MW
+                        </div>
+
+                        <div class="chem-value">
+                            ${
+                                MW[o]
+                                ? MW[o].toFixed(2)
+                                : "—"
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   CALCULATE RECIPE
+========================================================= */
+
+function calculateRecipe(){
+
+    const button =
+        document.getElementById(
+            "calculateButton"
+        );
+
+
+    button.disabled=true;
+
+    button.textContent =
+        "Calculating…";
+
+
+    /*
+        setTimeout gives the browser one
+        rendering cycle so the button changes
+        before calculation begins.
+    */
+
+    setTimeout(()=>{
+
+        try{
+
+            const target =
+                DB.targets[
+                    currentTarget
+                ];
+
+
+            const kg =
+                Math.max(
+                    0,
+                    Number(
+                        document.getElementById(
+                            "repKg"
+                        ).value
+                    ) || 1000
+                );
+
+
+            const batch =
+                solveBatch(
+                    target
+                );
+
+
+            const result =
+                chemistryResult(
+                    target,
+                    batch
+                );
+
+
+            renderRecipe(
+                batch,
+                kg
+            );
+
+
+            renderComparison(
+                target,
+                result
+            );
+
+
+        }finally{
+
+            button.disabled=false;
+
+            button.textContent =
+                "Calculate Recipe";
+
+        }
+
+    },20);
+
+}
+
+
+/* =========================================================
+   RECIPE OUTPUT
+========================================================= */
+
+function renderRecipe(
+    batch,
+    kg
+){
+
+    const total =
+        batch.reduce(
+            (a,b)=>a+b,
+            0
+        );
+
+
+    const active =
+        DB.rawMaterials
+            .map(
+                (m,i)=>({
+                    material:m,
+                    value:batch[i]
+                })
+            )
+            .filter(
+                x=>x.value>.0005
+            );
+
+
+    const output =
+        document.getElementById(
+            "recipeOutput"
+        );
+
+
+    if(
+        total <
+        99.999
+    ){
+
+        output.innerHTML = `
+
+            <div class="danger-box">
+
+                The current minimum / maximum
+                constraints cannot produce a
+                100% batch.
+
+                <br><br>
+
+                Reduce minimum limits or increase
+                maximum limits.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    output.innerHTML = `
+
+        <div class="stat-grid">
+
+            <div class="stat">
+
+                <div class="stat-value">
+                    ${total.toFixed(3)}%
+                </div>
+
+                <div class="stat-label">
+                    Total batch
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-value">
+                    ${active.length}
+                </div>
+
+                <div class="stat-label">
+                    Materials used
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-value">
+                    ${kg.toFixed(0)}
+                </div>
+
+                <div class="stat-label">
+                    Batch kg
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-value">
+                    ${active.length}
+                </div>
+
+                <div class="stat-label">
+                    Recipe lines
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="recipe-grid">
+
+            ${
+                active.map(
+                    (item,index)=>`
+
+                    <div
+                        class="recipe-item"
+                        style="
+                            animation-delay:
+                            ${index*25}ms
+                        "
+                    >
+
+                        <div class="recipe-name">
+                            ${escapeHTML(
+                                item.material.name
+                            )}
+                        </div>
+
+                        <div class="recipe-percent">
+                            ${item.value.toFixed(3)}%
+                        </div>
+
+                        <div class="recipe-kg">
+                            ${
+                                (
+                                    item.value *
+                                    kg /
+                                    100
+                                ).toFixed(3)
+                            } kg
+                        </div>
+
+                    </div>
+
+                    `
+                ).join("")
+            }
+
+        </div>
+
+
+        <div class="info">
+
+            <b>Formula:</b>
+            Required kg =
+            batch percentage × total batch kg ÷ 100.
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   COMPARISON
+========================================================= */
+
+function renderComparison(
+    target,
+    result
+){
+
+    const output =
+        document.getElementById(
+            "comparisonOutput"
+        );
+
+
+    const statusClass =
+        result.outside===0
+        ? "match"
+        : result.weightedError<1
+        ? "close"
+        : "out";
+
+
+    output.innerHTML = `
+
+        <div class="${
+            result.outside===0
+            ? "success-box"
+            : result.weightedError<1
+            ? "info warning"
+            : "info warning"
+        }">
+
+            <b>
+                ${result.status}
+            </b>
+
+            <br>
+
+            ${
+                result.outside===0
+                ? "All oxide values are within their defined tolerances."
+                : `${result.outside} oxide channel(s) are outside tolerance.`
+            }
+
+        </div>
+
+
+        <div class="chem-grid">
+
+            ${
+                result.rows
+                    .filter(
+                        row=>
+                            row.target!==0 ||
+                            row.calculated!==0
+                    )
+                    .map(
+                        row=>{
+
+                            const cls =
+                                Math.abs(
+                                    row.difference
+                                ) <=
+                                row.tolerance
+                                ? "match"
+                                : Math.abs(
+                                    row.difference
+                                ) <=
+                                row.tolerance*3
+                                ? "close"
+                                : "out";
+
+
+                            const text =
+                                cls==="match"
+                                ? "MATCH"
+                                : cls==="close"
+                                ? "CLOSE"
+                                : "OUT";
+
+
+                            return `
+
+                                <div class="chem-card">
+
+                                    <div class="chem-head">
+
+                                        <div class="oxide-name">
+                                            ${LABEL[row.oxide]}
+                                        </div>
+
+                                        <span class="status ${cls}">
+                                            ${text}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="chem-values">
+
+                                        <div>
+
+                                            <div class="chem-value-label">
+                                                TARGET
+                                            </div>
+
+                                            <div class="chem-value">
+                                                ${row.target.toFixed(4)}%
+                                            </div>
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <div class="chem-value-label">
+                                                CALCULATED
+                                            </div>
+
+                                            <div class="chem-value">
+                                                ${row.calculated.toFixed(4)}%
+                                            </div>
+
+                                        </div>
+
+
+                                        <div>
+
+                                            <div class="chem-value-label">
+                                                DIFFERENCE
+                                            </div>
+
+                                            <div class="chem-value">
+                                                ${
+                                                    row.difference>=0
+                                                    ?"+":""
+                                                }${
+                                                    row.difference
+                                                    .toFixed(4)
+                                                }%
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="card-sub">
+
+                                        Tolerance:
+                                        ±${row.tolerance.toFixed(3)}%
+
+                                    </div>
+
+                                </div>
+
+                            `;
+
+                        }
+                    )
+                    .join("")
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RAW MATERIALS
+========================================================= */
+
+function renderMaterials(){
+
+    document.getElementById(
+        "content"
+    ).innerHTML = `
+
+        <div class="grid">
+
+            <section class="card hero">
+
+                <div class="hero-kicker">
+                    MATERIAL LIBRARY
+                </div>
+
+                <div class="hero-title">
+                    Raw Materials
+                </div>
+
+                <div class="hero-description">
+
+                    Maintain the actual chemistry available
+                    to your formulation engine. Changes are
+                    automatically synchronized to the cloud.
+
+                </div>
+
+
+                <div class="row">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="addMaterial()"
+                    >
+                        + Add Material
+                    </button>
+
+
+                    <button
+                        class="btn btn-success"
+                        onclick="saveNow()"
+                    >
+                        Save All
+                    </button>
+
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="reloadCloud()"
+                    >
+                        Reload Cloud
+                    </button>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="field">
+
+                        <label class="field-label">
+                            Search materials
+                        </label>
+
+                        <input
+                            id="materialSearch"
+                            class="control"
+                            placeholder="Search by name…"
+                            oninput="filterMaterials()"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div
+                    id="materialGrid"
+                    class="material-grid"
+                ></div>
+
+            </section>
+
+        </div>
+
+    `;
+
+
+    renderMaterialCards();
+
+}
+
+
+function renderMaterialCards(){
+
+    const search =
+        (
+            document.getElementById(
+                "materialSearch"
+            )?.value ||
+            ""
+        )
+        .toLowerCase();
+
+
+    const list =
+        DB.rawMaterials.filter(
+            m=>
+                m.name
+                    .toLowerCase()
+                    .includes(search)
+        );
+
+
+    const container =
+        document.getElementById(
+            "materialGrid"
+        );
+
+
+    if(!list.length){
+
+        container.innerHTML = `
+            <div class="empty">
+                No materials found.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        list.map(
+            material=>{
+
+                const index =
+                    DB.rawMaterials.indexOf(
+                        material
+                    );
+
+
+                return `
+
+                    <article
+                        class="material-card"
+                    >
+
+                        <div class="material-top">
+
+                            <div>
+
+                                <input
+                                    class="control"
+                                    style="
+                                        font-weight:900;
+                                        font-size:14px;
+                                        height:40px;
+                                    "
+                                    value="${escapeHTML(material.name)}"
+                                    onchange="
+                                        updateMaterialName(
+                                            '${material.id}',
+                                            this.value
+                                        )
+                                    "
+                                >
+
+                                <div class="material-source">
+                                    ${escapeHTML(
+                                        material.source ||
+                                        "User entered"
+                                    )}
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                class="
+                                    switch
+                                    ${
+                                        material.active!==false
+                                        ?"on"
+                                        :""
+                                    }
+                                "
+                                onclick="
+                                    toggleMaterial(
+                                        '${material.id}'
+                                    )
+                                "
+                                aria-label="Toggle material"
+                            ></button>
+
+                        </div>
+
+
+                        <div class="material-fields">
+
+                            ${miniField(
+                                "Min %",
+                                material.min,
+                                `updateMaterialField('${material.id}','min',this.value)`
+                            )}
+
+                            ${miniField(
+                                "Max %",
+                                material.max,
+                                `updateMaterialField('${material.id}','max',this.value)`
+                            )}
+
+                            ${miniField(
+                                "Cost/kg",
+                                material.cost,
+                                `updateMaterialField('${material.id}','cost',this.value)`
+                            )}
+
+                        </div>
+
+
+                        <div class="composition-title">
+
+                            <div
+                                style="
+                                    font-size:11px;
+                                    font-weight:850;
+                                "
+                            >
+                                Chemical Analysis
+                            </div>
+
+                            <div
+                                style="
+                                    font-size:8px;
+                                    color:var(--muted);
+                                "
+                            >
+                                wt%
+                            </div>
+
+                        </div>
+
+
+                        <div class="composition-grid">
+
+                            ${
+                                OXIDES.map(
+                                    oxide=>`
+
+                                    <div>
+
+                                        <div class="oxide-label">
+                                            ${LABEL[oxide]}
+                                        </div>
+
+                                        <input
+                                            class="oxide-input"
+                                            type="number"
+                                            step=".001"
+                                            value="${
+                                                Number(
+                                                    material
+                                                        .oxides
+                                                        ?.[oxide]
+                                                ) || 0
+                                            }"
+                                            onchange="
+                                                updateMaterialOxide(
+                                                    '${material.id}',
+                                                    '${oxide}',
+                                                    this.value
+                                                )
+                                            "
+                                        >
+
+                                    </div>
+
+                                    `
+                                ).join("")
+                            }
+
+                        </div>
+
+
+                        <div class="material-actions">
+
+                            <button
+                                class="btn btn-danger btn-small"
+                                onclick="
+                                    deleteMaterial(
+                                        '${material.id}'
+                                    )
+                                "
+                            >
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+function miniField(
+    label,
+    value,
+    action
+){
+
+    return `
+
+        <div>
+
+            <div class="mini-label">
+                ${label}
+            </div>
+
+            <input
+                class="mini-input"
+                type="number"
+                step=".001"
+                value="${Number(value)||0}"
+                onchange="${action}"
+            >
+
+        </div>
+
+    `;
+
+}
+
+
+function filterMaterials(){
+
+    renderMaterialCards();
+
+}
+
+
+function findMaterial(id){
+
+    return DB.rawMaterials.find(
+        m=>m.id===id
+    );
+
+}
+
+
+function updateMaterialName(
+    id,
+    value
+){
+
+    const m =
+        findMaterial(id);
+
+
+    if(!m)
+        return;
+
+
+    m.name =
+        value.trim() ||
+        "Raw Material";
+
+
+    scheduleSave();
+
+}
+
+
+function updateMaterialField(
+    id,
+    field,
+    value
+){
+
+    const m =
+        findMaterial(id);
+
+
+    if(!m)
+        return;
+
+
+    m[field] =
+        Number(value)||0;
+
+
+    scheduleSave();
+
+}
+
+
+function updateMaterialOxide(
+    id,
+    oxide,
+    value
+){
+
+    const m =
+        findMaterial(id);
+
+
+    if(!m)
+        return;
+
+
+    if(!m.oxides){
+        m.oxides={};
+    }
+
+
+    m.oxides[oxide] =
+        Number(value)||0;
+
+
+    scheduleSave();
+
+}
+
+
+function toggleMaterial(id){
+
+    const m =
+        findMaterial(id);
+
+
+    if(!m)
+        return;
+
+
+    m.active =
+        m.active === false;
+
+
+    scheduleSave();
+
+    renderMaterialCards();
+
+}
+
+
+async function addMaterial(){
+
+    DB.rawMaterials.push(
+        material(
+            "New Raw Material",
+            "User entered",
+            {}
+        )
+    );
+
+
+    await saveCloud(
+        true
+    );
+
+
+    renderMaterialCards();
+
+}
+
+
+async function deleteMaterial(id){
+
+    const m =
+        findMaterial(id);
+
+
+    if(!m)
+        return;
+
+
+    if(
+        !confirm(
+            `Delete ${m.name}?`
+        )
+    ){
+        return;
+    }
+
+
+    DB.rawMaterials =
+        DB.rawMaterials.filter(
+            x=>x.id!==id
+        );
+
+
+    await saveCloud(
+        true
+    );
+
+
+    renderMaterialCards();
+
+}
+
+
+async function saveNow(){
+
+    await saveCloud(
+        true
+    );
+
+}
+
+
+async function reloadCloud(){
+
+    if(
+        !confirm(
+            "Reload the cloud database? Local unsaved changes will be discarded."
+        )
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        setStatus(
+            "Loading…"
+        );
+
+
+        const result =
+            await api("get");
+
+
+        if(result.data){
+
+            DB =
+                normalizeDatabase(
+                    result.data
+                );
+
+
+            localBackup();
+
+
+            setStatus(
+                "Cloud synced"
+            );
+
+
+            render();
+
+            showToast(
+                "Cloud data reloaded"
+            );
+
+        }else{
+
+            showToast(
+                "No cloud database found"
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        setStatus(
+            "Load failed"
+        );
+
+        showToast(
+            "Cloud load failed"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   TARGETS
+========================================================= */
+
+function renderTargets(){
+
+    const names =
+        Object.keys(
+            DB.targets
+        );
+
+
+    document.getElementById(
+        "content"
+    ).innerHTML = `
+
+        <div class="grid">
+
+            <section class="card hero">
+
+                <div class="hero-kicker">
+                    TARGET LIBRARY
+                </div>
+
+                <div class="hero-title">
+                    Engobe & Glaze targets
+                </div>
+
+                <div class="hero-description">
+                    Store the chemical analyses you want to
+                    reproduce. Each oxide can have its own
+                    tolerance.
+                </div>
+
+
+                <div class="row">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="addTarget()"
+                    >
+                        + New Target
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div class="target-card-grid"
+                     style="
+                        display:grid;
+                        grid-template-columns:
+                            repeat(2,minmax(0,1fr));
+                        gap:12px;
+                     "
+                >
+
+                    ${
+                        names.map(
+                            name=>targetCard(
+                                name,
+                                DB.targets[name]
+                            )
+                        ).join("")
+                    }
+
+                </div>
+
+            </section>
+
+        </div>
+
+    `;
+
+}
+
+
+function targetCard(
+    name,
+    target
+){
+
+    const activeOxides =
+        OXIDES.filter(
+            o=>
+                Number(
+                    target.oxides?.[o]
+                )
+        );
+
+
+    return `
+
+        <article
+            class="target-card"
+        >
+
+            <div class="target-name">
+                ${escapeHTML(name)}
+            </div>
+
+            <div class="target-meta">
+                ${escapeHTML(
+                    target.basis ||
+                    "Chemical analysis"
+                )}
+            </div>
+
+
+            <div class="target-summary">
+
+                ${
+                    activeOxides
+                        .slice(0,8)
+                        .map(
+                            o=>`
+                                <span class="oxide-chip">
+                                    ${LABEL[o]}
+                                    ${
+                                        Number(
+                                            target.oxides[o]
+                                        ).toFixed(2)
+                                    }
+                                </span>
+                            `
+                        )
+                        .join("")
+                }
+
+            </div>
+
+
+            <div class="row">
+
+                <button
+                    class="btn btn-primary btn-small"
+                    onclick="
+                        editTarget(
+                            '${escapeHTML(name)}'
+                        )
+                    "
+                >
+                    Open
+                </button>
+
+
+                <button
+                    class="btn btn-danger btn-small"
+                    onclick="
+                        deleteTarget(
+                            '${escapeHTML(name)}'
+                        )
+                    "
+                >
+                    Delete
+                </button>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+function addTarget(){
+
+    const name =
+        prompt(
+            "Target name:",
+            "Engobe-2"
+        );
+
+
+    if(!name)
+        return;
+
+
+    const clean =
+        name.trim();
+
+
+    if(
+        !clean ||
+        DB.targets[clean]
+    ){
+
+        showToast(
+            "Target name already exists"
+        );
+
+        return;
+
+    }
+
+
+    const oxides={};
+
+    const tolerances={};
+
+
+    OXIDES.forEach(
+        o=>{
+
+            oxides[o]=0;
+
+            tolerances[o]=
+                defaultTolerance(o);
+
+        }
+    );
+
+
+    DB.targets[clean]={
+
+        basis:"User target",
+
+        notes:"",
+
+        oxides,
+
+        tolerances
+
+    };
+
+
+    currentTarget =
+        clean;
+
+
+    saveCloud(
+        true
+    );
+
+
+    editTarget(
+        clean
+    );
+
+}
+
+
+function editTarget(
+    name
+){
+
+    currentTarget =
+        name;
+
+
+    const target =
+        DB.targets[name];
+
+
+    document.getElementById(
+        "content"
+    ).innerHTML = `
+
+        <div class="grid">
+
+            <section class="card hero">
+
+                <div class="hero-kicker">
+                    TARGET EDITOR
+                </div>
+
+                <div class="hero-title">
+                    ${escapeHTML(name)}
+                </div>
+
+                <div class="hero-description">
+                    Enter target oxide percentages and
+                    define the acceptable tolerance for
+                    each oxide.
+                </div>
+
+
+                <div class="row">
+
+                    <div class="field">
+
+                        <label class="field-label">
+                            Analysis basis
+                        </label>
+
+                        <input
+                            id="targetBasis"
+                            class="control"
+                            value="${escapeHTML(
+                                target.basis || ""
+                            )}"
+                        >
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label class="field-label">
+                            Notes
+                        </label>
+
+                        <input
+                            id="targetNotes"
+                            class="control"
+                            value="${escapeHTML(
+                                target.notes || ""
+                            )}"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div class="card-title">
+                    Oxide Analysis
+                </div>
+
+                <div class="card-sub">
+                    Target wt% and tolerance wt%.
+                </div>
+
+
+                <div class="chem-grid">
+
+                    ${
+                        OXIDES.map(
+                            oxide=>`
+
+                            <div
+                                class="chem-card"
+                            >
+
+                                <div class="oxide-name">
+                                    ${LABEL[oxide]}
+                                </div>
+
+
+                                <div class="material-fields">
+
+                                    <div>
+
+                                        <div class="mini-label">
+                                            Target %
+                                        </div>
+
+                                        <input
+                                            class="mini-input"
+                                            type="number"
+                                            step=".001"
+                                            value="${
+                                                Number(
+                                                    target
+                                                        .oxides
+                                                        ?.[oxide]
+                                                ) || 0
+                                            }"
+                                            onchange="
+                                                updateTargetOxide(
+                                                    '${name}',
+                                                    '${oxide}',
+                                                    this.value
+                                                )
+                                            "
+                                        >
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <div class="mini-label">
+                                            Tolerance
+                                        </div>
+
+                                        <input
+                                            class="mini-input"
+                                            type="number"
+                                            step=".001"
+                                            value="${
+                                                Number(
+                                                    target
+                                                        .tolerances
+                                                        ?.[oxide]
+                                                ) ||
+                                                defaultTolerance(
+                                                    oxide
+                                                )
+                                            }"
+                                            onchange="
+                                                updateTargetTolerance(
+                                                    '${name}',
+                                                    '${oxide}',
+                                                    this.value
+                                                )
+                                            "
+                                        >
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <div class="mini-label">
+                                            MW
+                                        </div>
+
+                                        <div
+                                            style="
+                                                height:34px;
+                                                display:flex;
+                                                align-items:center;
+                                                font-size:10px;
+                                                font-weight:800;
+                                            "
+                                        >
+                                            ${
+                                                MW[oxide]
+                                                ? MW[oxide].toFixed(3)
+                                                : "—"
+                                            }
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            `
+                        ).join("")
+                    }
+
+                </div>
+
+
+                <div class="row">
+
+                    <button
+                        class="btn btn-success"
+                        onclick="
+                            saveTargetHeader(
+                                '${escapeHTML(name)}'
+                            )
+                        "
+                    >
+                        Save Target
+                    </button>
+
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="renderTargets()"
+                    >
+                        Back
+                    </button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    `;
+
+}
+
+
+function updateTargetOxide(
+    name,
+    oxide,
+    value
+){
+
+    DB.targets[name]
+        .oxides[oxide] =
+        Number(value)||0;
+
+
+    scheduleSave();
+
+}
+
+
+function updateTargetTolerance(
+    name,
+    oxide,
+    value
+){
+
+    DB.targets[name]
+        .tolerances[oxide] =
+        Number(value)||0;
+
+
+    scheduleSave();
+
+}
+
+
+async function saveTargetHeader(
+    name
+){
+
+    const target =
+        DB.targets[name];
+
+
+    target.basis =
+        document.getElementById(
+            "targetBasis"
+        ).value;
+
+
+    target.notes =
+        document.getElementById(
+            "targetNotes"
+        ).value;
+
+
+    await saveCloud(
+        true
+    );
+
+
+    showToast(
+        "Target saved"
+    );
+
+}
+
+
+async function deleteTarget(
+    name
+){
+
+    if(
+        !confirm(
+            `Delete ${name}?`
+        )
+    ){
+
+        return;
+
+    }
+
+
+    delete DB.targets[name];
+
+
+    const names =
+        Object.keys(
+            DB.targets
+        );
+
+
+    if(!names.length){
+
+        addTarget();
+
+        return;
+
+    }
+
+
+    currentTarget =
+        names[0];
+
+
+    await saveCloud(
+        true
+    );
+
+
+    renderTargets();
+
+}
+
+
+/* =========================================================
+   BATCH → CHEMICAL
+========================================================= */
+
+function renderBatchChemical(){
+
+    document.getElementById(
+        "content"
+    ).innerHTML = `
+
+        <div class="grid">
+
+            <section class="card hero">
+
+                <div class="hero-kicker">
+                    REVERSE CALCULATION
+                </div>
+
+                <div class="hero-title">
+                    Batch → Chemical
+                </div>
+
+                <div class="hero-description">
+                    Enter the actual raw-material batch percentages
+                    and calculate the resulting chemical analysis.
+                    Molecular-weight / mole values are shown as a
+                    reference. UMF is not used.
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div class="card-title">
+                    Batch composition
+                </div>
+
+                <div class="card-sub">
+                    Enter percentages. Total should equal 100%.
+                </div>
+
+
+                <div
+                    id="batchInputs"
+                    class="batch-grid"
+                >
+
+                    ${
+                        DB.rawMaterials
+                            .filter(
+                                m=>
+                                    m.active!==false
+                            )
+                            .map(
+                                material=>`
+
+                                <div class="batch-item">
+
+                                    <div class="batch-material">
+                                        ${escapeHTML(
+                                            material.name
+                                        )}
+                                    </div>
+
+                                    <div class="batch-limit">
+                                        Allowed:
+                                        ${
+                                            material.min
+                                        }–${
+                                            material.max
+                                        }%
+                                    </div>
+
+                                    <input
+                                        class="batch-input"
+                                        data-id="${material.id}"
+                                        type="number"
+                                        min="0"
+                                        max="100"
+                                        step=".001"
+                                        value="0"
+                                        oninput="updateBatchTotal()"
+                                    >
+
+                                </div>
+
+                                `
+                            )
+                            .join("")
+                    }
+
+                </div>
+
+
+                <div
+                    id="batchTotal"
+                    class="info"
+                >
+                    Batch total: 0.000%
+                </div>
+
+
+                <div class="row">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="calculateBatchChemical()"
+                    >
+                        Calculate Chemistry
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div
+                    id="batchChemOutput"
+                    class="empty"
+                >
+                    Chemical result will appear here.
+                </div>
+
+            </section>
+
+        </div>
+
+    `;
+
+}
+
+
+function updateBatchTotal(){
+
+    let total=0;
+
+
+    document
+        .querySelectorAll(
+            ".batch-input"
+        )
+        .forEach(
+            input=>{
+                total +=
+                    Number(
+                        input.value
+                    ) || 0;
+            }
+        );
+
+
+    const el =
+        document.getElementById(
+            "batchTotal"
+        );
+
+
+    if(!el)
+        return;
+
+
+    el.textContent =
+        `Batch total: ${total.toFixed(3)}%`;
+
+}
+
+
+function calculateBatchChemical(){
+
+    const batch =
+        DB.rawMaterials.map(
+            ()=>0
+        );
+
+
+    document
+        .querySelectorAll(
+            ".batch-input"
+        )
+        .forEach(
+            input=>{
+
+                const material =
+                    findMaterial(
+                        input.dataset.id
+                    );
+
+
+                if(!material)
+                    return;
+
+
+                const index =
+                    DB.rawMaterials.indexOf(
+                        material
+                    );
+
+
+                batch[index] =
+                    Math.max(
+                        0,
+                        Number(
+                            input.value
+                        ) || 0
+                    );
+
+            }
+        );
+
+
+    const total =
+        batch.reduce(
+            (a,b)=>a+b,
+            0
+        );
+
+
+    const chemical =
+        calculateChemical(
+            batch
+        );
+
+
+    let html = `
+
+        <div class="card-title">
+            Calculated Chemical Analysis
+        </div>
+
+        <div class="card-sub">
+            Batch total:
+            <b>${total.toFixed(3)}%</b>
+        </div>
+
+
+        <div class="chem-grid">
+
+    `;
+
+
+    OXIDES.forEach(
+        oxide=>{
+
+            const value =
+                Number(
+                    chemical[oxide]
+                ) || 0;
+
+
+            if(
+                value===0 &&
+                !MW[oxide]
+            ){
+                return;
+            }
+
+
+            const moles =
+                MW[oxide]
+                ? value/MW[oxide]
+                : 0;
+
+
+            html += `
+
+                <div class="chem-card">
+
+                    <div class="oxide-name">
+                        ${LABEL[oxide]}
+                    </div>
+
+
+                    <div class="chem-values">
+
+                        <div>
+
+                            <div class="chem-value-label">
+                                WT%
+                            </div>
+
+                            <div class="chem-value">
+                                ${value.toFixed(4)}
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="chem-value-label">
+                                MW
+                            </div>
+
+                            <div class="chem-value">
+                                ${
+                                    MW[oxide]
+                                    ? MW[oxide].toFixed(3)
+                                    : "—"
+                                }
+                            </div>
+
+                        </div>
+
+
+                        <div>
+
+                            <div class="chem-value-label">
+                                MOLES
+                            </div>
+
+                            <div class="chem-value">
+                                ${
+                                    MW[oxide]
+                                    ? moles.toFixed(7)
+                                    : "—"
+                                }
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+        </div>
+
+
+        <div class="${
+            Math.abs(total-100)<.01
+            ? "success-box"
+            : "info warning"
+        }">
+
+            ${
+                Math.abs(total-100)<.01
+                ? "Batch is normalized to 100%."
+                : "Batch is not 100%. Adjust the material percentages."
+            }
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "batchChemOutput"
+    ).innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   PERIODIC / REFERENCE
+========================================================= */
+
+function renderPeriodic(){
+
+    document.getElementById(
+        "content"
+    ).innerHTML = `
+
+        <div class="grid">
+
+            <section class="card hero">
+
+                <div class="hero-kicker">
+                    CHEMICAL REFERENCE
+                </div>
+
+                <div class="hero-title">
+                    Oxide molecular weights
+                </div>
+
+                <div class="hero-description">
+                    Reference values used by the Batch → Chemical
+                    molecular calculation. This application does
+                    not calculate or normalize UMF.
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div class="periodic-grid">
+
+                    ${
+                        OXIDES
+                            .filter(
+                                o=>MW[o]
+                            )
+                            .map(
+                                oxide=>`
+
+                                <div
+                                    class="periodic-card"
+                                >
+
+                                    <div class="periodic-symbol">
+                                        ${LABEL[oxide]}
+                                    </div>
+
+                                    <div class="periodic-formula">
+                                        ${oxide}
+                                    </div>
+
+                                    <div class="periodic-mw">
+                                        ${MW[oxide].toFixed(3)}
+                                    </div>
+
+                                    <div class="periodic-formula">
+                                        g/mol
+                                    </div>
+
+                                </div>
+
+                                `
+                            )
+                            .join("")
+                    }
+
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div class="card-title">
+                    Calculation logic
+                </div>
+
+                <div class="info">
+
+                    <b>Batch → Chemical</b><br><br>
+
+                    Raw material contribution =
+                    batch % × raw-material oxide % ÷ 100.
+
+                    <br><br>
+
+                    <b>Moles per 100 g:</b><br>
+
+                    oxide wt% ÷ molecular weight.
+
+                    <br><br>
+
+                    UMF / Unity Molecular Formula
+                    is intentionally not included.
+
+                </div>
+
+            </section>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   SESSION RESTORE
+========================================================= */
+
+async function restoreSession(){
+
+    const saved =
+        sessionStorage.getItem(
+            "ceramicLabToken"
+        );
+
+
+    if(!saved)
+        return;
+
+
+    token =
+        saved;
+
+
+    try{
+
+        setStatus(
+            "Restoring…"
+        );
+
+
+        const result =
+            await api("get");
+
+
+        if(!result.data){
+
+            throw new Error(
+                "Cloud database not found"
+            );
+
+        }
+
+
+        DB =
+            normalizeDatabase(
+                result.data
+            );
+
+
+        localBackup();
+
+
+        document
+            .getElementById(
+                "loginScreen"
+            )
+            .classList
+            .add("hidden");
+
+
+        document
+            .getElementById(
+                "appScreen"
+            )
+            .classList
+            .remove("hidden");
+
+
+        setStatus(
+            "Cloud synced"
+        );
+
+
+        render();
+
+    }catch(error){
+
+        console.warn(
+            "Session restore:",
+            error
+        );
+
+
+        token="";
+
+        sessionStorage.removeItem(
+            "ceramicLabToken"
+        );
+
+    }
+
+}
+
+
+window.addEventListener(
+    "beforeunload",
+    ()=>{
+        localBackup();
+    }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+restoreSession();
+
+</script>
+
+</body>
+</html>
