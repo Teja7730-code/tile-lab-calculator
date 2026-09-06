@@ -1,6 +1,6 @@
 {
-  "name": "ceramic-lab-formulation-suite",
-  "version": "3.0.0",
+  "name": "ceramic-calculation-suite",
+  "version": "4.0.0",
   "private": true,
   "type": "module",
   "engines": {
