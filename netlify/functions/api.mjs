@@ -72,9 +72,13 @@ export default async function (request) {
   }
 
   if (!USERNAME || !PASSWORD) {
+    console.error("ILC login configuration missing:", {
+      LAB_USERNAME: Boolean(USERNAME),
+      LAB_PASSWORD: Boolean(PASSWORD)
+    });
     return response({
       ok: false,
-      error: "Server credentials are not configured. Set LAB_USERNAME and LAB_PASSWORD in Netlify environment variables."
+      error: "Server login is not configured. In Netlify, set LAB_USERNAME and LAB_PASSWORD for Functions in the production deploy context, then redeploy."
     }, 500);
   }
 
