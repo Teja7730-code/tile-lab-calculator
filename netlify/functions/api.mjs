@@ -1,312 +1,135 @@
 import { getStore } from "@netlify/blobs";
 import crypto from "node:crypto";
 
-const STORE_NAME = "ceramic-lab-data";
-const DATABASE_KEY = "database";
+const STORE_NAME = "ilc-quality-hub";
+const DATABASE_KEY = "ilc-database";
 
-const USERNAME =
-  process.env.LAB_USERNAME || "Teja";
+const USERNAME = process.env.LAB_USERNAME;
+const PASSWORD = process.env.LAB_PASSWORD;
 
-const PASSWORD =
-  process.env.LAB_PASSWORD || "abc123";
-
-
-const headers={
-  "content-type":
-    "application/json; charset=utf-8",
-
-  "cache-control":
-    "no-store"
+const headers = {
+  "content-type": "application/json; charset=utf-8",
+  "cache-control": "no-store"
 };
 
-
-function response(
-  body,
-  status=200
-){
-
-  return new Response(
-    JSON.stringify(body),
-    {
-      status,
-      headers
-    }
-  );
+function response(body, status = 200) {
+  return new Response(JSON.stringify(body), { status, headers });
 }
 
+function issueToken(username) {
+  const payload = Buffer.from(JSON.stringify({
+    u: username,
+    t: Date.now()
+  })).toString("base64url");
 
-/* =========================================================
-   SESSION TOKEN
-   ========================================================= */
+  const signature = crypto
+    .createHmac("sha256", PASSWORD)
+    .update(payload)
+    .digest("base64url");
 
-function issueToken(username){
+  return `${payload}.${signature}`;
+}
 
-  const payload=
-    Buffer
-      .from(
-        JSON.stringify({
-          u:username,
-          t:Date.now()
-        })
-      )
-      .toString("base64url");
+function validToken(token) {
+  if (!token || !USERNAME || !PASSWORD) return false;
 
+  try {
+    const parts = token.split(".");
+    if (parts.length !== 2) return false;
 
-  const signature=
-    crypto
-      .createHash("sha256")
-      .update(
-        payload+
-        PASSWORD
-      )
+    const [payload, signature] = parts;
+    const expected = crypto
+      .createHmac("sha256", PASSWORD)
+      .update(payload)
       .digest("base64url");
 
+    const a = Buffer.from(signature);
+    const b = Buffer.from(expected);
+    if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return false;
 
-  return payload+"."+signature;
-}
-
-
-function validToken(token){
-
-  if(!token)return false;
-
-  try{
-
-    const parts=
-      token.split(".");
-
-    if(parts.length!==2)
-      return false;
-
-    const payload=
-      parts[0];
-
-    const signature=
-      parts[1];
-
-
-    const expected=
-      crypto
-        .createHash("sha256")
-        .update(
-          payload+
-          PASSWORD
-        )
-        .digest("base64url");
-
-
-    if(
-      signature.length!==expected.length
-    ){
-      return false;
-    }
-
-
-    if(
-      !crypto.timingSafeEqual(
-        Buffer.from(signature),
-        Buffer.from(expected)
-      )
-    ){
-      return false;
-    }
-
-
-    const data=
-      JSON.parse(
-        Buffer
-          .from(
-            payload,
-            "base64url"
-          )
-          .toString()
-      );
-
-
-    return(
-      data.u===USERNAME &&
-      Date.now()-data.t<
-        30*
-        24*
-        60*
-        60*
-        1000
-    );
-
-  }catch{
-
+    const data = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
+    return data.u === USERNAME &&
+      Number.isFinite(data.t) &&
+      Date.now() - data.t < 30 * 24 * 60 * 60 * 1000;
+  } catch {
     return false;
   }
 }
 
+function validDatabase(data) {
+  return !!data &&
+    typeof data === "object" &&
+    !!data.round &&
+    typeof data.round === "object" &&
+    !!data.materials &&
+    typeof data.materials === "object" &&
+    !Array.isArray(data.materials);
+}
 
-/* =========================================================
-   FUNCTION
-   ========================================================= */
-
-export default async function(request){
-
-  if(request.method!=="POST"){
-
-    return response(
-      {
-        ok:false,
-        error:"POST only"
-      },
-      405
-    );
+export default async function (request) {
+  if (request.method !== "POST") {
+    return response({ ok: false, error: "POST only" }, 405);
   }
 
+  if (!USERNAME || !PASSWORD) {
+    return response({
+      ok: false,
+      error: "Server credentials are not configured. Set LAB_USERNAME and LAB_PASSWORD in Netlify environment variables."
+    }, 500);
+  }
 
-  try{
+  try {
+    const body = await request.json();
+    const action = body?.action;
 
-    const body=
-      await request.json();
+    if (action === "login") {
+      if (body.username !== USERNAME || body.password !== PASSWORD) {
+        return response({ ok: false, error: "Invalid username or password" }, 401);
+      }
+      return response({ ok: true, token: issueToken(USERNAME) });
+    }
 
+    if (!validToken(body?.token)) {
+      return response({ ok: false, error: "Session expired. Please sign in again." }, 401);
+    }
 
-    const action=
-      body.action;
+    const store = getStore({ name: STORE_NAME, consistency: "strong" });
 
+    if (action === "get") {
+      const data = await store.get(DATABASE_KEY, { type: "json" });
+      return response({
+        ok: true,
+        data: validDatabase(data) ? data : null
+      });
+    }
 
-    /* LOGIN */
-
-    if(action==="login"){
-
-      if(
-        body.username!==USERNAME ||
-        body.password!==PASSWORD
-      ){
-
-        return response(
-          {
-            ok:false,
-            error:
-              "Invalid username or password"
-          },
-          401
-        );
+    if (action === "save") {
+      if (!validDatabase(body.data)) {
+        return response({
+          ok: false,
+          error: "Invalid database payload. Expected round and materials data."
+        }, 400);
       }
 
+      await store.setJSON(DATABASE_KEY, body.data);
+      const verify = await store.get(DATABASE_KEY, { type: "json" });
 
-      return response({
-        ok:true,
-        token:
-          issueToken(
-            USERNAME
-          )
-      });
+      const verified = validDatabase(verify) &&
+        JSON.stringify(verify) === JSON.stringify(body.data);
+
+      if (!verified) {
+        return response({ ok: false, saved: false, verified: false, error: "Cloud save verification failed." }, 500);
+      }
+
+      return response({ ok: true, saved: true, verified: true });
     }
 
-
-    /* AUTH */
-
-    if(
-      !validToken(
-        body.token
-      )
-    ){
-
-      return response(
-        {
-          ok:false,
-          error:"Session expired"
-        },
-        401
-      );
-    }
-
-
-    /* STORE */
-
-    const store=
-      getStore({
-        name:STORE_NAME,
-        consistency:"strong"
-      });
-
-
-    /* GET */
-
-    if(action==="get"){
-
-      const data=
-        await store.get(
-          DATABASE_KEY,
-          {
-            type:"json"
-          }
-        );
-
-
-      return response({
-        ok:true,
-        data:
-          data ||
-          {
-            materials:[],
-            targets:[]
-          }
-      });
-    }
-
-
-    /* SAVE */
-
-    if(action==="save"){
-
-      const data=
-        body.data ||
-        {
-          materials:[],
-          targets:[]
-        };
-
-
-      await store.setJSON(
-        DATABASE_KEY,
-        data
-      );
-
-
-      const verify=
-        await store.get(
-          DATABASE_KEY,
-          {
-            type:"json"
-          }
-        );
-
-
-      return response({
-        ok:true,
-        saved:true,
-        verified:
-          !!verify
-      });
-    }
-
-
-    return response(
-      {
-        ok:false,
-        error:"Unknown action"
-      },
-      400
-    );
-
-
-  }catch(error){
-
-    console.error(error);
-
-    return response(
-      {
-        ok:false,
-        error:
-          error.message ||
-          "Server error"
-      },
-      500
-    );
+    return response({ ok: false, error: "Unknown action" }, 400);
+  } catch (error) {
+    console.error("ILC API error:", error);
+    return response({
+      ok: false,
+      error: error?.message || "Server error"
+    }, 500);
   }
 }
