@@ -4,51 +4,153 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#edf3ff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <title>ILC Quality Hub | Simpolo</title>
 <style>
-:root{--bg:#eef2f8;--card:rgba(255,255,255,.88);--ink:#142338;--muted:#65758b;--line:#dce5f1;--blue:#1746a2;--violet:#7157d9;--cyan:#2cb8c8;--good:#16834a;--warn:#b96a0a;--bad:#c12c37;--shadow:0 20px 55px rgba(21,43,84,.13)}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 8% 0%,#dce8ff 0,transparent 36%),radial-gradient(ellipse at 100% 10%,#d8f6f2 0,transparent 30%),linear-gradient(145deg,#f5f7fb,#eaf0f8);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}.shell{max-width:1500px;margin:auto;padding:18px}.glass,.card{background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(247,250,255,.82));border:1px solid rgba(255,255,255,.94);border-radius:24px;padding:20px;box-shadow:0 2px 5px rgba(19,43,82,.025),0 18px 42px rgba(27,49,84,.09),inset 0 1px 0 #fff;backdrop-filter:blur(20px);margin-bottom:16px;transition:transform .22s ease,box-shadow .22s ease}.login{max-width:440px;margin:8vh auto}.brand{font-weight:950;font-size:21px;letter-spacing:-.6px;margin-bottom:16px;display:flex;align-items:center;gap:10px}.brand:before{content:"";display:inline-block;flex:0 0 58px;width:58px;height:42px;border-radius:0;background-image:linear-gradient(135deg,#1746a2,#2cb8c8);background-repeat:no-repeat;background-position:center;background-size:contain;box-shadow:none}.sub,.muted{color:var(--muted);line-height:1.5}.muted{font-size:12px}.field{display:grid;gap:6px;margin:10px 0}.field label{font-size:12px;font-weight:800;color:#56677d}.field input,.field select,.field textarea,select,input,textarea{border:1px solid var(--line);border-radius:10px;padding:10px;background:#fbfdff;color:var(--ink);min-width:0}.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:850;margin:3px;transition:transform .18s ease,box-shadow .18s ease}.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px #173b8022}.primary{background:linear-gradient(135deg,var(--blue),var(--violet));color:white}.ghost{background:#edf2f9;color:#304258}.danger{background:#fff0f0;color:#b62932}.full{width:100%}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.status{font-size:12px;font-weight:800;background:#eaf8ef;color:#197244;border-radius:99px;padding:8px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.tab{border:0;border-radius:10px;background:#edf2f9;padding:10px;font-weight:800}.tab.active{background:linear-gradient(135deg,#173b80,#426fca 58%,#7157d9);color:white;box-shadow:0 7px 17px #254b9b35}.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.metric{font-size:29px;font-weight:950;letter-spacing:-1px;margin-top:7px;background:linear-gradient(120deg,#173b80,#7157d9);-webkit-background-clip:text;background-clip:text;color:transparent}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}.table{border-collapse:collapse;width:100%;min-width:900px;background:white}.table th,.table td{padding:8px;border-bottom:1px solid #e6edf5;text-align:left;font-size:12px}.table th{background:#f6f9fd;position:sticky;top:0}.table input{width:100%;min-width:90px}.note{background:#f1f6fd;border-radius:12px;padding:12px;color:#52647b;font-size:12px;line-height:1.5}.pill{display:inline-block;border-radius:99px;padding:5px 9px;font-size:10px;font-weight:900;background:#edf1f7}.pass{background:#e5f7ec;color:#167243}.warning{background:#fff2dd;color:#99570a}.fail{background:#ffe9e9;color:#b32330}.chart{width:100%;height:260px}.hero-band{border-radius:26px;padding:28px;color:#fff;background:radial-gradient(circle at 90% 5%,#5dd3d0 0,transparent 24%),linear-gradient(120deg,#102c60,#2457a6 58%,#6550b5);box-shadow:0 20px 45px #1c3e7830;position:relative;overflow:hidden}.hero-band:after{content:"";position:absolute;width:220px;height:220px;border:1px solid #ffffff30;border-radius:50%;right:-70px;bottom:-130px;box-shadow:0 0 0 25px #ffffff0b,0 0 0 55px #ffffff08}.report-cover{padding:28px 32px;border-radius:20px;background:linear-gradient(115deg,#172b45 0%,#205b6b 60%,#2d8060 100%);color:white;position:relative;overflow:hidden;margin-bottom:16px;min-height:175px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}.report-cover h1{font-size:30px;line-height:1.12;max-width:760px;margin:12px 0 8px;letter-spacing:-.5px}.report-brand{font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#d8e8ff}.report-logo{position:absolute;right:28px;top:24px;width:145px;height:auto;max-height:100px;object-fit:contain;background:#fff;border-radius:5px;padding:6px}.report-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}.report-meta>div{background:#f1f5f8;border:1px solid #dce5eb;padding:12px;border-radius:12px;display:flex;flex-direction:column;gap:6px;min-width:0}.report-meta>div span{font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:#647987;line-height:1.3}.report-meta>div b{font-size:12px;line-height:1.35;color:#193345;overflow-wrap:anywhere}.report-section{break-inside:avoid;margin-top:18px}.report-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.report-kpi{border-radius:16px;padding:14px;background:linear-gradient(145deg,#f7faff,#eaf1fb);border:1px solid #e0e8f5}.report-kpi b{display:block;font-size:24px;color:#173b80}.report-table{font-size:10px!important;min-width:0!important;border-collapse:collapse!important;width:100%!important}.report-table th{background:#205b6b!important;color:white!important;position:static}.report-table th,.report-table td{padding:6px 5px!important;line-height:1.25;border-bottom:1px solid #dfe7eb!important}.type-select{min-width:120px;font-weight:800;background:#f5f8ff}.editable-calc{background:#eaf8ef!important;color:#17663b!important;font-weight:900!important;border:1px solid #b9e7c8!important}.logo-placeholder{font-weight:950;letter-spacing:1px;border:1px solid #ffffff70;border-radius:12px;padding:8px 12px;display:inline-block;background:#ffffff16}.footer{font-size:11px;color:var(--muted)}@media(max-width:750px){.grid,.metrics,.report-meta,.report-kpis{grid-template-columns:1fr 1fr}.shell{padding:10px}.glass,.card{padding:14px}.table{min-width:1000px}.report-cover h1{font-size:24px}}/* Simpolo-inspired crisp enterprise UI: flat surfaces, clear contrast, no blur */
-:root{--bg:#f4f7fa;--card:#fff;--ink:#142d3d;--muted:#687887;--line:#dce3e8;--blue:#205b6b;--violet:#337c5a;--cyan:#2b9a9d;--shadow:0 3px 12px rgba(18,44,57,.07)}
-body{background:#f4f7fa;color:#183344}
-.shell{max-width:1600px;padding:20px}
-.glass,.card{background:#fff;border:1px solid #e0e6eb;border-radius:8px;padding:20px;box-shadow:0 3px 12px rgba(18,44,57,.06);backdrop-filter:none;margin-bottom:18px;transition:box-shadow .18s ease,border-color .18s ease}
-.glass:hover,.card:hover{box-shadow:0 5px 16px rgba(18,44,57,.09);border-color:#d2dfe4}
-.login{max-width:500px;margin:7vh auto;border-radius:12px;padding:34px}
-.brand{font-size:21px;letter-spacing:-.35px;color:#132e3c;margin-bottom:8px}
-.brand:before{content:"";width:7px;height:32px;border-radius:3px;background:linear-gradient(180deg,#205b6b,#3d875c);box-shadow:none}
-.sub,.muted{color:#667784}
-.field input,.field select,.field textarea,select,input,textarea{background:#fff;border:1px solid #cbd6dd;border-radius:6px;padding:11px 12px;box-shadow:none}
-input:focus,select:focus,textarea:focus{outline:3px solid #2a7c8a20;border-color:#287889}
-.btn{border-radius:6px;box-shadow:none}
-.btn:hover{transform:translateY(-1px);box-shadow:0 3px 8px #173b8018}
-.primary{background:linear-gradient(100deg,#205b6b,#3d805e);color:#fff}
-.ghost{background:#f6f8fa;border:1px solid #d7e0e5;color:#294655}
-.top{display:flex;align-items:center;border-radius:8px;border-top:3px solid #286e79}
-.tabs{display:flex;gap:7px;flex-wrap:wrap;padding:7px;background:#fff;border:1px solid #e0e6eb;border-radius:8px;margin:0 0 18px}
-.tab{border:1px solid transparent;background:#fff;color:#4e626f;border-radius:6px;padding:11px 15px;font-weight:800}
-.tab:hover{background:#f2f7f7}
-.tab.active{background:#205b6b;color:#fff;box-shadow:none}
-.hero-band{border-radius:8px;padding:28px 30px;background:linear-gradient(105deg,#205b6b 0%,#28796f 58%,#3d805e 100%);box-shadow:none}
-.hero-band:after{display:none}
-.report-cover{border-radius:8px;background:linear-gradient(105deg,#205b6b,#28796f 58%,#3d805e);box-shadow:none}
-.report-brand{color:#e7f4f2}
-.metric{color:#183d4b;background:none;-webkit-text-fill-color:#183d4b;-webkit-background-clip:border-box;background-clip:border-box;font-size:30px}
-.metrics .card{border-top:3px solid #2d7380}
-.table-wrap{border-radius:7px;border-color:#dce3e8}
-.table{background:#fff}
-.table th{background:#edf3f5;color:#274654;position:sticky}
-.table th,.table td{border-bottom:1px solid #e7ecef}
-.note{background:#f1f6f7;border:1px solid #e1ebed;border-radius:7px;color:#4f6570}
-.pill{border-radius:5px}
-.report-meta>div,.report-kpi{border-radius:7px;background:#f5f8f9;border-color:#e1e8eb}
-.report-table th{background:#205b6b!important}
-.type-select{background:#fff}
-.editable-calc{background:#e8f5ed!important}
-.footer{color:#6b7b84}
-@media(max-width:750px){.shell{padding:10px}.glass,.card{padding:14px}.top{align-items:flex-start;flex-direction:column}.tabs{overflow-x:auto;flex-wrap:nowrap}.tab{white-space:nowrap}.hero-band{padding:20px}.report-meta,.report-kpis{grid-template-columns:1fr 1fr}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+/* ILC Quality Hub — Liquid Glass dashboard UI (visual layer only; all logic lives in the script below) */
+:root{--bg:#e8eef9;--card:rgba(255,255,255,.60);--ink:#14233d;--muted:#61718e;--line:rgba(116,139,180,.22);--blue:#0a84ff;--violet:#8b5cf6;--cyan:#27b8d5;--good:#159b69;--warn:#c47a11;--bad:#d83d61;--shadow:0 18px 40px -12px rgba(40,70,130,.26),0 2px 6px rgba(40,70,130,.06);--edge:rgba(255,255,255,.88)}
+*{box-sizing:border-box}
+html{scroll-padding-top:20px;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;color:var(--ink);font:14px/1.5 "Plus Jakarta Sans",-apple-system,"SF Pro Display","Segoe UI",system-ui,sans-serif;background:radial-gradient(45vmax 35vmax at 55% 108%,rgba(255,170,210,.55),transparent 70%),radial-gradient(35vmax 30vmax at 8% 92%,rgba(126,232,192,.45),transparent 70%),linear-gradient(135deg,#e4edff,#eef3fb 45%,#e4f6fb);background-attachment:fixed;position:relative;isolation:isolate}
+body:before,body:after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(70px);opacity:.6;animation:drift 24s ease-in-out infinite alternate}
+body:before{width:44vw;height:44vw;left:-12vw;top:-16vw;background:#6fc8ff}
+body:after{width:40vw;height:40vw;right:-12vw;top:6vh;background:#b49cff;animation-delay:-9s}
+@keyframes drift{to{transform:translate3d(5vw,4vh,0) scale(1.12)}}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.shell{max-width:1640px;margin:auto;padding:22px}
+h1,h2,h3{letter-spacing:-.035em;margin:0 0 8px}h1{font-size:25px;font-weight:800}h2{font-size:19px;font-weight:800}h3{font-size:15.5px;font-weight:800}
+.sub,.muted,.footer{color:var(--muted);line-height:1.5}.muted{font-size:12px}.footer{font-size:11px}
+/* glass material */
+.glass,.card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(255,255,255,.42));border:1px solid rgba(255,255,255,.82);border-radius:26px;padding:20px;margin-bottom:16px;box-shadow:var(--shadow),inset 0 1.5px 0 var(--edge),inset 0 -1px 0 rgba(120,145,185,.14);-webkit-backdrop-filter:blur(26px) saturate(185%);backdrop-filter:blur(26px) saturate(185%);transition:transform .25s ease-out,box-shadow .25s ease}
+.glass:before,.card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.42),transparent 38%,transparent 70%,rgba(255,255,255,.16))}
+.card:hover{box-shadow:0 28px 50px -18px rgba(30,70,150,.34),inset 0 1.5px 0 var(--edge)}
+/* login */
+.login{max-width:470px;margin:8vh auto;padding:34px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;letter-spacing:-.04em;margin-bottom:12px}
+.brand:before{content:"◈";display:grid;place-items:center;width:42px;height:42px;border-radius:14px;color:#fff;font-size:20px;background:linear-gradient(145deg,#5ac8fa,#0a84ff 55%,#af8cff);box-shadow:inset 0 2px 3px rgba(255,255,255,.6),0 10px 20px -6px rgba(10,132,255,.6)}
+.login .brand{font-size:0}.login .brand:before{font-size:20px}
+.login .brand:after{content:"ILC Quality Hub";font-size:20px}
+/* forms */
+.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:12px;font-weight:700;color:#52627f}
+input,select,textarea{width:100%;min-height:44px;min-width:0;border:1px solid rgba(126,148,184,.30);border-radius:13px;padding:10px 12px;background:rgba(255,255,255,.66);color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s,background .2s}
+textarea{min-height:90px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:rgba(10,132,255,.75);box-shadow:0 0 0 4px rgba(10,132,255,.12);background:#fff}
+input[type=checkbox]{width:19px;min-height:19px;height:19px;accent-color:var(--blue);padding:0}
+.btn{display:inline-block;border:1px solid rgba(255,255,255,.65);border-radius:14px;padding:11px 17px;margin:3px;font-weight:700;letter-spacing:-.01em;transition:transform .16s,box-shadow .16s,filter .16s;box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 8px 18px -7px rgba(10,100,210,.35)}
+.btn:hover{transform:translateY(-1px);filter:saturate(1.1)}
+.btn:disabled{opacity:.65;cursor:wait;transform:none}
+.primary{background:linear-gradient(180deg,#45a8ff,#0877ed);color:#fff}
+.ghost{background:rgba(255,255,255,.58);color:var(--ink);border-color:rgba(255,255,255,.9);box-shadow:inset 0 1px 0 #fff,0 4px 12px rgba(36,61,105,.07)}
+.danger{background:linear-gradient(180deg,#ff8da3,#d83d61);color:#fff}
+.full{width:100%;margin:8px 0 0}
+:focus-visible{outline:3px solid rgba(10,132,255,.45);outline-offset:2px}
+/* app shell: sidebar + content */
+#app{display:grid;grid-template-columns:252px minmax(0,1fr);column-gap:20px;align-items:start}
+#app>.top{grid-column:2;grid-row:1}
+#app>.tabs{grid-column:1;grid-row:1/span 30;position:sticky;top:20px;align-self:start}
+#app>.page{grid-column:2;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 22px}
+.top .brand{margin:0 0 2px;font-size:19px}
+.top>div:last-child{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.status,.pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:99px;background:rgba(10,132,255,.10);color:#086ac8;font-size:12px;font-weight:800;border:1px solid rgba(10,132,255,.12)}
+.status:before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px rgba(10,132,255,.14)}
+.pill.pass{background:#dcf6ea;color:#0f7a52;border-color:transparent}.pill.warning{background:#fff1d6;color:#9a5b06;border-color:transparent}.pill.fail{background:#ffe1e7;color:#b4233f;border-color:transparent}.pill.missing{background:#e9eef6;color:#52627f;border-color:transparent}
+.tabs{display:flex;flex-direction:column;gap:6px;padding:16px 12px;margin:0;background:linear-gradient(160deg,rgba(255,255,255,.7),rgba(255,255,255,.38));border:1px solid rgba(255,255,255,.82);border-radius:28px;box-shadow:var(--shadow),inset 0 1.5px 0 var(--edge);-webkit-backdrop-filter:blur(26px) saturate(185%);backdrop-filter:blur(26px) saturate(185%)}
+.tabs:before{content:"◈";display:grid;place-items:center;width:44px;height:44px;margin:2px 6px 14px;border-radius:15px;color:#fff;font-size:21px;background:linear-gradient(145deg,#5ac8fa,#0a84ff 55%,#af8cff);box-shadow:inset 0 2px 3px rgba(255,255,255,.6),0 10px 20px -6px rgba(10,132,255,.6)}
+.tabs:after{content:"Simpolo · Quality excellence";margin:18px 8px 4px;font-size:11px;font-weight:600;color:var(--muted)}
+.tab{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:0;border-radius:16px;padding:12px 13px;background:transparent;color:var(--muted);font-weight:700;font-size:13.5px;transition:background .2s,color .2s,box-shadow .2s}
+.tab:before{content:"";width:19px;height:19px;flex:none;background:currentColor;-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+.tab:hover{background:rgba(255,255,255,.62);color:var(--ink)}
+.tab.active{background:rgba(255,255,255,.92);color:#0877ed;box-shadow:inset 0 1px 0 #fff,0 8px 16px -6px rgba(10,132,255,.45)}
+.tab[data-page=dashboard]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z'/%3E%3C/svg%3E")}
+.tab[data-page=round]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7h10M18 7h2M4 17h2M10 17h10M14 5v4M8 15v4'/%3E%3C/svg%3E")}
+.tab[data-page=entry]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4'/%3E%3C/svg%3E")}
+.tab[data-page=review]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM8 12.5l3 3 5-6'/%3E%3C/svg%3E")}
+.tab[data-page=report]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3h8l4 4v14H6zM14 3v4h4M9 13h6M9 17h6'/%3E%3C/svg%3E")}
+.tab[data-page=settings]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2'/%3E%3C/svg%3E")}
 
-
+.page{display:none}.page.active{display:block;animation:fade-in .26s ease}
+@keyframes fade-in{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:none}}
+/* dashboard */
+#dashboard.active{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
+#dashboard>.hero-band,#dashboard>.metrics{grid-column:1/-1}
+#dashboard>.card{margin:0;grid-column:1}
+.dash-side{grid-column:2;grid-row:3/span 2;display:grid;gap:16px}.dash-side .card{margin:0}
+.hero-band{position:relative;overflow:hidden;border-radius:28px;padding:32px 34px;color:#fff;background:radial-gradient(circle at 88% 0,rgba(94,211,208,.55),transparent 34%),linear-gradient(120deg,rgba(10,53,119,.97),rgba(24,102,174,.92) 58%,rgba(98,84,200,.9));box-shadow:0 26px 46px -20px rgba(20,59,122,.55),inset 0 1.5px 0 rgba(255,255,255,.35)}
+.hero-band:after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;right:-80px;bottom:-190px;border:1px solid rgba(255,255,255,.22);box-shadow:0 0 0 34px rgba(255,255,255,.05),0 0 0 72px rgba(255,255,255,.035);pointer-events:none}
+.hero-band h1{font-size:32px!important;color:#fff}.hero-band p{max-width:560px;color:#e0ebff;margin:0 0 16px}
+.report-brand{font-size:11px;font-weight:800;letter-spacing:.16em;opacity:.85}
+.hero-band .pill{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4)}
+.hero-art{position:absolute;right:46px;top:50%;width:200px;height:190px;transform:translateY(-50%);animation:float 7s ease-in-out infinite alternate;pointer-events:none}
+@keyframes float{to{transform:translateY(-54%) rotate(2deg)}}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.metrics .card{margin:0;min-width:0;overflow:hidden}
+.metrics .card:after{content:"";position:absolute;left:22px;right:22px;top:0;height:3px;border-radius:0 0 5px 5px;background:var(--a,#0a84ff)}
+#dashboard .metrics .card:nth-child(1){--a:#0a84ff}#dashboard .metrics .card:nth-child(2){--a:#8b5cf6}#dashboard .metrics .card:nth-child(3){--a:#1fb878}#dashboard .metrics .card:nth-child(4){--a:#f0476b}
+#reviewSummary .card:nth-child(1){--a:#1fb878}#reviewSummary .card:nth-child(2){--a:#f5a524}#reviewSummary .card:nth-child(3){--a:#f0476b}#reviewSummary .card:nth-child(4){--a:#a9b6cc}
+#reviewSummary{margin:12px 0}#reviewSummary .muted{text-transform:capitalize;font-weight:700}
+.metric{font-size:36px;line-height:1.12;font-weight:800;letter-spacing:-.045em;margin-top:6px;background:linear-gradient(120deg,#0a5fd0,#7c5ce6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.grid>.card,.grid>.glass{margin-bottom:0}
+#materialPicker{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+#materialPicker .card{display:grid;grid-template-columns:auto 1fr;gap:0 11px;align-items:center;padding:15px 17px;margin:0;cursor:pointer}
+#materialPicker .card .muted{grid-column:2}
+#materialPicker .card:has(input:checked){border-color:rgba(10,132,255,.55);background:linear-gradient(145deg,rgba(225,240,255,.9),rgba(255,255,255,.55))}
+.note{border-radius:16px;background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.7);padding:13px 15px;color:var(--muted);font-size:12.5px;line-height:1.55}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;font-size:12px;font-weight:700;color:var(--muted)}.legend i{display:inline-block;width:10px;height:10px;border-radius:4px;margin-right:6px}
+.labrow{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;margin:12px 0}.labrow b{font-size:13px}.labrow .pc{font-weight:800;font-size:13px}
+.dot{width:10px;height:10px;border-radius:50%}
+.bar{height:7px;border-radius:9px;background:rgba(120,140,180,.18);overflow:hidden;margin-top:5px}.bar i{display:block;height:100%;border-radius:9px}
+.donut-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.dleg{display:grid;gap:7px;font-size:12px;flex:1;min-width:130px}.dleg div{display:flex;align-items:center;gap:7px;color:var(--muted);font-weight:600}.dleg b{margin-left:auto;color:var(--ink)}.dleg i{width:10px;height:10px;border-radius:4px;flex:none}
+/* tables */
+.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.5)}
+.table{border-collapse:separate;border-spacing:0;width:100%;min-width:900px}
+.table th,.table td{padding:10px 12px;border-bottom:1px solid rgba(117,139,177,.16);text-align:left;font-size:12.5px}
+.table th{background:rgba(228,237,250,.92);color:#4d5e7a;font-weight:800;font-size:11px;letter-spacing:.03em;position:sticky;top:0}
+.table tr:last-child td{border-bottom:0}.table tr:hover td{background:rgba(255,255,255,.55)}
+.table input{min-width:96px;min-height:38px;padding:7px 10px;border-radius:10px}
+.type-select{min-width:128px;min-height:38px;font-weight:700}
+.editable-calc{background:#e3f7ee!important;color:#0f7a52!important;font-weight:800!important;border-color:#b6e6cf!important}
+.chart{width:100%;height:260px;display:block}
+.logo-placeholder{font-weight:900;letter-spacing:1px;border:1px solid rgba(255,255,255,.5);border-radius:12px;padding:8px 12px;display:inline-block;background:rgba(255,255,255,.15)}
+/* ===== Report (solid colours so the PDF stays crisp) ===== */
+#reportPreview{background:#fff;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:var(--shadow);color:#172f3b}
+.report-cover{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:190px;padding:30px 34px;margin:0 16px 28px 0;border-radius:22px;color:#fff;background:radial-gradient(circle at 92% 6%,rgba(94,211,208,.6),transparent 32%),linear-gradient(115deg,#0c2a5c,#1d5aa6 55%,#5b49b8);box-shadow:8px 8px 0 -2px #c9d8f2,16px 16px 0 -4px #e3ebf8}
+.report-cover:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-70px;bottom:-150px;border:1px solid rgba(255,255,255,.3);box-shadow:0 0 0 26px rgba(255,255,255,.07),0 0 0 56px rgba(255,255,255,.05)}
+.report-cover h1{font-size:30px;line-height:1.12;max-width:620px;margin:12px 0 8px;color:#fff}
+.report-brand{color:#d8e8ff}
+.cover-score{position:absolute;right:30px;top:26px;z-index:1;width:108px;height:108px;border-radius:50%;display:grid;place-content:center;text-align:center;font-size:30px;font-weight:800;line-height:1;background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.55);box-shadow:inset 0 2px 0 rgba(255,255,255,.4),0 10px 24px -8px rgba(0,0,0,.4)}
+.cover-score small{font-size:10px;font-weight:600;opacity:.88;margin-top:5px}
+.report-logo{position:absolute;right:28px;top:24px;width:145px;max-height:100px;object-fit:contain;background:#fff;border-radius:6px;padding:6px}
+.report-meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.report-meta>div{background:#f3f7fc;border:1px solid #dde6f2;padding:12px;border-radius:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.report-meta>div span{font-size:10px;letter-spacing:.3px;text-transform:uppercase;color:#647987}.report-meta>div b{font-size:12px;line-height:1.35;color:#193345;overflow-wrap:anywhere}
+.report-section{break-inside:avoid;margin-top:22px}.report-section h2{font-size:18px;margin:0 0 6px;color:#0f2a4d}.report-section h3{color:#173b80}
+.report-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.report-kpi{border-radius:16px;padding:14px;background:linear-gradient(160deg,#fff,#eef4fc);border:1px solid #dde6f2;border-top:4px solid #0a84ff;box-shadow:0 8px 14px -10px rgba(30,60,120,.4)}
+.report-kpi b{display:block;font-size:26px;color:#0b4fa8}.report-kpi:nth-child(2){border-top-color:#1fb878}.report-kpi:nth-child(2) b{color:#0f7a52}.report-kpi:nth-child(3){border-top-color:#f0476b}.report-kpi:nth-child(3) b{color:#b4233f}.report-kpi:nth-child(4){border-top-color:#a9b6cc}.report-kpi:nth-child(4) b{color:#52627f}
+.rgrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:12px}
+.rc{border:1px solid #dfe7f3;border-radius:16px;padding:14px;background:linear-gradient(160deg,#fff,#f4f8fe);box-shadow:0 8px 16px -10px rgba(30,60,120,.35);break-inside:avoid;margin-top:10px}
+.rt{display:block;font-size:12.5px;margin-bottom:8px;color:#173b80}
+.findings{margin:0;padding-left:18px;font-size:12.5px;line-height:1.55}.findings li{margin:5px 0}
+.heat{display:grid;gap:5px;margin-top:8px;font-size:11.5px}.hh{font-weight:800;font-size:11px;text-align:center;padding:4px}.hl{font-weight:700;align-self:center;padding:2px 4px}.hc{border-radius:9px;padding:8px 4px;text-align:center;font-weight:800;box-shadow:inset 0 -3px 0 rgba(0,0,0,.08)}
+.report-table{font-size:10px!important;min-width:0!important;border-collapse:collapse!important;width:100%!important}
+.report-table th{background:#14437f!important;color:#fff!important;position:static}
+.report-table th,.report-table td{padding:6px 5px!important;line-height:1.25;border-bottom:1px solid #e0e8f2!important}
+.footer{color:#6b7b94}
+/* responsive */
+@media(max-width:1180px){#dashboard.active{grid-template-columns:1fr}.dash-side{grid-column:1;grid-row:auto;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-art{display:none}}
+@media(max-width:900px){
+ .shell{padding:12px 12px 100px}#app{grid-template-columns:1fr}#app>.top,#app>.page{grid-column:1}
+ #app>.tabs{position:fixed;grid-column:auto;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));top:auto;z-index:30;flex-direction:row;gap:2px;padding:7px;border-radius:24px;overflow-x:auto}
+ .tabs:before,.tabs:after{display:none}.tab{flex-direction:column;gap:3px;width:auto;min-width:64px;padding:8px 10px;font-size:10.5px;text-align:center;white-space:nowrap}
+ .grid{grid-template-columns:1fr}.report-meta,.report-kpis,.rgrid{grid-template-columns:1fr 1fr}.rgrid{grid-template-columns:1fr}
+ .top{flex-direction:column;align-items:stretch}.hero-band{padding:24px 20px}.hero-band h1{font-size:26px!important}
+ .report-cover{padding:22px 20px;margin-right:10px}.report-cover h1{font-size:23px}.cover-score{position:static;margin-top:14px;width:84px;height:84px;font-size:24px}
+}
+@media(max-width:560px){.glass,.card{border-radius:20px;padding:15px}.metrics{gap:10px}.metric{font-size:28px}.login{margin:5vh auto;padding:24px 19px}#reportPreview{padding:10px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media print {
   @page { size: A4 landscape; margin: 12mm; }
   html, body { background: #fff !important; color: #172f3b !important; margin: 0 !important; padding: 0 !important; }
@@ -71,96 +173,8 @@ input:focus,select:focus,textarea:focus{outline:3px solid #2a7c8a20;border-color
   .report-cover, .report-kpi, .report-meta > div, .pill { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   a { color: inherit !important; text-decoration: none !important; }
 }
+@media print{#app{display:block!important}.rgrid{display:grid!important;grid-template-columns:1.2fr 1fr!important}.rc{break-inside:avoid;box-shadow:none!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}#reportPreview{border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important}.report-cover{box-shadow:none!important}.report-section{break-inside:avoid!important}.hc,.report-kpi,svg{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
 
-
-/* Liquid-glass refresh inspired by the supplied Labsphere reference UI */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-:root{
- --bg:#e8eef9;--card:rgba(255,255,255,.60);--ink:#14233d;--muted:#61718e;
- --line:rgba(116,139,180,.20);--blue:#0a84ff;--violet:#8b5cf6;--cyan:#27b8d5;
- --good:#159b69;--warn:#c47a11;--bad:#d83d61;
- --shadow:0 18px 40px -12px rgba(40,70,130,.24),0 2px 6px rgba(40,70,130,.06);
-}
-html{scroll-padding-top:20px}
-body{
- font-family:"Plus Jakarta Sans",-apple-system,"SF Pro Display","Segoe UI",system-ui,sans-serif;
- background:linear-gradient(135deg,#e7efff 0%,#eef3fb 44%,#e6f8f5 100%);
- color:var(--ink);font-size:14px;line-height:1.5;position:relative;isolation:isolate;
-}
-body:before,body:after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(68px);opacity:.54}
-body:before{width:42vw;height:42vw;left:-12vw;top:-16vw;background:#78cfff}
-body:after{width:40vw;height:40vw;right:-12vw;top:8vh;background:#b7a0ff}
-.shell{max-width:1560px;padding:22px}
-.glass,.card{
- position:relative;background:linear-gradient(145deg,rgba(255,255,255,.68),rgba(255,255,255,.43));
- border:1px solid rgba(255,255,255,.82);border-radius:24px;
- box-shadow:var(--shadow),inset 0 1.5px 0 rgba(255,255,255,.8),inset 0 -1px 0 rgba(120,145,185,.12);
- -webkit-backdrop-filter:blur(24px) saturate(175%);backdrop-filter:blur(24px) saturate(175%);
- transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
-}
-.glass:before,.card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.32),transparent 42%,rgba(255,255,255,.08));}
-.card:hover{box-shadow:0 24px 46px -16px rgba(40,70,130,.27),inset 0 1.5px 0 rgba(255,255,255,.9)}
-.login{max-width:480px;margin:7vh auto;padding:32px}
-.brand{font-weight:800;font-size:20px;letter-spacing:-.5px;margin-bottom:12px;position:relative}
-.brand:before{content:"";display:inline-block;flex:0 0 54px;width:54px;height:42px;background-size:contain;background-repeat:no-repeat;background-position:center}
-h1,h2,h3{letter-spacing:-.035em;position:relative}
-h1{font-size:25px;font-weight:800}
-h3{font-size:15px;font-weight:800}
-.sub,.muted,.footer{color:var(--muted)}
-.field{margin:14px 0;position:relative}
-.field label{display:block;font-size:12px;font-weight:700;color:#52627f;margin-bottom:7px}
-input,select,textarea{width:100%;min-height:44px;border:1px solid rgba(126,148,184,.28);border-radius:13px;padding:10px 12px;background:rgba(255,255,255,.64);color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s,background .2s}
-textarea{min-height:84px}
-input:focus,select:focus,textarea:focus{border-color:rgba(10,132,255,.72);box-shadow:0 0 0 4px rgba(10,132,255,.11);background:rgba(255,255,255,.88)}
-.btn{border:1px solid rgba(255,255,255,.65);border-radius:14px;padding:11px 16px;font-weight:700;letter-spacing:-.01em;box-shadow:inset 0 1px 0 rgba(255,255,255,.38),0 8px 18px -7px rgba(10,100,210,.35);transition:transform .16s,filter .16s,box-shadow .16s;position:relative}
-.btn:hover{transform:translateY(-1px);filter:saturate(1.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 12px 22px -7px rgba(10,100,210,.4)}
-.btn.primary{background:linear-gradient(180deg,#45a8ff,#0877ed);color:#fff}
-.btn.ghost{background:rgba(255,255,255,.53);color:var(--ink);border-color:rgba(255,255,255,.86);box-shadow:inset 0 1px 0 #fff,0 4px 12px rgba(36,61,105,.06)}
-.btn.danger{background:linear-gradient(180deg,#ff8da3,#d83d61);color:white}
-.btn.full{width:100%;margin-top:8px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 22px}
-.top>div:last-child{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.status,.pill{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:99px;background:rgba(10,132,255,.10);color:#086ac8;font-size:12px;font-weight:800;border:1px solid rgba(10,132,255,.10)}
-.tabs{display:flex;gap:7px;flex-wrap:wrap;padding:8px;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.38);border-radius:20px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);margin-bottom:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.8)}
-.tab{border:0;border-radius:13px;padding:11px 15px;background:transparent;color:var(--muted);font-size:13px;font-weight:700;transition:background .2s,color .2s,box-shadow .2s}
-.tab:hover{background:rgba(255,255,255,.62);color:var(--ink)}
-.tab.active{background:rgba(255,255,255,.85);color:#0877ed;box-shadow:inset 0 1px 0 #fff,0 5px 12px rgba(25,57,115,.09)}
-.page{animation:fade-in .24s ease}
-@keyframes fade-in{from{opacity:.55;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-.hero-band{border-radius:25px;padding:30px 32px;background:linear-gradient(120deg,rgba(10,53,119,.96),rgba(24,102,174,.90) 55%,rgba(62,174,194,.86));box-shadow:0 22px 42px -18px rgba(20,59,122,.48);color:#fff;position:relative;overflow:hidden;margin-bottom:18px}
-.hero-band:after{content:"";position:absolute;width:300px;height:300px;border-radius:50%;right:-60px;top:-160px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.18);box-shadow:0 0 0 34px rgba(255,255,255,.045),0 0 0 70px rgba(255,255,255,.035)}
-.hero-band .report-brand{font-size:11px;font-weight:800;letter-spacing:.16em;opacity:.82}
-.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:0 0 18px}
-.metrics .card{margin:0;padding:20px;min-width:0}
-.metric{font-size:34px;line-height:1.15;font-weight:800;letter-spacing:-.04em;margin-top:8px;color:#0b6fce}
-.grid{gap:16px}
-.grid>.card,.grid>.glass{margin-bottom:0}
-.note{border-radius:14px;background:rgba(255,255,255,.43);border:1px solid rgba(255,255,255,.58);padding:12px 14px;color:var(--muted)}
-table{border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:14px;background:rgba(255,255,255,.32)}
-th{background:rgba(228,237,250,.75);color:#4d5e7a;font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
-td,th{padding:11px 12px;border-bottom:1px solid rgba(117,139,177,.16)}
-tr:last-child td{border-bottom:0}
-tr:hover td{background:rgba(255,255,255,.46)}
-hr{border:0;border-top:1px solid var(--line);margin:18px 0}
-.chart{max-width:100%}
-#reportPreview{background:rgba(255,255,255,.25);border-radius:22px;padding:16px}
-.report-cover{border-radius:18px;overflow:hidden}
-@media(max-width:1000px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.shell{padding:14px}.top{align-items:flex-start}.grid{grid-template-columns:1fr}}
-@media(max-width:640px){
- .shell{padding:10px}.glass,.card{border-radius:19px;padding:15px;margin-bottom:12px}
- .login{margin:5vh auto;padding:24px 19px}.top{flex-direction:column;align-items:stretch;gap:12px}
- .top>div:last-child{justify-content:flex-start}.tabs{overflow-x:auto;flex-wrap:nowrap;padding:6px}.tab{white-space:nowrap;padding:10px 12px}
- .metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metrics .card{padding:14px}.metric{font-size:28px}
- .hero-band{padding:23px 20px}.hero-band h1{font-size:25px!important}
- #reportPreview{padding:6px}
-}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-@media(prefers-color-scheme:dark){
- /* Keep laboratory records high-contrast and stable; the default remains light glass. */
-}
-
-
-.btn:disabled{opacity:.65;cursor:wait;transform:none}
 </style>
 </head>
 <body>
@@ -183,9 +197,9 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
     <button class="tab active" data-page="dashboard">Dashboard</button><button class="tab" data-page="round">Round setup</button><button class="tab" data-page="entry">Result entry</button><button class="tab" data-page="review">Results review</button><button class="tab" data-page="report">Reports & PDF</button><button class="tab" data-page="settings">Settings</button>
   </div>
   <section id="dashboard" class="page active">
-    <div class="hero-band"><div class="report-brand">SIMPOLO · QUALITY EXCELLENCE</div><h1 style="font-size:30px;margin:14px 0 8px">ILC Command Centre</h1><p style="color:#e0ebff;max-width:650px">A premium workspace for inter-laboratory comparison, result integrity, Z-score evaluation and controlled reporting.</p><span id="dashRound" class="pill">Round —</span></div>
+    <div class="hero-band"><div class="report-brand">SIMPOLO · QUALITY EXCELLENCE</div><h1 style="font-size:30px;margin:14px 0 8px">ILC Command Centre</h1><p style="color:#e0ebff;max-width:650px">A premium workspace for inter-laboratory comparison, result integrity, Z-score evaluation and controlled reporting.</p><span id="dashRound" class="pill">Round —</span><svg class="hero-art" viewBox="0 0 200 190" aria-hidden="true"><g transform="translate(100 56) scale(1.15)" opacity="1"><polygon points="0,-40 35,-20 0,0 -35,-20" fill="#fff" fill-opacity=".8"/><polygon points="-35,-20 0,0 0,40 -35,20" fill="#fff" fill-opacity=".3"/><polygon points="0,0 35,-20 35,20 0,40" fill="#fff" fill-opacity=".5"/></g><g transform="translate(52 128) scale(0.85)" opacity="0.9"><polygon points="0,-40 35,-20 0,0 -35,-20" fill="#fff" fill-opacity=".8"/><polygon points="-35,-20 0,0 0,40 -35,20" fill="#fff" fill-opacity=".3"/><polygon points="0,0 35,-20 35,20 0,40" fill="#fff" fill-opacity=".5"/></g><g transform="translate(148 134) scale(0.65)" opacity="0.8"><polygon points="0,-40 35,-20 0,0 -35,-20" fill="#fff" fill-opacity=".8"/><polygon points="-35,-20 0,0 0,40 -35,20" fill="#fff" fill-opacity=".3"/><polygon points="0,0 35,-20 35,20 0,40" fill="#fff" fill-opacity=".5"/></g></svg></div>
     <div class="metrics"><div class="card"><div class="muted">Selected materials</div><div class="metric" id="mMaterials">0</div></div><div class="card"><div class="muted">Parameters</div><div class="metric" id="mParameters">0</div></div><div class="card"><div class="muted">Satisfactory</div><div class="metric" id="mPass">0</div></div><div class="card"><div class="muted">Attention required</div><div class="metric" id="mAttention">0</div></div></div>
-    <div class="card"><h3>Round progress</h3><div id="progressText" class="note">Select materials to begin.</div></div><div class="card"><h3>Follow-up</h3><div id="attentionList" class="note">No results yet.</div></div>
+    <div class="card"><h3>Round progress</h3><div id="progressText" class="note">Select materials to begin.</div></div><div class="card"><h3>Follow-up</h3><div id="attentionList" class="note">No results yet.</div></div><div class="dash-side"><div class="card"><h3>Outcome mix</h3><div id="dashDonut"></div></div><div class="card"><h3>Laboratory standing</h3><p class="muted">Satisfactory share of Z-scores</p><div id="dashLabs"></div></div><div class="card"><h3>Quick actions</h3><button class="btn primary full" onclick="go('entry')">Enter results</button><button class="btn ghost full" onclick="go('review')">Review Z-scores</button><button class="btn ghost full" onclick="go('report')">Open final report</button></div></div>
   </section>
   <section id="round" class="page">
     <div class="glass"><h1>Round setup</h1><div class="grid"><div>
@@ -201,7 +215,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
     <div class="glass"><h1>Result entry</h1><div class="grid"><div><div class="field"><label>Material</label><select id="entryMaterial" onchange="renderEntry()"></select></div><div class="grid"><div class="field"><label>Sample code</label><input id="sampleCode"></div><div class="field"><label>Blind sample code</label><input id="blindCode"></div></div><div class="grid"><div class="field"><label>Sampling date</label><input id="samplingDate" type="date"></div><div class="field"><label>Reporting date</label><input id="reportingDate" type="date"></div></div><div class="field"><label>Sample receiver / prepared by</label><input id="sampleReceiver"></div><div class="field"><label>Tested by / reviewer</label><input id="testedBy"></div><div class="field"><label>Remarks</label><textarea id="remarks"></textarea></div><button class="btn primary" onclick="saveMaterialResults()">Save material results</button></div><div><h3>Entry status</h3><div id="entryStatus" class="note">Choose a material.</div></div></div></div>
     <div class="card"><h3>Applicable test parameters</h3><div id="entryTable" class="note">Select a material.</div></div>
   </section>
-  <section id="review" class="page"><div class="glass"><h1>Results review</h1><div class="field"><label>Material</label><select id="reviewMaterial" onchange="renderReview()"></select></div><div id="reviewSummary" class="metrics"></div><div id="reviewTable" class="note">No results yet.</div></div><div class="grid"><div class="card"><h3>Z-score profile</h3><canvas id="zChart" class="chart"></canvas></div><div class="card"><h3>Result comparison</h3><canvas id="valueChart" class="chart"></canvas></div></div></section>
+  <section id="review" class="page"><div class="glass"><h1>Results review</h1><div class="field"><label>Material</label><select id="reviewMaterial" onchange="renderReview()"></select></div><div id="reviewSummary" class="metrics"></div><div id="reviewTable" class="note">No results yet.</div></div><div class="grid"><div class="card"><h3>Z-score profile</h3><canvas id="zChart" class="chart"></canvas></div><div class="card"><h3>Result comparison</h3><canvas id="valueChart" class="chart"></canvas></div></div><div id="labLegend" class="legend"></div></section>
   <section id="report" class="page"><div class="glass no-print"><h1>Reports & PDF</h1><p class="sub">Generate and download a branded PDF directly. No print dialog required.</p><button class="btn primary" onclick="generatePDF()">Download / Save report as PDF</button><button class="btn ghost" onclick="renderReport()">Preview report</button></div><div id="reportPreview"></div></section>
   <section id="settings" class="page"><div class="glass"><h1>Settings & data</h1><p id="settingsCloud" class="note">Cloud status not checked.</p><button class="btn primary" onclick="saveCloud()">Save current database to cloud</button><button class="btn ghost" onclick="reloadCloud()">Sync from cloud</button><hr><button class="btn ghost" onclick="exportJSON()">Export backup JSON</button><label class="btn ghost">Import backup JSON <input type="file" accept=".json" hidden onchange="importJSON(event)"></label><button class="btn danger" onclick="resetResults()">Clear results</button></div><div class="card note">Z-score screening: |Z| ≤ 2 satisfactory; 2 &lt; |Z| &lt; 3 warning; |Z| ≥ 3 unsatisfactory. Outliers should be investigated rather than automatically deleted.</div></section>
 </div>
@@ -276,8 +290,8 @@ function cls(z){return z===null?"missing":Math.abs(z)<=2?"pass":Math.abs(z)<3?"w
 function assessments(m){let e=ensure(m);return params(m).map(p=>({p,row:e.results[p.id],s:score(p,e.results[p.id])}))}
 function renderReviewSelectors(){let s=$("reviewMaterial"),old=s.value;s.innerHTML=db.round.selected.map(m=>`<option>${esc(m)}</option>`).join("");if(old&&db.round.selected.includes(old))s.value=old;if(!db.round.selected.length)s.innerHTML='<option value="">No selected materials</option>'}
 function renderReview(){let m=$("reviewMaterial").value||db.round.selected[0];if(!m){$("reviewTable").textContent="Select materials in Round setup.";return}let rows=assessments(m),counts={pass:0,warning:0,fail:0,missing:0};rows.forEach(a=>{let kind=a.row.entryType||(a.p.type==="qual"?"qual":"num");let state=kind==="num"?(a.s.z.some(z=>z!==null&&Math.abs(z)>=3)?"fail":a.s.z.some(z=>z!==null&&Math.abs(z)>2)?"warning":a.s.z.some(z=>z===null)?"missing":"pass"):a.s.status;counts[state]=(counts[state]||0)+1;a.state=state});$("reviewSummary").innerHTML=Object.entries(counts).map(([k,v])=>`<div class="card"><div class="muted">${k}</div><div class="metric">${v}</div></div>`).join("");$("reviewTable").innerHTML='<div class="table-wrap"><table class="table"><thead><tr><th>Parameter</th><th>Standard</th>'+db.round.labs.map(l=>`<th>${esc(l)} result</th>`).join("")+'<th>Assigned value</th><th>SD / scale</th>'+db.round.labs.map(l=>`<th>${esc(l)} Z</th>`).join("")+'<th>Status</th></tr></thead><tbody>'+rows.map(a=>`<tr><td>${esc(a.p.name)} (${esc(a.p.unit)})</td><td>${esc(a.row.standard||"—")}</td>`+[0,1,2,3].map(i=>`<td>${esc(a.row.values[i]||"—")}</td>`).join("")+`<td>${(a.row.entryType||(a.p.type==="qual"?"qual":"num"))==="num"&&a.s.assigned!==null?a.s.assigned.toFixed(4):"—"}</td><td>${(a.row.entryType||(a.p.type==="qual"?"qual":"num"))==="num"&&a.s.sd!==null?a.s.sd.toFixed(4):"—"}</td>`+[0,1,2,3].map(i=>`<td>${a.s.z[i]===null?"—":a.s.z[i].toFixed(3)}</td>`).join("")+`<td><span class="pill ${a.state}">${a.state.toUpperCase()}</span></td></tr>`).join("")+'</tbody></table></div>';drawChart($("zChart"),rows,true);drawChart($("valueChart"),rows,false);renderDashboard()}
-function drawChart(canvas,rows,isZ){const ctx=canvas.getContext("2d"),w=canvas.clientWidth||500,h=260,dpr=devicePixelRatio||1;canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);let rr=rows.filter(a=>(a.row.entryType||(a.p.type==="qual"?"qual":"num"))==="num").slice(0,12);if(!rr.length){ctx.fillStyle="#65758b";ctx.fillText("No numeric results available",16,24);return}let max=isZ?3:Math.max(1,...rr.flatMap(a=>a.s.z.map((_,i)=>num(a.row.values[i])||0).map(Math.abs)))*1.15,min=isZ?-3:0,left=36,top=12,bottom=55,pw=w-left-10,ph=h-top-bottom;let y=v=>top+(max-v)/(max-min)*ph;ctx.strokeStyle="#e1e8f2";for(let i=0;i<=4;i++){let v=max-(max-min)*i/4;ctx.beginPath();ctx.moveTo(left,y(v));ctx.lineTo(w-10,y(v));ctx.stroke()}let colors=["#2864ff","#7652ff","#19a6a0","#e39a31"],gw=pw/rr.length,bw=Math.min(12,gw/5);rr.forEach((a,i)=>[0,1,2,3].forEach(j=>{let v=isZ?a.s.z[j]:num(a.row.values[j]);if(v===null||!Number.isFinite(v))return;ctx.fillStyle=colors[j];let yy=y(v),zero=y(0);ctx.fillRect(left+i*gw+gw/2-2*bw+j*bw,Math.min(yy,zero),bw-1,Math.max(1,Math.abs(yy-zero)))}));ctx.fillStyle="#65758b";ctx.font="9px sans-serif";rr.forEach((a,i)=>{ctx.save();ctx.translate(left+i*gw+gw/2,h-bottom+8);ctx.rotate(-.6);ctx.fillText(a.p.name.slice(0,18),0,0);ctx.restore()})}
-function renderDashboard(){if(!$("mMaterials"))return;let all=0,pass=0,attention=0,entered=0,total=0;db.round.selected.forEach(m=>assessments(m).forEach(a=>{total++;if(a.row.values.some(v=>String(v??"").trim()!==""))entered++;if(a.p.type==="num")a.s.z.forEach(z=>{if(z!==null){all++;if(Math.abs(z)<=2)pass++;if(Math.abs(z)>2)attention++}})}));$("mMaterials").textContent=db.round.selected.length;$("mParameters").textContent=all;$("mPass").textContent=pass;$("mAttention").textContent=attention;$("dashRound").textContent="Round: "+db.round.name;$("progressText").textContent=entered+" of "+total+" material-parameter rows have at least one result."; $("attentionList").textContent=attention?"Review the Results Review page for warnings and unsatisfactory scores.":"No calculated warning currently available; check missing results too."}
+function drawChart(canvas,rows,isZ){const ctx=canvas.getContext("2d"),w=canvas.clientWidth||500,h=260,dpr=devicePixelRatio||1;canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);let rr=rows.filter(a=>(a.row.entryType||(a.p.type==="qual"?"qual":"num"))==="num").slice(0,12);if(!rr.length){ctx.fillStyle="#65758b";ctx.fillText("No numeric results available",16,24);return}let max=isZ?3:Math.max(1,...rr.flatMap(a=>a.s.z.map((_,i)=>num(a.row.values[i])||0).map(Math.abs)))*1.15,min=isZ?-3:0,left=36,top=12,bottom=55,pw=w-left-10,ph=h-top-bottom;let y=v=>top+(max-v)/(max-min)*ph;ctx.strokeStyle="#e1e8f2";for(let i=0;i<=4;i++){let v=max-(max-min)*i/4;ctx.beginPath();ctx.moveTo(left,y(v));ctx.lineTo(w-10,y(v));ctx.stroke()}let colors=LABC,gw=pw/rr.length,bw=Math.min(12,gw/5);rr.forEach((a,i)=>[0,1,2,3].forEach(j=>{let v=isZ?a.s.z[j]:num(a.row.values[j]);if(v===null||!Number.isFinite(v))return;ctx.fillStyle=colors[j];let yy=y(v),zero=y(0);ctx.fillRect(left+i*gw+gw/2-2*bw+j*bw,Math.min(yy,zero),bw-1,Math.max(1,Math.abs(yy-zero)))}));ctx.fillStyle="#65758b";ctx.font="9px sans-serif";rr.forEach((a,i)=>{ctx.save();ctx.translate(left+i*gw+gw/2,h-bottom+8);ctx.rotate(-.6);ctx.fillText(a.p.name.slice(0,18),0,0);ctx.restore()})}
+function renderDashboard(){if(!$("mMaterials"))return;let all=0,pass=0,attention=0,entered=0,total=0;db.round.selected.forEach(m=>assessments(m).forEach(a=>{total++;if(a.row.values.some(v=>String(v??"").trim()!==""))entered++;if(a.p.type==="num")a.s.z.forEach(z=>{if(z!==null){all++;if(Math.abs(z)<=2)pass++;if(Math.abs(z)>2)attention++}})}));$("mMaterials").textContent=db.round.selected.length;$("mParameters").textContent=all;$("mPass").textContent=pass;$("mAttention").textContent=attention;$("dashRound").textContent="Round: "+db.round.name;$("progressText").textContent=entered+" of "+total+" material-parameter rows have at least one result."; $("attentionList").textContent=attention?"Review the Results Review page for warnings and unsatisfactory scores.":"No calculated warning currently available; check missing results too.";dashExtras()}
 function renderReport(){
  if(!$("reportPreview"))return;
  const all=db.round.selected.flatMap(m=>assessments(m).map(a=>({...a,material:m})));
@@ -287,14 +301,14 @@ function renderReport(){
    const state=kind!=="num"?a.s.status:(a.s.z.some(z=>z!==null&&Math.abs(z)>=3)?"fail":a.s.z.some(z=>z!==null&&Math.abs(z)>2)?"warning":a.s.z.some(z=>z===null)?"missing":"pass");
    if(state==="pass")pass++;else if(state==="warning"||state==="variation")warning++;else if(state==="fail")fail++;else missing++;
  });
- let html=`<div class="report-cover"><div class="report-brand">Simpolo · Inter-Laboratory Comparison</div><h1>ILC Quality Performance Report</h1><div>${esc(db.round.name||"Inter-Laboratory Comparison Round")}</div><div style="margin-top:10px;color:#dce9ff;font-size:12px">Generated ${new Date().toLocaleDateString("en-IN")} · Controlled quality assessment summary</div></div>
+ let html=`<div class="report-cover"><div class="report-brand">Simpolo · Inter-Laboratory Comparison</div><h1>ILC Quality Performance Report</h1><div>${esc(db.round.name||"Inter-Laboratory Comparison Round")}</div><div style="margin-top:10px;color:#dce9ff;font-size:12px">Generated ${new Date().toLocaleDateString("en-IN")} · Controlled quality assessment summary</div><div class="cover-score">${pass+warning+fail?Math.round(pass/(pass+warning+fail)*100):0}%<small>satisfactory</small></div></div>
  <div class="report-meta"><div><span class="muted">Round / period</span><b>${esc(db.round.name||"—")}</b></div><div><span class="muted">Coordinator</span><b>${esc(db.round.coordinator||"—")}</b></div><div><span class="muted">Dispatch / deadline</span><b>${esc(db.round.dispatchDate||"—")} / ${esc(db.round.deadlineDate||"—")}</b></div><div><span class="muted">Scoring method</span><b>${db.round.scoreMethod==="robust"?"Robust modified Z-score":"Conventional Z-score"}</b></div></div>
  <div class="report-kpis"><div class="report-kpi"><span class="muted">Parameters assessed</span><b>${all.length}</b><span class="muted">Across selected materials</span></div><div class="report-kpi"><span class="muted">Satisfactory</span><b>${pass}</b><span class="muted">Within acceptance</span></div><div class="report-kpi"><span class="muted">Attention</span><b>${warning+fail}</b><span class="muted">Review recommended</span></div><div class="report-kpi"><span class="muted">Incomplete</span><b>${missing}</b><span class="muted">Missing / insufficient data</span></div></div>
- <div class="report-section"><h2>Programme overview</h2><p class="muted">Participating laboratories: ${db.round.labs.map(esc).join(" · ")}. Assigned value method: ${db.round.assignedMethod==="median"?"Median":"Mean"}. Quantitative and qualitative parameters are handled according to the type selected during result entry.</p>
+ ${reportOverviewCharts(all,{pass,warning,fail,missing})}<div class="report-section"><h2>Programme overview</h2><p class="muted">Participating laboratories: ${db.round.labs.map(esc).join(" · ")}. Assigned value method: ${db.round.assignedMethod==="median"?"Median":"Mean"}. Quantitative and qualitative parameters are handled according to the type selected during result entry.</p>
  <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0"><span class="pill pass">Satisfactory: ${pass}</span><span class="pill warning">Warning / variation: ${warning}</span><span class="pill fail">Unsatisfactory: ${fail}</span><span class="pill">Incomplete: ${missing}</span></div></div>`;
  db.round.selected.forEach((m,mi)=>{
    const rows=assessments(m);
-   html+=`<div class="report-section"><h2>${mi+1}. ${esc(m)}</h2><p class="muted">Sample code: ${esc(db.materials[m]?.meta?.sampleCode||"—")} · Blind code: ${esc(db.materials[m]?.meta?.blindCode||"—")} · Reported: ${esc(db.materials[m]?.meta?.reportingDate||"—")}</p>`;
+   html+=`<div class="report-section"><h2>${mi+1}. ${esc(m)}</h2><p class="muted">Sample code: ${esc(db.materials[m]?.meta?.sampleCode||"—")} · Blind code: ${esc(db.materials[m]?.meta?.blindCode||"—")} · Reported: ${esc(db.materials[m]?.meta?.reportingDate||"—")}</p>${materialZPlot(rows)}`;
    const nums=rows.filter(a=>(a.row.entryType||(a.p.type==="qual"?"qual":"num"))==="num");
    if(nums.length){
      html+='<div class="table-wrap"><table class="table report-table"><thead><tr><th>Parameter</th><th>Unit</th>'+db.round.labs.map(l=>`<th>${esc(l)}</th>`).join("")+'<th>Assigned value</th><th>SD / scale</th>'+db.round.labs.map(l=>`<th>${esc(l)} Z</th>`).join("")+'<th>Outcome</th></tr></thead><tbody>';
@@ -333,7 +347,7 @@ async function generatePDF(){
       image:{type:"jpeg",quality:0.98},
       html2canvas:{scale:2,useCORS:true,backgroundColor:"#ffffff",scrollY:0},
       jsPDF:{unit:"mm",format:"a4",orientation:"portrait",compress:true},
-      pagebreak:{mode:["css","legacy"],avoid:[".report-kpi",".report-meta",".report-section h2","tr"]}
+      pagebreak:{mode:["css","legacy"],avoid:[".report-kpi",".report-meta",".report-section h2",".rc","tr"]}
     }).from(report).save();
   }catch(err){
     console.error("PDF generation failed",err);
@@ -345,6 +359,55 @@ async function generatePDF(){
 function exportJSON(){const b=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="ilc-quality-hub-backup.json";a.click();URL.revokeObjectURL(a.href)}
 function importJSON(ev){let f=ev.target.files?.[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let d=JSON.parse(r.result);if(!d.round||!d.materials)throw Error("Backup format not recognized");db=d;seed();localSave();renderAll();if(token)saveCloud();alert("Backup imported. Cloud save will be attempted if signed in.")}catch(e){alert("Import failed: "+e.message)}};r.readAsText(f)}
 function resetResults(){if(!confirm("Clear results for all selected materials? Export a backup first."))return;db.round.selected.forEach(m=>{db.materials[m]={meta:{},results:{}};ensure(m)});localSave();renderAll();if(token)saveCloud()}
+/* ===== Liquid-glass dashboard + graphical report helpers (UI only — scoring logic above is unchanged) ===== */
+const LABC=["#0a84ff","#8b5cf6","#14b8a6","#f59e0b"],OUTC={pass:"#1fb878",warning:"#f5a524",fail:"#f0476b",missing:"#a9b6cc"};
+const kindOf=a=>a.row.entryType||(a.p.type==="qual"?"qual":"num");
+function stateOf(a){if(kindOf(a)!=="num")return a.s.status==="pass"?"pass":a.s.status==="variation"?"warning":"missing";return a.s.z.some(z=>z!==null&&Math.abs(z)>=3)?"fail":a.s.z.some(z=>z!==null&&Math.abs(z)>2)?"warning":a.s.z.some(z=>z===null)?"missing":"pass"}
+function labStats(){const st=db.round.labs.map(()=>({n:0,pass:0,warn:0,fail:0,sum:0,max:0}));db.round.selected.forEach(m=>assessments(m).forEach(a=>{if(kindOf(a)!=="num")return;a.s.z.forEach((z,i)=>{if(z===null||!st[i])return;const s=st[i],az=Math.abs(z);s.n++;s.sum+=az;if(az>s.max)s.max=az;if(az<=2)s.pass++;else if(az<3)s.warn++;else s.fail++})}));return st}
+function attnRows(){const out=[];db.round.selected.forEach(m=>assessments(m).forEach(a=>{if(kindOf(a)!=="num")return;a.s.z.forEach((z,i)=>{if(z!==null&&Math.abs(z)>2)out.push({m,p:a.p.name,lab:db.round.labs[i],z})})}));return out.sort((x,y)=>Math.abs(y.z)-Math.abs(x.z))}
+function donutSVG(parts,size,label){const tot=parts.reduce((a,p)=>a+p.v,0),R=44,C=2*Math.PI*R,live=parts.filter(p=>p.v).length;let off=0,s=`<svg viewBox="0 0 120 120" width="${size}" height="${size}" role="img" aria-label="${label}"><circle cx="60" cy="60" r="${R}" fill="none" stroke="#e6ecf5" stroke-width="15"/>`;if(tot)parts.forEach(p=>{if(!p.v)return;const len=p.v/tot*C;s+=`<circle cx="60" cy="60" r="${R}" fill="none" stroke="${p.c}" stroke-width="15" stroke-dasharray="${Math.max(len-(live>1?3:0),.5)} ${C}" stroke-dashoffset="${-off}" transform="rotate(-90 60 60)"/>`;off+=len});return s+`<text x="60" y="58" text-anchor="middle" font-size="21" font-weight="800" fill="#14233d">${tot}</text><text x="60" y="72" text-anchor="middle" font-size="8.5" fill="#61718e">${label}</text></svg>`}
+function outParts(c){return ["pass","warning","fail","missing"].map(k=>({v:c[k],c:OUTC[k]}))}
+function legendHTML(c){return '<div class="dleg">'+[["pass","Satisfactory"],["warning","Warning / variation"],["fail","Unsatisfactory"],["missing","Incomplete"]].map(([k,t])=>`<div><i style="background:${OUTC[k]}"></i>${t}<b>${c[k]}</b></div>`).join("")+'</div>'}
+function bars3D(st){const W=640,H=300,fl=246,mh=180,bw=76,d=22,e=12,gap=(W-90-bw*4-d)/3;let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Satisfactory rate by laboratory"><defs><linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".38"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>`;
+ [0,50,100].forEach(p=>{const y=fl-mh*p/100;s+=`<line x1="40" x2="${W-14}" y1="${y}" y2="${y}" stroke="#d3dcec" stroke-dasharray="${p?"3 5":"0"}"/><text x="34" y="${y+4}" text-anchor="end" font-size="10" fill="#61718e">${p}%</text>`});
+ st.forEach((t,i)=>{const pct=t.n?t.pass/t.n*100:0,h=Math.max(4,pct/100*mh),x=52+i*(bw+gap),y=fl-h,c=LABC[i],nm=db.round.labs[i]||"";
+  s+=`<ellipse cx="${x+bw/2+d/2}" cy="${fl+4}" rx="${bw*.72}" ry="6" fill="#0f1b33" opacity=".13"/><rect x="${x}" y="${y}" width="${bw}" height="${h}" fill="${c}"/><rect x="${x}" y="${y}" width="${bw}" height="${h}" fill="url(#gl)"/>`+
+  `<polygon points="${x},${y} ${x+d},${y-e} ${x+bw+d},${y-e} ${x+bw},${y}" fill="${c}"/><polygon points="${x},${y} ${x+d},${y-e} ${x+bw+d},${y-e} ${x+bw},${y}" fill="#fff" opacity=".42"/>`+
+  `<polygon points="${x+bw},${y} ${x+bw+d},${y-e} ${x+bw+d},${y+h-e} ${x+bw},${y+h}" fill="${c}"/><polygon points="${x+bw},${y} ${x+bw+d},${y-e} ${x+bw+d},${y+h-e} ${x+bw},${y+h}" fill="#000" opacity=".26"/>`+
+  `<text x="${x+bw/2+d/2}" y="${y-e-8}" text-anchor="middle" font-size="15" font-weight="800" fill="#14233d">${t.n?pct.toFixed(0)+"%":"—"}</text>`+
+  `<text x="${x+bw/2+d/2}" y="${fl+24}" text-anchor="middle" font-size="11.5" font-weight="700" fill="${c}">${esc(nm.length>17?nm.slice(0,16)+"…":nm)}</text><text x="${x+bw/2+d/2}" y="${fl+39}" text-anchor="middle" font-size="10" fill="#61718e">mean |Z| ${t.n?(t.sum/t.n).toFixed(2):"—"}</text>`});
+ return s+'</svg>'}
+function materialZPlot(rows){const nums=rows.filter(a=>kindOf(a)==="num"&&a.s.z.some(z=>z!==null));if(!nums.length)return"";const W=640,H=168,x0=130,x1=624,X=z=>x0+(Math.max(-4,Math.min(4,z))+4)/8*(x1-x0),band=(a,b,c)=>`<rect x="${X(a)}" y="24" width="${X(b)-X(a)}" height="124" fill="${c}"/>`;
+ let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Z-score spread by laboratory">`+band(-4,-3,"#ffe4ea")+band(-3,-2,"#fff1d6")+band(-2,2,"#e3f7ee")+band(2,3,"#fff1d6")+band(3,4,"#ffe4ea");
+ [-3,-2,0,2,3].forEach(t=>{s+=`<line x1="${X(t)}" x2="${X(t)}" y1="24" y2="148" stroke="${t===0?"#7b8aa3":"#c5d0e2"}" stroke-dasharray="${t===0?"0":"3 4"}"/><text x="${X(t)}" y="17" text-anchor="middle" font-size="10" fill="#61718e">${t>0?"+"+t:t}</text>`});
+ db.round.labs.forEach((l,i)=>{const y=24+i*31+15;s+=`<text x="8" y="${y+4}" font-size="11" font-weight="700" fill="${LABC[i]}">${esc(l.length>19?l.slice(0,18)+"…":l)}</text><line x1="${x0}" x2="${x1}" y1="${y}" y2="${y}" stroke="#d3dcec"/>`;nums.forEach((a,k)=>{const z=a.s.z[i];if(z===null)return;s+=`<circle cx="${X(z).toFixed(1)}" cy="${y+((k%5)-2)*2.6}" r="4.3" fill="${LABC[i]}" fill-opacity=".78" stroke="#fff" stroke-width="1"/>`})});
+ return `<div class="rc"><b class="rt">Z-score spread by laboratory · ${nums.length} quantitative parameters</b>${s}</svg><div class="muted">Green band: satisfactory (|Z| ≤ 2) · amber: warning · red: unsatisfactory (|Z| ≥ 3). Values beyond ±4 are drawn at the edge.</div></div>`}
+function heatHTML(){const labs=db.round.labs;let h='<div class="heat" style="grid-template-columns:minmax(120px,1.7fr) repeat(4,minmax(0,1fr))"><div class="hh"></div>'+labs.map((l,i)=>`<div class="hh" style="color:${LABC[i]}">${esc(l)}</div>`).join("");
+ db.round.selected.forEach(m=>{const rows=assessments(m);h+=`<div class="hl">${esc(m)}</div>`;labs.forEach((l,i)=>{let mx=null;rows.forEach(a=>{if(kindOf(a)!=="num")return;const z=a.s.z[i];if(z!==null&&(mx===null||Math.abs(z)>mx))mx=Math.abs(z)});const c=mx===null?["#eef2f8","#7b8aa3"]:mx<=2?["#d9f5e8","#0f7a52"]:mx<3?["#ffecc7","#8a5200"]:["#ffd9e1","#a51f3a"];h+=`<div class="hc" style="background:${c[0]};color:${c[1]}">${mx===null?"—":mx.toFixed(2)}</div>`})});return h+'</div>'}
+function reportOverviewCharts(all,c){
+ const st=labStats(),tot=c.pass+c.warning+c.fail,pct=tot?Math.round(c.pass/tot*100):0,attn=attnRows(),L=db.round.labs;
+ const rk=st.map((s,i)=>({i,lab:L[i],...s,pct:s.n?s.pass/s.n*100:0,mean:s.n?s.sum/s.n:0})).filter(x=>x.n).sort((a,b)=>b.pct-a.pct||a.mean-b.mean);
+ const f=[];
+ if(tot)f.push(`<b>${pct}%</b> of assessed parameters are satisfactory (${c.pass} of ${tot}).`);else f.push("No assessable results have been entered yet.");
+ if(rk.length){const b=rk[0],w=rk[rk.length-1];f.push(`<b>${esc(b.lab)}</b> shows the strongest agreement: ${b.pct.toFixed(0)}% satisfactory, mean |Z| ${b.mean.toFixed(2)}.`);if(rk.length>1&&w.i!==b.i)f.push(`<b>${esc(w.lab)}</b> needs the most follow-up: ${w.warn+w.fail} flagged score(s), maximum |Z| ${w.max.toFixed(2)}.`)}
+ if(attn.length)f.push(`${attn.length} laboratory score(s) fall outside |Z| ≤ 2. Largest: <b>${esc(attn[0].p)}</b> (${esc(attn[0].m)}) at ${esc(attn[0].lab)}, Z = ${attn[0].z.toFixed(2)}.`);else if(tot)f.push("No laboratory score exceeds |Z| = 2 in the data entered.");
+ if(c.missing)f.push(`${c.missing} parameter(s) are incomplete or lack enough results for scoring.`);
+ const rate=p=>p===null?"—":p>=95?"Excellent":p>=85?"Good":p>=70?"Monitor":"Action needed";
+ const perf=st.map((s,i)=>{const p=s.n?s.pass/s.n*100:null;return `<tr><td><b style="color:${LABC[i]}">${esc(L[i])}</b></td><td>${s.n}</td><td>${p===null?"—":p.toFixed(0)+"%"}</td><td>${s.warn}</td><td>${s.fail}</td><td>${s.n?(s.sum/s.n).toFixed(2):"—"}</td><td>${s.n?s.max.toFixed(2):"—"}</td><td>${rate(p)}</td></tr>`}).join("");
+ const at=attn.slice(0,12).map(r=>`<tr><td>${esc(r.m)}</td><td>${esc(r.p)}</td><td>${esc(r.lab)}</td><td><b>${r.z.toFixed(3)}</b></td><td><span class="pill ${Math.abs(r.z)>=3?"fail":"warning"}">${Math.abs(r.z)>=3?"UNSATISFACTORY":"WARNING"}</span></td></tr>`).join("");
+ return `<div class="report-section"><h2>Executive summary</h2><div class="rgrid"><div class="rc"><b class="rt">Key findings</b><ul class="findings">${f.map(x=>`<li>${x}</li>`).join("")}</ul></div><div class="rc"><b class="rt">Outcome mix</b><div class="donut-row">${donutSVG(outParts(c),150,"assessed")}${legendHTML(c)}</div></div></div></div>
+ <div class="report-section"><h2>Laboratory performance</h2><div class="rgrid"><div class="rc"><b class="rt">Satisfactory rate by laboratory · 3D view</b>${bars3D(st)}</div><div class="rc"><b class="rt">Performance table</b><table class="table report-table"><thead><tr><th>Laboratory</th><th>Scores</th><th>Satisf.</th><th>Warn</th><th>Unsat.</th><th>Mean |Z|</th><th>Max |Z|</th><th>Rating</th></tr></thead><tbody>${perf}</tbody></table></div></div></div>
+ <div class="report-section"><h2>Material × laboratory heat map</h2><div class="rc"><span class="muted">Largest |Z| for each material and laboratory · green ≤ 2 · amber 2–3 · red ≥ 3</span>${db.round.selected.length?heatHTML():'<p class="muted">Select materials in Round setup.</p>'}</div></div>
+ <div class="report-section"><h2>Results needing follow-up</h2>${at?`<table class="table report-table"><thead><tr><th>Material</th><th>Parameter</th><th>Laboratory</th><th>Z-score</th><th>Outcome</th></tr></thead><tbody>${at}</tbody></table>${attn.length>12?`<p class="muted">Showing the 12 largest of ${attn.length} flagged scores.</p>`:""}`:'<p class="muted">No quantitative score is outside the satisfactory range.</p>'}</div>`}
+function dashExtras(){
+ const lg=$("labLegend");if(lg)lg.innerHTML=db.round.labs.map((l,i)=>`<span><i style="background:${LABC[i]}"></i>${esc(l)}</span>`).join("");
+ const el=$("dashDonut");if(!el)return;const c={pass:0,warning:0,fail:0,missing:0};db.round.selected.forEach(m=>assessments(m).forEach(a=>{c[stateOf(a)]++}));
+ el.innerHTML=`<div class="donut-row">${donutSVG(outParts(c),132,"assessed")}${legendHTML(c)}</div>`;
+ $("dashLabs").innerHTML=labStats().map((s,i)=>{const p=s.n?Math.round(s.pass/s.n*100):0;return `<div class="labrow"><span class="dot" style="background:${LABC[i]}"></span><div><b>${esc(db.round.labs[i])}</b><div class="bar"><i style="width:${p}%;background:${LABC[i]}"></i></div></div><span class="pc">${s.n?p+"%":"—"}</span></div>`}).join("")}
+(function tilt(){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;let cur=null;const sel=".metrics .card,.dash-side .card,#dashboard>.card,#materialPicker .card";
+ document.addEventListener("pointermove",e=>{const c=e.target.closest?e.target.closest(sel):null;if(cur&&cur!==c){cur.style.transform="";cur=null}if(!c||e.pointerType==="touch")return;cur=c;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(900px) rotateX(${(-y*6).toFixed(2)}deg) rotateY(${(x*8).toFixed(2)}deg)`},{passive:true});
+ document.addEventListener("pointerleave",()=>{if(cur){cur.style.transform="";cur=null}})})();
+
 (function start(){loadLocal();seed();if(token){showApp();reloadCloud()}else{} })();
 </script>
 </body>
