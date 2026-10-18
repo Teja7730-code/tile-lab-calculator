@@ -1,6 +1,6 @@
 {
-  "name": "ceramic-calculation-suite",
-  "version": "4.0.0",
+  "name": "ilc-quality-hub",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "engines": {
