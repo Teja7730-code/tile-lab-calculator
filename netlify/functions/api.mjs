@@ -5,10 +5,10 @@ const STORE_NAME = "ceramic-lab-data";
 const DATABASE_KEY = "database";
 
 const USERNAME =
-  process.env.LAB_USERNAME || "admin";
+  process.env.LAB_USERNAME || "Teja";
 
 const PASSWORD =
-  process.env.LAB_PASSWORD || "1234";
+  process.env.LAB_PASSWORD || "abc123";
 
 
 const headers={
